@@ -42,5 +42,10 @@ Global
 	GlobalSection(MonoDevelopProperties) = preSolution
 		version = 0.1
 		StartupItem = Examples\UseCasesUML\UseCasesUML.csproj
+		Policies = $0
+		$0.ChangeLogPolicy = $1
+		$1.MessageStyle = $2
+		$2.LineAlign = 0
+		$1.inheritsSet = Mono
 	EndGlobalSection
 EndGlobal
