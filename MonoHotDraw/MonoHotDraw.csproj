@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D5D2EB0A-662A-471D-94C0-FD51C96E9429}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>MonoHotDraw</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Mono.Cairo" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AbstractCommand.cs" />
+    <Compile Include="AbstractConnector.cs" />
+    <Compile Include="AbstractFigure.cs" />
+    <Compile Include="AbstractHandle.cs" />
+    <Compile Include="AbstractTool.cs" />
+    <Compile Include="BringToFrontCommand.cs" />
+    <Compile Include="ChangeAttributeCommand.cs" />
+    <Compile Include="ChangeConnectionEndHandle.cs" />
+    <Compile Include="ChangeConnectionHandle.cs" />
+    <Compile Include="ChangeConnectionStartHandle.cs" />
+    <Compile Include="ChopBoxConnector.cs" />
+    <Compile Include="ChopEllipseConnector.cs" />
+    <Compile Include="Clipboard.cs" />
+    <Compile Include="CompositeFigure.cs" />
+    <Compile Include="CompositeFigureTool.cs" />
+    <Compile Include="ConnectionCreationTool.cs" />
+    <Compile Include="ContainerCanvas.cs" />
+    <Compile Include="CopyCommand.cs" />
+    <Compile Include="CreationTool.cs" />
+    <Compile Include="CursorFactory.cs" />
+    <Compile Include="CutCommand.cs" />
+    <Compile Include="Dash.cs" />
+    <Compile Include="DeleteCommand.cs" />
+    <Compile Include="DeleteFromDrawingVisitor.cs" />
+    <Compile Include="DragCreationTool.cs" />
+    <Compile Include="DragTracker.cs" />
+    <Compile Include="DuplicateCommand.cs" />
+    <Compile Include="EastHandle.cs" />
+    <Compile Include="FigureCollection.cs" />
+    <Compile Include="FigureTool.cs" />
+    <Compile Include="FigureTransferCommand.cs" />
+    <Compile Include="FontFactory.cs" />
+    <Compile Include="HandleTracker.cs" />
+    <Compile Include="InsertIntoDrawingVisitor.cs" />
+    <Compile Include="LineConnectionHandle.cs" />
+    <Compile Include="LocatorHandle.cs" />
+    <Compile Include="MultiLineTextTool.cs" />
+    <Compile Include="NorthEastHandle.cs" />
+    <Compile Include="NorthHandle.cs" />
+    <Compile Include="NorthWestHandle.cs" />
+    <Compile Include="NullUndoActivity.cs" />
+    <Compile Include="PasteCommand.cs" />
+    <Compile Include="PolyLineFigureTool.cs" />
+    <Compile Include="PolyLineHandle.cs" />
+    <Compile Include="PolyLineLocator.cs" />
+    <Compile Include="QuickActionLocator.cs" />
+    <Compile Include="QuickActionPosition.cs" />
+    <Compile Include="RedoCommand.cs" />
+    <Compile Include="RelativeLocator.cs" />
+    <Compile Include="ResizeCreationTool.cs" />
+    <Compile Include="SelectAllCommand.cs" />
+    <Compile Include="SelectAreaTracker.cs" />
+    <Compile Include="SelectionTool.cs" />
+    <Compile Include="SendToBackCommand.cs" />
+    <Compile Include="SimpleTextTool.cs" />
+    <Compile Include="SouthEastHandle.cs" />
+    <Compile Include="SouthHandle.cs" />
+    <Compile Include="SouthWestHandle.cs" />
+    <Compile Include="StandardDrawing.cs" />
+    <Compile Include="StandardDrawingView.cs" />
+    <Compile Include="UndoableAdapter.cs" />
+    <Compile Include="UndoableCommand.cs" />
+    <Compile Include="UndoCommand.cs" />
+    <Compile Include="UndoManager.cs" />
+    <Compile Include="WestHandle.cs" />
+    <Compile Include="DrawingEventArgs.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="FigureAttribute.cs" />
+    <Compile Include="FigureEventArgs.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="IConnectionFigure.cs" />
+    <Compile Include="IConnector.cs" />
+    <Compile Include="IDrawing.cs" />
+    <Compile Include="IDrawingEditor.cs" />
+    <Compile Include="IDrawingView.cs" />
+    <Compile Include="IFigure.cs" />
+    <Compile Include="IFigureVisitor.cs" />
+    <Compile Include="IHandle.cs" />
+    <Compile Include="ILocator.cs" />
+    <Compile Include="ITool.cs" />
+    <Compile Include="IUndoable.cs" />
+    <Compile Include="KeyEvent.cs" />
+    <Compile Include="MouseEvent.cs" />
+    <Compile Include="AttributeFigure.cs" />
+    <Compile Include="BaseBoxFigure.cs" />
+    <Compile Include="EllipseFigure.cs" />
+    <Compile Include="LineConnection.cs" />
+    <Compile Include="LineTerminal.cs" />
+    <Compile Include="MultiLineTextFigure.cs" />
+    <Compile Include="PolyLineFigure.cs" />
+    <Compile Include="RectangleFigure.cs" />
+    <Compile Include="SimpleTextFigure.cs" />
+    <Compile Include="TriangleArrowLineTerminal.cs" />
+    <Compile Include="CairoFigures.cs" />
+    <Compile Include="ColorSerializationSurrogate.cs" />
+    <Compile Include="GdkCairoHelper.cs" />
+    <Compile Include="GenericCloner.cs" />
+    <Compile Include="Geometry.cs" />
+    <Compile Include="PointDSerializationSurrogate.cs" />
+    <Compile Include="RectangleD.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
