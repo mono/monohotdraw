@@ -1,0 +1,7 @@
+2009-05-28  Manuel Cerón  <ceronman@gmail.com>
+
+	* MonoHotDraw.csproj: Project Updated
+
+	* SteticComponent.cs: Added new component for using with
+	stetic
+

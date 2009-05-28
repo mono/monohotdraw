@@ -1,0 +1,9 @@
+2009-05-28  Manuel Cerón  <ceronman@gmail.com>
+
+	* Main.cs:
+	* gtk-gui:
+	* MainWindow.cs:
+	* AssemblyInfo.cs:
+	* ClassDesigner.csproj: Added new example project. Will be
+	base for the Class Designer Addin of MonoDevelop
+
