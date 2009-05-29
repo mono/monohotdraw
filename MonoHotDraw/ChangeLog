@@ -2,6 +2,14 @@
 
 	* MonoHotDraw.Tools:
 	* MonoHotDraw.csproj:
+	* MonoHotDraw.Handles:
+	* MonoHotDraw.Figures:
+	* MonoHotDraw.Commands: 
+
+2009-05-28  Manuel Cerón  <ceronman@gmail.com>
+
+	* MonoHotDraw.Tools:
+	* MonoHotDraw.csproj:
 	* MonoHotDraw.Figures:
 	* MonoHotDraw.Handles:
 	* MonoHotDraw.Commands: Added folders for organization

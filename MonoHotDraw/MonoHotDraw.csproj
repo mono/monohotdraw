@@ -38,32 +38,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="AbstractCommand.cs" />
     <Compile Include="AbstractConnector.cs" />
-    <Compile Include="AbstractFigure.cs" />
-    <Compile Include="AbstractHandle.cs" />
-    <Compile Include="AbstractTool.cs" />
-    <Compile Include="BringToFrontCommand.cs" />
-    <Compile Include="ChangeAttributeCommand.cs" />
-    <Compile Include="ChangeConnectionEndHandle.cs" />
-    <Compile Include="ChangeConnectionHandle.cs" />
-    <Compile Include="ChangeConnectionStartHandle.cs" />
     <Compile Include="ChopBoxConnector.cs" />
     <Compile Include="ChopEllipseConnector.cs" />
     <Compile Include="Clipboard.cs" />
-    <Compile Include="CompositeFigure.cs" />
-    <Compile Include="CompositeFigureTool.cs" />
-    <Compile Include="ConnectionCreationTool.cs" />
     <Compile Include="ContainerCanvas.cs" />
-    <Compile Include="CopyCommand.cs" />
-    <Compile Include="CreationTool.cs" />
     <Compile Include="CursorFactory.cs" />
-    <Compile Include="CutCommand.cs" />
     <Compile Include="Dash.cs" />
-    <Compile Include="DeleteCommand.cs" />
     <Compile Include="DeleteFromDrawingVisitor.cs" />
-    <Compile Include="DragCreationTool.cs" />
-    <Compile Include="DragTracker.cs" />
     <Compile Include="DuplicateCommand.cs" />
     <Compile Include="EastHandle.cs" />
     <Compile Include="FigureCollection.cs" />
@@ -105,7 +87,6 @@
     <Compile Include="WestHandle.cs" />
     <Compile Include="DrawingEventArgs.cs" />
     <Compile Include="Event.cs" />
-    <Compile Include="FigureAttribute.cs" />
     <Compile Include="FigureEventArgs.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IConnectionFigure.cs" />
@@ -121,9 +102,6 @@
     <Compile Include="IUndoable.cs" />
     <Compile Include="KeyEvent.cs" />
     <Compile Include="MouseEvent.cs" />
-    <Compile Include="AttributeFigure.cs" />
-    <Compile Include="BaseBoxFigure.cs" />
-    <Compile Include="EllipseFigure.cs" />
     <Compile Include="LineConnection.cs" />
     <Compile Include="LineTerminal.cs" />
     <Compile Include="MultiLineTextFigure.cs" />
@@ -141,6 +119,28 @@
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="SteticComponent.cs" />
     <Compile Include="gtk-gui\MonoHotDraw.SteticComponent.cs" />
+    <Compile Include="MonoHotDraw.Figures\AbstractFigure.cs" />
+    <Compile Include="MonoHotDraw.Figures\AttributeFigure.cs" />
+    <Compile Include="MonoHotDraw.Figures\BaseBoxFigure.cs" />
+    <Compile Include="MonoHotDraw.Handles\ChangeConnectionEndHandle.cs" />
+    <Compile Include="MonoHotDraw.Handles\ChangeConnectionHandle.cs" />
+    <Compile Include="MonoHotDraw.Handles\ChangeConnectionStartHandle.cs" />
+    <Compile Include="MonoHotDraw.Figures\CompositeFigure.cs" />
+    <Compile Include="MonoHotDraw.Tools\CompositeFigureTool.cs" />
+    <Compile Include="MonoHotDraw.Tools\ConnectionCreationTool.cs" />
+    <Compile Include="MonoHotDraw.Tools\CreationTool.cs" />
+    <Compile Include="MonoHotDraw.Commands\AbstractCommand.cs" />
+    <Compile Include="MonoHotDraw.Handles\AbstractHandle.cs" />
+    <Compile Include="MonoHotDraw.Tools\AbstractTool.cs" />
+    <Compile Include="MonoHotDraw.Commands\BringToFrontCommand.cs" />
+    <Compile Include="MonoHotDraw.Commands\ChangeAttributeCommand.cs" />
+    <Compile Include="MonoHotDraw.Commands\CopyCommand.cs" />
+    <Compile Include="MonoHotDraw.Commands\CutCommand.cs" />
+    <Compile Include="MonoHotDraw.Commands\DeleteCommand.cs" />
+    <Compile Include="MonoHotDraw.Tools\DragCreationTool.cs" />
+    <Compile Include="MonoHotDraw.Tools\DragTracker.cs" />
+    <Compile Include="MonoHotDraw.Figures\EllipseFigure.cs" />
+    <Compile Include="MonoHotDraw.Figures\FigureAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
