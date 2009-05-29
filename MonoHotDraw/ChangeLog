@@ -1,4 +1,12 @@
 2009-05-28  Manuel Cerón  <ceronman@gmail.com>
+
+	* MonoHotDraw.Tools:
+	* MonoHotDraw.csproj:
+	* MonoHotDraw.Handles:
+	* MonoHotDraw.Figures:
+	* MonoHotDraw.Commands: 
+
+2009-05-28  Manuel Cerón  <ceronman@gmail.com>
 	* Moved a lot of files to new folders
 
 2009-05-28  Manuel Cerón  <ceronman@gmail.com>
