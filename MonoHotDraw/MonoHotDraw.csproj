@@ -55,11 +55,11 @@
     <Compile Include="MonoHotDraw.Commands\PasteCommand.cs" />
     <Compile Include="MonoHotDraw.Tools\PolyLineFigureTool.cs" />
     <Compile Include="MonoHotDraw.Handles\PolyLineHandle.cs" />
-    <Compile Include="PolyLineLocator.cs" />
-    <Compile Include="QuickActionLocator.cs" />
-    <Compile Include="QuickActionPosition.cs" />
+    <Compile Include="MonoHotDraw.Locators\PolyLineLocator.cs" />
+    <Compile Include="MonoHotDraw.Locators\QuickActionLocator.cs" />
+    <Compile Include="MonoHotDraw.Locators\QuickActionPosition.cs" />
     <Compile Include="MonoHotDraw.Commands\RedoCommand.cs" />
-    <Compile Include="RelativeLocator.cs" />
+    <Compile Include="MonoHotDraw.Locators\RelativeLocator.cs" />
     <Compile Include="MonoHotDraw.Tools\ResizeCreationTool.cs" />
     <Compile Include="MonoHotDraw.Commands\SelectAllCommand.cs" />
     <Compile Include="MonoHotDraw.Tools\SelectAreaTracker.cs" />
@@ -81,7 +81,7 @@
     <Compile Include="IDrawing.cs" />
     <Compile Include="IDrawingEditor.cs" />
     <Compile Include="IDrawingView.cs" />
-    <Compile Include="ILocator.cs" />
+    <Compile Include="MonoHotDraw.Locators\ILocator.cs" />
     <Compile Include="KeyEvent.cs" />
     <Compile Include="MouseEvent.cs" />
     <Compile Include="LineTerminal.cs" />
