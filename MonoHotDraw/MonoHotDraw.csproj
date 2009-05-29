@@ -38,21 +38,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="AbstractConnector.cs" />
-    <Compile Include="ChopBoxConnector.cs" />
-    <Compile Include="ChopEllipseConnector.cs" />
     <Compile Include="Clipboard.cs" />
     <Compile Include="ContainerCanvas.cs" />
     <Compile Include="CursorFactory.cs" />
     <Compile Include="Dash.cs" />
     <Compile Include="DeleteFromDrawingVisitor.cs" />
-    <Compile Include="DuplicateCommand.cs" />
-    <Compile Include="EastHandle.cs" />
-    <Compile Include="FigureCollection.cs" />
-    <Compile Include="FigureTool.cs" />
-    <Compile Include="FigureTransferCommand.cs" />
     <Compile Include="FontFactory.cs" />
-    <Compile Include="HandleTracker.cs" />
     <Compile Include="InsertIntoDrawingVisitor.cs" />
     <Compile Include="LineConnectionHandle.cs" />
     <Compile Include="LocatorHandle.cs" />
@@ -87,22 +78,12 @@
     <Compile Include="WestHandle.cs" />
     <Compile Include="DrawingEventArgs.cs" />
     <Compile Include="Event.cs" />
-    <Compile Include="FigureEventArgs.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="IConnectionFigure.cs" />
-    <Compile Include="IConnector.cs" />
     <Compile Include="IDrawing.cs" />
     <Compile Include="IDrawingEditor.cs" />
     <Compile Include="IDrawingView.cs" />
-    <Compile Include="IFigure.cs" />
-    <Compile Include="IFigureVisitor.cs" />
-    <Compile Include="IHandle.cs" />
     <Compile Include="ILocator.cs" />
-    <Compile Include="ITool.cs" />
-    <Compile Include="IUndoable.cs" />
     <Compile Include="KeyEvent.cs" />
     <Compile Include="MouseEvent.cs" />
-    <Compile Include="LineConnection.cs" />
     <Compile Include="LineTerminal.cs" />
     <Compile Include="MultiLineTextFigure.cs" />
     <Compile Include="PolyLineFigure.cs" />
@@ -141,6 +122,24 @@
     <Compile Include="MonoHotDraw.Tools\DragTracker.cs" />
     <Compile Include="MonoHotDraw.Figures\EllipseFigure.cs" />
     <Compile Include="MonoHotDraw.Figures\FigureAttribute.cs" />
+    <Compile Include="MonoHotDraw.Connectors\AbstractConnector.cs" />
+    <Compile Include="MonoHotDraw.Connectors\ChopBoxConnector.cs" />
+    <Compile Include="MonoHotDraw.Connectors\ChopEllipseConnector.cs" />
+    <Compile Include="MonoHotDraw.Commands\DuplicateCommand.cs" />
+    <Compile Include="MonoHotDraw.Handles\EastHandle.cs" />
+    <Compile Include="MonoHotDraw.Figures\FigureCollection.cs" />
+    <Compile Include="MonoHotDraw.Figures\FigureEventArgs.cs" />
+    <Compile Include="MonoHotDraw.Tools\FigureTool.cs" />
+    <Compile Include="MonoHotDraw.Commands\FigureTransferCommand.cs" />
+    <Compile Include="MonoHotDraw.Tools\HandleTracker.cs" />
+    <Compile Include="MonoHotDraw.Commands\ICommand.cs" />
+    <Compile Include="MonoHotDraw.Figures\IConnectionFigure.cs" />
+    <Compile Include="MonoHotDraw.Connectors\IConnector.cs" />
+    <Compile Include="MonoHotDraw.Figures\IFigure.cs" />
+    <Compile Include="MonoHotDraw.Figures\IFigureVisitor.cs" />
+    <Compile Include="MonoHotDraw.Handles\IHandle.cs" />
+    <Compile Include="MonoHotDraw.Tools\ITool.cs" />
+    <Compile Include="MonoHotDraw.Commands\IUndoable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
