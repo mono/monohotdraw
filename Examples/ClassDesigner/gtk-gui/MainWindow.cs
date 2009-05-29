@@ -14,19 +14,29 @@ public partial class MainWindow {
     
     private Gtk.UIManager UIManager;
     
+    private Gtk.Action FiguresAction;
+    
+    private Gtk.Action AddClassAction;
+    
     private Gtk.VBox vbox2;
     
     private Gtk.MenuBar menubar1;
     
     private Gtk.Toolbar toolbar1;
     
-    private MonoHotDraw.SteticComponent steticcomponent1;
+    private MonoHotDraw.SteticComponent mhdcanvas;
     
     protected virtual void Build() {
         Stetic.Gui.Initialize(this);
         // Widget MainWindow
         this.UIManager = new Gtk.UIManager();
         Gtk.ActionGroup w1 = new Gtk.ActionGroup("Default");
+        this.FiguresAction = new Gtk.Action("FiguresAction", Mono.Unix.Catalog.GetString("Figures"), null, null);
+        this.FiguresAction.ShortLabel = Mono.Unix.Catalog.GetString("Figures");
+        w1.Add(this.FiguresAction, null);
+        this.AddClassAction = new Gtk.Action("AddClassAction", Mono.Unix.Catalog.GetString("Add Class"), null, null);
+        this.AddClassAction.ShortLabel = Mono.Unix.Catalog.GetString("Add Class");
+        w1.Add(this.AddClassAction, null);
         this.UIManager.InsertActionGroup(w1, 0);
         this.AddAccelGroup(this.UIManager.AccelGroup);
         this.Name = "MainWindow";
@@ -37,7 +47,7 @@ public partial class MainWindow {
         this.vbox2.Name = "vbox2";
         this.vbox2.Spacing = 6;
         // Container child vbox2.Gtk.Box+BoxChild
-        this.UIManager.AddUiFromString("<ui><menubar name='menubar1'/></ui>");
+        this.UIManager.AddUiFromString("<ui><menubar name='menubar1'><menu name='FiguresAction' action='FiguresAction'><menuitem name='AddClassAction' action='AddClassAction'/></menu></menubar></ui>");
         this.menubar1 = ((Gtk.MenuBar)(this.UIManager.GetWidget("/menubar1")));
         this.menubar1.Name = "menubar1";
         this.vbox2.Add(this.menubar1);
@@ -58,11 +68,11 @@ public partial class MainWindow {
         w3.Expand = false;
         w3.Fill = false;
         // Container child vbox2.Gtk.Box+BoxChild
-        this.steticcomponent1 = new MonoHotDraw.SteticComponent();
-        this.steticcomponent1.Events = ((Gdk.EventMask)(256));
-        this.steticcomponent1.Name = "steticcomponent1";
-        this.vbox2.Add(this.steticcomponent1);
-        Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox2[this.steticcomponent1]));
+        this.mhdcanvas = new MonoHotDraw.SteticComponent();
+        this.mhdcanvas.Events = ((Gdk.EventMask)(256));
+        this.mhdcanvas.Name = "mhdcanvas";
+        this.vbox2.Add(this.mhdcanvas);
+        Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox2[this.mhdcanvas]));
         w4.Position = 2;
         this.Add(this.vbox2);
         if ((this.Child != null)) {
@@ -72,5 +82,6 @@ public partial class MainWindow {
         this.DefaultHeight = 300;
         this.Show();
         this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
+        this.AddClassAction.Activated += new System.EventHandler(this.OnAddClassActionActivated);
     }
 }

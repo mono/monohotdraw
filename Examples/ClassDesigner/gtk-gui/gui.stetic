@@ -10,7 +10,19 @@
     <widget-library name="../bin/Debug/ClassDesigner.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="400 300">
-    <action-group name="Default" />
+    <action-group name="Default">
+      <action id="FiguresAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Figures</property>
+        <property name="ShortLabel" translatable="yes">Figures</property>
+      </action>
+      <action id="AddClassAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add Class</property>
+        <property name="ShortLabel" translatable="yes">Add Class</property>
+        <signal name="Activated" handler="OnAddClassActionActivated" />
+      </action>
+    </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
     <property name="WindowPosition">CenterOnParent</property>
@@ -22,7 +34,11 @@
         <child>
           <widget class="Gtk.MenuBar" id="menubar1">
             <property name="MemberName" />
-            <node name="menubar1" type="Menubar" />
+            <node name="menubar1" type="Menubar">
+              <node type="Menu" action="FiguresAction">
+                <node type="Menuitem" action="AddClassAction" />
+              </node>
+            </node>
           </widget>
           <packing>
             <property name="Position">0</property>
@@ -47,7 +63,7 @@
           </packing>
         </child>
         <child>
-          <widget class="MonoHotDraw.SteticComponent" id="steticcomponent1">
+          <widget class="MonoHotDraw.SteticComponent" id="mhdcanvas">
             <property name="MemberName" />
             <property name="Events">ButtonPressMask</property>
           </widget>

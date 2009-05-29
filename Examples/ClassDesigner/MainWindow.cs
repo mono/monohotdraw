@@ -1,5 +1,7 @@
 using System;
 using Gtk;
+using MonoHotDraw;
+using ClassDesigner;
 
 public partial class MainWindow: Gtk.Window
 {	
@@ -12,5 +14,11 @@ public partial class MainWindow: Gtk.Window
 	{
 		Application.Quit ();
 		a.RetVal = true;
+	}
+
+	protected virtual void OnAddClassActionActivated (object sender, System.EventArgs e)
+	{
+		this.mhdcanvas.Tool = new DragCreationTool(this.mhdcanvas,
+		                                           new ClassFigure());
 	}
 }

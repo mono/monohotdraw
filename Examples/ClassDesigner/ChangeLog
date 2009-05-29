@@ -1,5 +1,12 @@
 2009-05-28  Manuel Cerón  <ceronman@gmail.com>
 
+	* ClassFigure.cs:
+	* ClassDesigner.csproj: Added ClassFigure.
+
+	* MainWindow.cs: Added a menu entry for creating ClassFigures
+
+2009-05-28  Manuel Cerón  <ceronman@gmail.com>
+
 	* Main.cs:
 	* gtk-gui:
 	* MainWindow.cs:

@@ -1,6 +1,11 @@
 2009-05-28  Manuel Cerón  <ceronman@gmail.com>
 
 	* gui.stetic:
+	* MainWindow.cs: Added a menu entry for creating ClassFigures
+
+2009-05-28  Manuel Cerón  <ceronman@gmail.com>
+
+	* gui.stetic:
 	* generated.cs:
 	* MainWindow.cs: Added new example project. Will be base for
 	the Class Designer Addin of MonoDevelop
