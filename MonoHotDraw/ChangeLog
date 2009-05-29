@@ -1,5 +1,13 @@
 2009-05-28  Manuel Cerón  <ceronman@gmail.com>
 
+	* MonoHotDraw.Tools:
+	* MonoHotDraw.csproj:
+	* MonoHotDraw.Figures:
+	* MonoHotDraw.Handles:
+	* MonoHotDraw.Commands: Added folders for organization
+
+2009-05-28  Manuel Cerón  <ceronman@gmail.com>
+
 	* MonoHotDraw.csproj: Project Updated
 
 	* SteticComponent.cs: Added new component for using with

@@ -148,4 +148,10 @@
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MonoHotDraw.Figures\" />
+    <Folder Include="MonoHotDraw.Tools\" />
+    <Folder Include="MonoHotDraw.Handles\" />
+    <Folder Include="MonoHotDraw.Commands\" />
+  </ItemGroup>
 </Project>
