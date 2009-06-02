@@ -1,3 +1,8 @@
+2009-06-02  Manuel Cerón  <ceronman@gmail.com>
+
+	* MonoHotDraw.Util:
+	* MonoHotDraw.csproj: Added MonoHotDraw.Util Folder
+
 2009-05-28  Manuel Cerón  <ceronman@gmail.com>
 
 	* MonoHotDraw.Tools:

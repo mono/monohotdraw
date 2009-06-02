@@ -154,5 +154,6 @@
     <Folder Include="MonoHotDraw.Commands\" />
     <Folder Include="MonoHotDraw.Connectors\" />
     <Folder Include="MonoHotDraw.Locators\" />
+    <Folder Include="MonoHotDraw.Util\" />
   </ItemGroup>
 </Project>
