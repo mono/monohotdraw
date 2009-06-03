@@ -1,10 +1,9 @@
-//
-// MonoHotDraw. Diagramming library
+// MonoHotDraw. Diagramming Framework
 //
 // Authors:
 //	Mario Carrión <mario@monouml.org>
 //
-// Copyright (C) 2006, 2007, 2008 MonoUML Team (http://www.monouml.org)
+// Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +22,12 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
-using System;
 
-namespace MonoHotDraw {
+using System;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Handles;
+
+namespace MonoHotDraw.Commands {
 
 	public class DeleteFromDrawingVisitor : IFigureVisitor {
 
@@ -35,10 +36,7 @@ namespace MonoHotDraw {
 			_deletedFigures = new FigureCollection ();
 		}
 		
-		public IDrawing Drawing {
-			get { return _drawing; }
-			set {_drawing = value; }
-		}
+		public IDrawing Drawing { get; set; }
 		
 		public FigureCollection GetDeletedFigures () {
 			return _deletedFigures;
@@ -56,6 +54,5 @@ namespace MonoHotDraw {
 		}
 		
 		private FigureCollection _deletedFigures;
-		private IDrawing         _drawing;
 	}
 }

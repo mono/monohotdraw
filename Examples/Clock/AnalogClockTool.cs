@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 //
 using Gdk;
+using MonoHotDraw.Tools;
 
 namespace MonoHotDraw.Samples {
 

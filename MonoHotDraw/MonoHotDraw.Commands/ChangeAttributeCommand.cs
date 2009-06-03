@@ -1,10 +1,9 @@
-//
-// MonoHotDraw. Diagramming library
+// MonoHotDraw. Diagramming Framework
 //
 // Authors:
 //	Mario Carrión <mario@monouml.org>
 //
-// Copyright (C) 2006, 2007, 2008 MonoUML Team (http://www.monouml.org)
+// Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +22,12 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
+
 using System;
 using System.Collections.Generic;
+using MonoHotDraw.Figures;
 
-namespace MonoHotDraw {
+namespace MonoHotDraw.Commands {
 
 	public class ChangeAttributeCommand : AbstractCommand {
 
@@ -76,15 +76,9 @@ namespace MonoHotDraw {
 				}
 			}
 			
-			public FigureAttribute Attribute {
-				get { return _attribute; }
-				set { _attribute = value; }
-			}
-
-			public object Value {
-				get { return _value; }
-				set { _value = value; }
-			}
+			public FigureAttribute Attribute { get; set; }
+			
+			public object Value { get; set; }
 
 			public override bool Undo () {
 				if (base.Undo () == false)
@@ -114,13 +108,10 @@ namespace MonoHotDraw {
 				}
 			}
 			
-			private FigureAttribute             _attribute;
 			private Dictionary<IFigure, object> _originalValues;
-			private object                      _value;
 		}
 
 		private FigureAttribute _attribute;
-		private object          _value;
-
+		private object _value;
 	}
 }

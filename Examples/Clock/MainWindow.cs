@@ -1,6 +1,8 @@
 
 using System;
 using MonoHotDraw;
+using MonoHotDraw.Commands;
+using MonoHotDraw.Tools;
 using Gtk;
 
 namespace MonoHotDraw.Samples

@@ -1,11 +1,10 @@
-//
-// MonoHotDraw. Diagramming library
+// MonoHotDraw. Diagramming Framework
 //
 // Authors:
 //	Manuel Cerón <ceronman@gmail.com>
 //	Mario Carrión <mario@monouml.org>
 //
-// Copyright (C) 2006, 2007, 2008 MonoUML Team (http://www.monouml.org)
+// Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +23,17 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
+
 using Cairo;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using MonoHotDraw.Connectors;
+using MonoHotDraw.Handles;
+using MonoHotDraw.Tools;
+using MonoHotDraw.Util;
 
-namespace MonoHotDraw { 
+namespace MonoHotDraw.Figures { 
 
 	public interface IFigure : ICloneable, ISerializable {
 	

@@ -29,6 +29,12 @@ using System.Collections.Generic;
 using Cairo;
 using Gdk;
 using MonoHotDraw;
+using MonoHotDraw.Connectors;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Handles;
+using MonoHotDraw.Locators;
+using MonoHotDraw.Tools;
+using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Samples {
 
@@ -181,13 +187,13 @@ namespace MonoHotDraw.Samples {
 				PointD nameTopLeft = new PointD(nameRect.Left, nameRect.Top);
 				PointD nameTopRight = new PointD(nameRect.Right, nameRect.Top);
 				
-				if (MonoHotDraw.Geometry.LineIntersection(actorRect.Center, point, nameTopLeft, nameTopRight) != null) {
-					double angle = MonoHotDraw.Geometry.AngleFromPoint (nameRect, point);
-					return MonoHotDraw.Geometry.EdgePointFromAngle (nameRect, angle);
+				if (MonoHotDraw.Util.Geometry.LineIntersection(actorRect.Center, point, nameTopLeft, nameTopRight) != null) {
+					double angle = MonoHotDraw.Util.Geometry.AngleFromPoint (nameRect, point);
+					return MonoHotDraw.Util.Geometry.EdgePointFromAngle (nameRect, angle);
 				}
 				else {
-					double angle = MonoHotDraw.Geometry.AngleFromPoint (actorRect, point);
-					return MonoHotDraw.Geometry.EdgePointFromAngle (actorRect, angle);
+					double angle = MonoHotDraw.Util.Geometry.AngleFromPoint (actorRect, point);
+					return MonoHotDraw.Util.Geometry.EdgePointFromAngle (actorRect, angle);
 				}
 			}
 		}

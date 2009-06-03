@@ -1,6 +1,8 @@
 using System;
 using Cairo;
 using MonoHotDraw;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Util;
 
 namespace ClassDesigner
 {
@@ -36,7 +38,7 @@ namespace ClassDesigner
 		}
 
 		
-		protected override void OnFigureChanged (MonoHotDraw.FigureEventArgs e)
+		protected override void OnFigureChanged (FigureEventArgs e)
 		{
 			classname.MoveTo(DisplayBox.X, DisplayBox.Y);
 		}

@@ -28,6 +28,8 @@ using System;
 using Gtk;
 using Cairo;
 using MonoHotDraw;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Samples {
 	//FIXME: This is NoteFigure preview, I'm thinking changing this to a decorator.

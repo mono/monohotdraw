@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 //
 using MonoHotDraw;
+using MonoHotDraw.Figures;
 using System.Collections.Generic;
 
 namespace MonoHotDraw.Database {

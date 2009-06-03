@@ -1,10 +1,9 @@
-//
-// MonoHotDraw. Diagramming library
+// MonoHotDraw. Diagramming Framework
 //
 // Authors:
 //	Mario Carrión <mario@monouml.org>
 //
-// Copyright (C) 2006, 2007, 2008 MonoUML Team (http://www.monouml.org)
+// Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,35 +22,23 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
+
 using System;
 
-namespace MonoHotDraw {
+namespace MonoHotDraw.Commands {
 
-	public abstract class AbstractCommand : ICommand {
+	public abstract class AbstractCommand: ICommand {
 
 		protected AbstractCommand (string name, IDrawingEditor editor) {
-			_name          = name;
-			_drawingEditor = editor;
+			Name = name;
+			DrawingEditor = editor;
 		}
 		
-		public virtual IDrawingEditor DrawingEditor {
-			get { return _drawingEditor; }
-		}
+		public virtual IDrawingEditor DrawingEditor { get; private set; }
+		public virtual IDrawingView DrawingView { get; private set; }
+		public virtual string Name { get; private set; }
+		public virtual IUndoable UndoActivity {	get; set; }
 		
-		public virtual IDrawingView DrawingView {
-			get { return DrawingEditor.View; }
-		}
-
-		public virtual string Name {
-			get { return _name; }
-		}
-		
-		public virtual IUndoable UndoActivity {
-			get { return _undoActivity; }
-			set { _undoActivity = value; }
-		}
-
 		public virtual bool IsExecutable {
 			get { return true; }
 		}
@@ -64,9 +51,5 @@ namespace MonoHotDraw {
 		protected virtual IUndoable CreateUndoActivity () { 
 			return new NullUndoActivity (DrawingView);;
 		}
-
-		private IDrawingEditor _drawingEditor;
-		private string         _name;
-		private IUndoable      _undoActivity;
 	}
 }

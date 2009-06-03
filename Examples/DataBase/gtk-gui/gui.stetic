@@ -250,6 +250,7 @@
             <property name="MemberName" />
             <property name="ShowArrow">False</property>
             <property name="ButtonStyle">Icons</property>
+            <property name="IconSize">LargeToolbar</property>
             <node name="toolbar1" type="Toolbar">
               <node type="Toolitem" action="entity" />
               <node type="Toolitem" action="relation" />

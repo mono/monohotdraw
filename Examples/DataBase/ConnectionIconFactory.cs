@@ -27,6 +27,7 @@
 using Cairo;
 using Gdk;
 using System.Collections.Generic;
+using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Database {
 

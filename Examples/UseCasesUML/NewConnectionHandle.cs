@@ -29,6 +29,10 @@ using System.Reflection;
 using Gdk;
 using Cairo;
 using MonoHotDraw;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Handles;
+using MonoHotDraw.Locators;
+using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Samples {
 

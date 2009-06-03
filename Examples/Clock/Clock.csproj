@@ -8,7 +8,6 @@
     <ProjectGuid>{D5AED9F8-B201-41B0-86CE-4004E3E20407}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AssemblyName>Clock</AssemblyName>
-    <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,4 +72,9 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties InternalTargetFrameworkVersion="3.5" />
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

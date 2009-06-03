@@ -26,6 +26,8 @@
 //
 using Cairo;
 using MonoHotDraw;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Locators;
 using System;
 
 namespace MonoHotDraw.Samples {

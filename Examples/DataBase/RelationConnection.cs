@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 //
 using MonoHotDraw;
+using MonoHotDraw.Figures;
 using System;
 using System.Runtime.Serialization;
 

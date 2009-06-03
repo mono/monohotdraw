@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using Cairo;
 using MonoHotDraw;
+using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Samples {
 

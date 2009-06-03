@@ -28,6 +28,7 @@ using Gtk;
 using Gdk;
 using System;
 using MonoHotDraw;
+using MonoHotDraw.Tools;
 
 namespace MonoHotDraw.Database {
 	

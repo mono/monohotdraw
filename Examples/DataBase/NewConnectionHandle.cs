@@ -27,6 +27,10 @@
 using Cairo;
 using Gdk;
 using MonoHotDraw;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Handles;
+using MonoHotDraw.Locators;
+using MonoHotDraw.Util;
 using System;
 
 //TODO: Evaluate: adding this duplicated class to the framework.

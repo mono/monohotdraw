@@ -26,6 +26,9 @@
 //
 using Cairo;
 using MonoHotDraw;
+using MonoHotDraw.Connectors;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Util;
 using System;
 using System.Runtime.Serialization;
 

@@ -1,10 +1,9 @@
-//
-// MonoHotDraw. Diagramming library
+// MonoHotDraw. Diagramming Framework
 //
 // Authors:
 //	Mario Carrión <mario@monouml.org>
 //
-// Copyright (C) 2006, 2007, 2008 MonoUML Team (http://www.monouml.org)
+// Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,14 +22,15 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
-using System;
 
-namespace MonoHotDraw {	
+using System;
+using MonoHotDraw.Figures;
+
+namespace MonoHotDraw.Commands {	
 	
-	public class BringToFrontCommand : AbstractCommand {
+	public class BringToFrontCommand: AbstractCommand {
 		
-		public BringToFrontCommand (string name, IDrawingEditor editor) : base (name, editor) {
+		public BringToFrontCommand (string name, IDrawingEditor editor): base (name, editor) {
 		}
 
 		public override bool IsExecutable {
@@ -52,7 +52,7 @@ namespace MonoHotDraw {
 		}
 		
 		class BringToFrontUndoActivity : UndoableAdapter {
-			public BringToFrontUndoActivity (IDrawingView drawingView) : base (drawingView) {
+			public BringToFrontUndoActivity (IDrawingView drawingView): base (drawingView) {
 				Undoable = true;
 				Redoable = true;
 			}

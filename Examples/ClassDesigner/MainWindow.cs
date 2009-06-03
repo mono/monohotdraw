@@ -1,6 +1,7 @@
 using System;
 using Gtk;
 using MonoHotDraw;
+using MonoHotDraw.Tools;
 using ClassDesigner;
 
 public partial class MainWindow: Gtk.Window

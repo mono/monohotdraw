@@ -26,6 +26,7 @@
 //
 using System;
 using MonoHotDraw;
+using MonoHotDraw.Figures;
 
 namespace MonoHotDraw.Samples {
 

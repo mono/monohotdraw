@@ -28,6 +28,10 @@ using System;
 using System.Collections.Generic;
 using Cairo;
 using MonoHotDraw;
+using MonoHotDraw.Connectors;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Tools;
+using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Samples {
 

@@ -103,7 +103,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
-      <Properties>
+      <Properties InternalTargetFrameworkVersion="3.5">
         <Deployment.LinuxDeployData generateScript="false" />
       </Properties>
     </MonoDevelop>

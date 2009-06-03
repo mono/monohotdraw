@@ -27,6 +27,8 @@
 using Gdk;
 using Gtk;
 using MonoHotDraw;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Tools;
 
 namespace MonoHotDraw.Samples {
 

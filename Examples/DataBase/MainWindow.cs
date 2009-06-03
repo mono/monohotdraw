@@ -27,7 +27,11 @@
 using System;
 using Gtk;
 using MonoHotDraw;
+using MonoHotDraw.Commands;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Tools;
 using MonoHotDraw.Database;
+using MonoHotDraw.Util;
 
 public partial class MainWindow: Gtk.Window, IDrawingEditor {
 	
@@ -172,7 +176,7 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 		ColorDialog dialog = new ColorDialog ();
 		if (dialog.Run () == (int) Gtk.ResponseType.Ok) {
 			UndoableCommand fontColor = new UndoableCommand (new ChangeAttributeCommand ("Font color",
-				FigureAttribute.FontColor, MonoHotDraw.GdkCairoHelper.CairoColor (dialog.Color), this));
+				FigureAttribute.FontColor, GdkCairoHelper.CairoColor (dialog.Color), this));
 			fontColor.Execute ();
 		}
 		dialog.Destroy ();
@@ -198,7 +202,7 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 		ColorDialog dialog = new ColorDialog ();
 		if (dialog.Run () == (int) Gtk.ResponseType.Ok) {
 			UndoableCommand colorLine = new UndoableCommand (new ChangeAttributeCommand ("Line color",
-				FigureAttribute.LineColor, MonoHotDraw.GdkCairoHelper.CairoColor (dialog.Color), this));
+				FigureAttribute.LineColor, GdkCairoHelper.CairoColor (dialog.Color), this));
 			colorLine.Execute ();
 		}
 		dialog.Destroy ();
@@ -209,7 +213,7 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 		ColorDialog dialog = new ColorDialog ();
 		if (dialog.Run () == (int) Gtk.ResponseType.Ok) {
 			UndoableCommand fillColor = new UndoableCommand (new ChangeAttributeCommand ("Fill color",
-				FigureAttribute.FillColor, MonoHotDraw.GdkCairoHelper.CairoColor (dialog.Color), this));
+				FigureAttribute.FillColor, GdkCairoHelper.CairoColor (dialog.Color), this));
 			fillColor.Execute ();
 		}
 		dialog.Destroy ();
