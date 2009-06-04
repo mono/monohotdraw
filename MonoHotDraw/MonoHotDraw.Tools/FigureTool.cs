@@ -26,25 +26,19 @@
 using Gdk;
 using System;
 using MonoHotDraw.Figures;
+using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Tools {
 
 	public class FigureTool: AbstractTool {
 	
 		public FigureTool (IDrawingEditor editor, IFigure fig, ITool dt): base (editor) {
-			_defaultTool = dt;
+			DefaultTool = dt;
 			Figure = fig;
 		}
 		
-		public virtual ITool DefaultTool {
-			get { return _defaultTool; }
-			set { _defaultTool = value; }
-		}
-		
-		public IFigure Figure {
-			get { return _figure; }
-			set { _figure = value;  }
-		}
+		public virtual ITool DefaultTool { get; set; }		
+		public IFigure Figure { get; set; }
 		
 		public override void MouseDown (MouseEvent ev) {
 			if (DefaultTool != null) {
@@ -82,7 +76,33 @@ namespace MonoHotDraw.Tools {
 			}
 		}
 		
-		private ITool _defaultTool;
-		private IFigure _figure;
+		public override void Activate () {
+			base.Activate ();
+			if (DefaultTool != null) {
+				DefaultTool.Activate();
+			}
+		}
+		
+		public override void Deactivate () {
+			base.Deactivate ();
+			if (DefaultTool != null) {
+				DefaultTool.Deactivate();
+			}
+		}
+		
+		public override IUndoActivity UndoActivity {
+			get {
+				if (DefaultTool != null) {
+					return DefaultTool.UndoActivity;
+				}
+				return null;
+			}
+			set {
+				if (DefaultTool != null) {
+					DefaultTool.UndoActivity = value;
+				}
+			}
+		}
+
 	}
 }

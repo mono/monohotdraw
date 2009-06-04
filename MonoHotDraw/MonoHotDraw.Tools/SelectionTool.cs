@@ -28,6 +28,7 @@ using Gdk;
 using Gtk;
 using System.Collections.Generic;
 using MonoHotDraw.Figures;
+using MonoHotDraw.Commands;
 using MonoHotDraw.Handles;
 using MonoHotDraw.Util;
 
@@ -49,12 +50,13 @@ namespace MonoHotDraw.Tools {
 			else {
 				IFigure figure = view.Drawing.FindFigure (ev.X, ev.Y);
 				if (figure != null) {
-					DelegateTool = figure.CreateFigureTool (Editor, new DragTool (Editor, figure));
+					DelegateTool = new UndoableTool(figure.CreateFigureTool (Editor, new DragTool (Editor, figure)));
 				} else {
 					DelegateTool = new SelectAreaTracker (Editor);
 				}
 			}
-			if (DelegateTool != null) { 
+			if (DelegateTool != null) {
+				DelegateTool.Activate();
 				DelegateTool.MouseDown (ev);
 			}
 		}
@@ -62,6 +64,7 @@ namespace MonoHotDraw.Tools {
 		public override void MouseUp (MouseEvent ev) {
 			if (DelegateTool != null) {
 				DelegateTool.MouseUp (ev);
+				DelegateTool.Deactivate();
 			}
 		}
 		
@@ -106,7 +109,7 @@ namespace MonoHotDraw.Tools {
 		
 		protected ITool DelegateTool {
 			set { 
-				if (_delegateTool != null) {
+				if (_delegateTool != null && _delegateTool.Activated) {
 					_delegateTool.Deactivate ();
 				}
 

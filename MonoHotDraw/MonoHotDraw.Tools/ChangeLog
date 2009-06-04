@@ -1,5 +1,15 @@
 2009-06-04  Manuel Cerón  <ceronman@gmail.com>
 
+	* FigureTool.cs: Using automatic properties. Added Activate,
+	Deactivate, and UndoActivity Implementations
+
+	* DragTool.cs: Using Automatic Properties. Added UndoActivity
+
+	* SelectionTool.cs: Using UndoableTool for DragTracker and
+	FigureTool
+
+2009-06-04  Manuel Cerón  <ceronman@gmail.com>
+
 	* UndoableTool.cs: Fixed constructor syntax error
 
 2009-06-04  Manuel Cerón  <ceronman@gmail.com>

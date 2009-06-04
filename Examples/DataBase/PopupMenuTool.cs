@@ -74,13 +74,6 @@ namespace MonoHotDraw.Database {
 			base.Activate ();
 		}
 
-		public override void Deactivate () {
-			if (DefaultTool != null) {
-				DefaultTool.Deactivate ();
-			}
-			base.Deactivate ();
-		}
-
 		public override void MouseUp (MouseEvent ev) {
 			//FIXME: Does this hardcoded value always apply?
 			Gdk.EventButton gdk_event = ev.GdkEvent as EventButton;

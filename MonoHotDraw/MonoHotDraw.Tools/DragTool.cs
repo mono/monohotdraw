@@ -1,5 +1,3 @@
-// TODO: Renamed to DragTool
-
 // MonoHotDraw. Diagramming Framework
 //
 // Authors:
@@ -25,9 +23,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gdk;
 using System;
+using Gdk;
+using Cairo;
 using MonoHotDraw.Figures;
+using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Tools {
 
@@ -37,29 +37,14 @@ namespace MonoHotDraw.Tools {
 			AnchorFigure = anchor;
 		}
 
-		public IFigure AnchorFigure {
-			get { return  _anchorFigure; }
-			set { _anchorFigure = value; }
-		}
-
-		protected double LastX {
-			set { _lastX = value; }
-			get { return _lastX; }
-		}
-
-		protected double LastY {
-			set { _lastY = value; }
-			get { return _lastY; }
-		}
-
+		public IFigure AnchorFigure { get; set; }
+		protected double LastX { get; set; }
+		protected double LastY { get; set; }
+		public bool HasMoved { get; protected set; }
+		
 		protected void SetLastCoords (double x, double y) {
 			LastX = x;
 			LastY = y;
-		}
-
-		public bool HasMoved {
-			get { return _hasMoved; }
-			protected set {_hasMoved = value; }
 		}
 
 		public override void MouseDown (MouseEvent ev) {
@@ -80,7 +65,7 @@ namespace MonoHotDraw.Tools {
 				view.ClearSelection ();
 				view.AddToSelection (AnchorFigure);
 			}
-
+			UndoActivity = CreateUndoActivity();
 		}
 
 		public override void MouseDrag (MouseEvent ev) {
@@ -95,12 +80,63 @@ namespace MonoHotDraw.Tools {
 		}
 		
 		public override void MouseUp (MouseEvent ev) {
-//			view.Drawing.RecalculateDisplayBox ();
 		}
-
-		private double _lastX;
-		private double _lastY;
-		private bool _hasMoved;
-		private IFigure _anchorFigure;
+		
+		public override void Deactivate () {
+			base.Deactivate ();
+			
+			if (HasMoved){
+				DragToolUndoActivity activity = UndoActivity as DragToolUndoActivity;
+				activity.EndPoint = new PointD(LastX, LastY);
+			}
+			
+			else {
+				UndoActivity = null;
+			}
+		}
+		
+		public class DragToolUndoActivity: AbstractUndoActivity {
+			public DragToolUndoActivity(IDrawingView drawingView): base (drawingView) {
+				Undoable = true;
+				Redoable = true;
+			}
+			
+			public override bool Undo () {
+				if (!base.Undo()  )
+					return false;
+				
+				double deltaX = StartPoint.X - EndPoint.X;
+				double deltaY = StartPoint.Y - EndPoint.Y;
+			
+				foreach (IFigure figure in AffectedFigures) {
+					figure.MoveBy(deltaX, deltaY);
+				}
+				return true;
+			}
+			
+			public override bool Redo () {
+				if (!base.Redo() )
+					return false;
+				
+				double deltaX = EndPoint.X - StartPoint.X;
+				double deltaY = EndPoint.Y - StartPoint.Y;
+				
+				foreach (IFigure figure in AffectedFigures) {
+					figure.MoveBy(deltaX, deltaY);
+				}
+				return true;
+			}
+			
+			public PointD StartPoint { get; set; }
+			public PointD EndPoint { get; set; } 
+		}
+		
+		protected IUndoActivity CreateUndoActivity() {
+			IDrawingView view = Editor.View;
+			DragToolUndoActivity activity = new DragToolUndoActivity(view);
+			activity.AffectedFigures = view.SelectionEnumerator.ToFigures();
+			activity.StartPoint = new PointD(AnchorX, AnchorY);
+			return activity;
+		}
 	}
 }
