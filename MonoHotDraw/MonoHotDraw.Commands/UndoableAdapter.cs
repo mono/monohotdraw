@@ -32,28 +32,14 @@ namespace MonoHotDraw.Commands {
 	public class UndoableAdapter : IUndoable {
 	
 		public UndoableAdapter (IDrawingView drawingView) {
-			_drawingView = drawingView;
+			DrawingView = drawingView;
 		}
 		
-		public bool Undoable {
-			get { return _undoable; }
-			set { _undoable = value; }
-		}
-
-		public bool Redoable {
-			get { return _redoable; }
-			set { _redoable = value; }
-		}
-
-		public IDrawingView DrawingView {
-			get { return _drawingView; }
-		}
-
-		public virtual FigureCollection AffectedFigures {
-			get { return _affectedFigures; }
-			set { _affectedFigures = value; }
-		}
-		
+		public bool Undoable { get; set; }
+		public bool Redoable { get; set; }
+		public IDrawingView DrawingView { get; protected set; }
+		public virtual FigureCollection AffectedFigures { get; set; }
+			
 		public virtual bool Undo () {
 			return Undoable; 
 		}
@@ -63,12 +49,7 @@ namespace MonoHotDraw.Commands {
 		}
 
 		public void Release () {
-			_affectedFigures = null;
+			AffectedFigures = null;
 		}
-		
-		private FigureCollection _affectedFigures;
-		private IDrawingView     _drawingView;
-		private bool             _redoable;
-		private bool             _undoable;
 	}
 }

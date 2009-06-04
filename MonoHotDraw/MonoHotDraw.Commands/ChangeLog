@@ -1,5 +1,10 @@
 2009-06-03  Manuel Cerón  <ceronman@gmail.com>
 
+	* UndoableAdapter.cs: Updated some properties to Automatic
+	Properties of C# 3
+
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
 	* CutCommand.cs:
 	* CopyCommand.cs:
 	* DeleteCommand.cs:
