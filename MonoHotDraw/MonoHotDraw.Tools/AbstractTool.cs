@@ -26,6 +26,7 @@
 using Cairo;
 using Gdk;
 using System;
+using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Tools {
 
@@ -35,26 +36,17 @@ namespace MonoHotDraw.Tools {
 			Editor = editor;
 		}
 
-		public IDrawingEditor Editor {
-			set { _editor = value; }
-			get { return  _editor; }
-		}
-
-		public IDrawingView View {
-			set { _view = value; }
-			get { return  _view; }
-		}
-		
-		public bool Activated {
-			get { return _activated; }
-		}
+		public IDrawingEditor Editor { get; set;}
+		public IDrawingView View { get; set; }
+		public bool Activated { get; protected set; }
+		public virtual IUndoActivity UndoActivity { get; set; }
 		
 		public virtual void Activate () {
-			_activated = true;
+			Activated = true;
 		}
 		
 		public virtual void Deactivate () {
-			_activated = false;
+			Activated = false;
 		}
 			
 		public virtual void KeyDown (KeyEvent ev) {
@@ -77,25 +69,12 @@ namespace MonoHotDraw.Tools {
 		public virtual void MouseUp (MouseEvent ev) {
 		}
 
-		protected double AnchorX {
-			get { return  _anchorX; }
-			set { _anchorX = value; }
-		}
-
-		protected double AnchorY {
-			get { return  _anchorY; }
-			set { _anchorY = value; }
-		}
+		protected double AnchorX { get; set; }
+		protected double AnchorY { get; set; }
 
 		protected void SetAnchorCoords (double x, double y) {
 			AnchorX = x;
 			AnchorY = y;
 		}
-
-		private IDrawingEditor _editor;
-		private IDrawingView _view;
-		private double _anchorX;
-		private double _anchorY;
-		private bool _activated = false;
 	}
 }

@@ -1,0 +1,7 @@
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
+	* ITool.cs: Added UndoActivity property.
+
+	* AbstractTool.cs: Added UndoActivity Property. Some
+	properties migrated to automatic properties.
+

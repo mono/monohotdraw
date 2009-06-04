@@ -25,6 +25,7 @@
 
 using Gdk;
 using Cairo;
+using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Tools {
 
@@ -41,5 +42,6 @@ namespace MonoHotDraw.Tools {
 		
 		bool Activated { get; }
 		IDrawingEditor Editor { set; get; }
+		IUndoActivity UndoActivity { get; set; }
 	}
 }
