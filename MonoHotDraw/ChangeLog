@@ -1,5 +1,9 @@
 2009-06-03  Manuel Cerón  <ceronman@gmail.com>
 
+	* MonoHotDraw.csproj: Added UndoableTool
+
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
 	* MonoHotDraw.csproj: IUndoable renamed to IUndoActivity
 	UnodableAdapter renamed to AbstractUndoActivity
 

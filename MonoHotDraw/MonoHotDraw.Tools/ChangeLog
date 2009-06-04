@@ -1,5 +1,9 @@
 2009-06-03  Manuel Cerón  <ceronman@gmail.com>
 
+	* UndoableTool.cs: Added UndoableTool
+
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
 	* ITool.cs: Added UndoActivity property.
 
 	* AbstractTool.cs: Added UndoActivity Property. Some
