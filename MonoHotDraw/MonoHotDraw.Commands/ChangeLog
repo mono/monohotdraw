@@ -1,0 +1,13 @@
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
+	* CutCommand.cs:
+	* CopyCommand.cs:
+	* DeleteCommand.cs:
+	* UndoableAdapter.cs:
+	* DuplicateCommand.cs:
+	* SelectAllCommand.cs:
+	* SendToBackCommand.cs:
+	* BringToFrontCommand.cs:
+	* ChangeAttributeCommand.cs: Changed references to
+	FromEnumerator
+

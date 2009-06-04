@@ -30,15 +30,14 @@ using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Figures {
 
-	[System.Serializable]
-	public class FigureCollection: Collection <IFigure>, System.ICloneable {
+	public class FigureCollection: List <IFigure>, System.ICloneable {
 	
-		public static FigureCollection FromEnumeration (IEnumerable <IFigure> enumeration) {
-			FigureCollection collection = new FigureCollection ();
-			foreach (IFigure figure in enumeration) {
-				collection.Add (figure);
-			}
-			return collection;
+		public FigureCollection (): base()
+		{
+		}
+		public FigureCollection (IEnumerable <IFigure> enumeration):
+			base (enumeration)
+		{
 		}
 		
 		object System.ICloneable.Clone () {
@@ -48,5 +47,12 @@ namespace MonoHotDraw.Figures {
 		public FigureCollection Clone () {
 			return (FigureCollection) GenericCloner.Clone<FigureCollection> (this); 
 		}
+	}
+
+	public static class FigureCollectionExtensions {
+	     public static FigureCollection ToFigures( this IEnumerable<IFigure> collection )
+	     {
+	          return new FigureCollection( collection );
+	     }
 	}
 }

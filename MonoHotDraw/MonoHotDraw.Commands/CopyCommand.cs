@@ -36,7 +36,7 @@ namespace MonoHotDraw.Commands {
 		
 		public override void Execute () {
 			base.Execute ();
-			CopyFigures (FigureCollection.FromEnumeration (DrawingView.SelectionEnumerator));
+			CopyFigures (new FigureCollection (DrawingView.SelectionEnumerator));
 		}
 
 		public override bool IsExecutable {

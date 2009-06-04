@@ -1,3 +1,7 @@
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
+	* MonoHotDraw.csproj: Changed references to FromEnumerator
+
 2009-06-02  Manuel Cerón  <ceronman@gmail.com>
 
 	* MonoHotDraw.Util:

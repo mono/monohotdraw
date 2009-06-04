@@ -1,0 +1,7 @@
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
+	* AbstractFigure.cs: Changed references to FromEnumerator
+
+	* FigureCollection.cs: Removed FromEnumerator Method. Changed
+	with new Constructor. Added ToFigures Extension method
+

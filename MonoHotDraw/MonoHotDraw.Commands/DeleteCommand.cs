@@ -24,6 +24,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using MonoHotDraw.Figures;
 
 namespace MonoHotDraw.Commands {
@@ -39,7 +40,7 @@ namespace MonoHotDraw.Commands {
 		
 		public override void Execute () {
 			base.Execute ();
-			FigureCollection figures = GetWithDependents (FigureCollection.FromEnumeration (DrawingView.SelectionEnumerator));
+			FigureCollection figures = GetWithDependents (new FigureCollection (DrawingView.SelectionEnumerator));
 			DeleteFigures (figures);
 		}
 
@@ -58,7 +59,8 @@ namespace MonoHotDraw.Commands {
 			public override bool Undo () {
 				if (base.Undo () && AffectedFigures.Count > 0) {
 					DrawingView.ClearSelection ();
-					AffectedFigures = _command.InsertFigures (AffectedFiguresReversed, 0, 0);
+					var reverseAffectedFigures = Enumerable.Reverse(AffectedFigures);
+					AffectedFigures = _command.InsertFigures (reverseAffectedFigures.ToFigures(), 0, 0);
 					return true;
 				}
 				return false;

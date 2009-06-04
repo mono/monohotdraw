@@ -39,7 +39,7 @@ namespace MonoHotDraw.Commands {
 		
 		public override void Execute () {
 			base.Execute ();
-			FigureCollection figures = GetWithDependents (FigureCollection.FromEnumeration (DrawingView.SelectionEnumerator));
+			FigureCollection figures = GetWithDependents (new FigureCollection (DrawingView.SelectionEnumerator));
 			CopyFigures (figures);
 			DeleteFigures (figures);
 		}

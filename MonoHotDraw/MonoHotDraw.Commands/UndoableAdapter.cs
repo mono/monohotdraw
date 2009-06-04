@@ -54,17 +54,6 @@ namespace MonoHotDraw.Commands {
 			set { _affectedFigures = value; }
 		}
 		
-		// TODO: Move this to FigureCollection
-		public virtual FigureCollection AffectedFiguresReversed {
-			get {
-				FigureCollection collection = new FigureCollection ();
-				for (int i = 1; i <= AffectedFigures.Count; i++) {
-					collection.Add (AffectedFigures [AffectedFigures.Count - i]);
-				}
-				return collection;
-			}
-		}
-
 		public virtual bool Undo () {
 			return Undoable; 
 		}

@@ -37,7 +37,7 @@ namespace MonoHotDraw.Commands {
 			base.Execute ();
 
 			UndoActivity = CreateUndoActivity ();
-			UndoActivity.AffectedFigures = FigureCollection.FromEnumeration (DrawingView.SelectionEnumerator);
+			UndoActivity.AffectedFigures = new FigureCollection (DrawingView.SelectionEnumerator);
 			foreach (IFigure figure in DrawingView.Drawing.FiguresEnumerator) {
 				DrawingView.AddToSelection (figure);
 			}

@@ -239,7 +239,7 @@ namespace MonoHotDraw.Figures {
 			}
 			
 			if (_dependentFigures != null) {
-				FigureCollection dependents = FigureCollection.FromEnumeration (DependentFiguresEnumerator);
+				FigureCollection dependents = new FigureCollection (DependentFiguresEnumerator);
 
 				foreach (IFigure dependent in dependents) {
 					dependent.Visit (visitor);
