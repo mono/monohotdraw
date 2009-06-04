@@ -49,7 +49,7 @@ namespace MonoHotDraw.Tools {
 			else {
 				IFigure figure = view.Drawing.FindFigure (ev.X, ev.Y);
 				if (figure != null) {
-					DelegateTool = figure.CreateFigureTool (Editor, new DragTracker (Editor, figure));
+					DelegateTool = figure.CreateFigureTool (Editor, new DragTool (Editor, figure));
 				} else {
 					DelegateTool = new SelectAreaTracker (Editor);
 				}

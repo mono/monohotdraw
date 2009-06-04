@@ -119,7 +119,7 @@
     <Compile Include="MonoHotDraw.Tools\ConnectionCreationTool.cs" />
     <Compile Include="MonoHotDraw.Tools\CreationTool.cs" />
     <Compile Include="MonoHotDraw.Tools\DragCreationTool.cs" />
-    <Compile Include="MonoHotDraw.Tools\DragTracker.cs" />
+    <Compile Include="MonoHotDraw.Tools\DragTool.cs" />
     <Compile Include="MonoHotDraw.Tools\FigureTool.cs" />
     <Compile Include="MonoHotDraw.Tools\HandleTracker.cs" />
     <Compile Include="MonoHotDraw.Tools\ITool.cs" />

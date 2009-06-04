@@ -1,3 +1,9 @@
+2009-06-04  Manuel Cerón  <ceronman@gmail.com>
+
+	* DragTool.cs:
+	* DragTracker.cs:
+	* SelectionTool.cs: DragTracker renamed to DragTool
+
 2009-06-03  Manuel Cerón  <ceronman@gmail.com>
 
 	* UndoableTool.cs: Added UndoableTool
