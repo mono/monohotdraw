@@ -31,9 +31,9 @@ using MonoHotDraw.Figures;
 
 namespace MonoHotDraw.Tools {
 
-	public class DragTracker: AbstractTool {
+	public class DragTool: AbstractTool {
 	
-		public DragTracker (IDrawingEditor editor, IFigure anchor): base (editor) {
+		public DragTool (IDrawingEditor editor, IFigure anchor): base (editor) {
 			AnchorFigure = anchor;
 		}
 
