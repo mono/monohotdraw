@@ -1,5 +1,9 @@
 2009-06-04  Manuel Cerón  <ceronman@gmail.com>
 
+	* UndoableTool.cs: Fixed constructor syntax error
+
+2009-06-04  Manuel Cerón  <ceronman@gmail.com>
+
 	* DragTool.cs: Renamed to DragTool
 
 2009-06-04  Manuel Cerón  <ceronman@gmail.com>

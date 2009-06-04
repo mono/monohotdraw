@@ -30,7 +30,7 @@ namespace MonoHotDraw.Tools {
 	
 	public class UndoableTool: ITool	{
 		
-		public UndoableTool (ITool wrappedTool): base(editor) {
+		public UndoableTool (ITool wrappedTool) {
 			WrappedTool = wrappedTool;
 		}
 		
@@ -39,11 +39,6 @@ namespace MonoHotDraw.Tools {
 		public IDrawingEditor Editor {
 			get { return WrappedTool.Editor; }
 			set { WrappedTool.Editor = value; }
-		}
-		
-		public IDrawingView View {
-			get { return WrappedTool.View; }
-			set { WrappedTool.View = value; }
 		}
 		
 		public bool Activated {
