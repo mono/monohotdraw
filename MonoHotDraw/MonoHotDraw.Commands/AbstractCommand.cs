@@ -35,9 +35,14 @@ namespace MonoHotDraw.Commands {
 		}
 		
 		public virtual IDrawingEditor DrawingEditor { get; private set; }
-		public virtual IDrawingView DrawingView { get; private set; }
 		public virtual string Name { get; private set; }
 		public virtual IUndoable UndoActivity {	get; set; }
+		
+		public virtual IDrawingView DrawingView {
+			get {
+				return DrawingEditor.View;
+			}
+		}
 		
 		public virtual bool IsExecutable {
 			get { return true; }

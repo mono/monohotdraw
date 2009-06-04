@@ -1,5 +1,10 @@
 2009-06-03  Manuel Cerón  <ceronman@gmail.com>
 
+	* ICommand.cs:
+	* AbstractCommand.cs: Fixed DrawingView Property
+
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
 	* IUndoable.cs:
 	* PasteCommand.cs:
 	* DeleteCommand.cs:

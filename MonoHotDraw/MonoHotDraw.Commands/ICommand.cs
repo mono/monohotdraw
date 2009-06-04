@@ -35,6 +35,5 @@ namespace MonoHotDraw.Commands {
 		bool IsExecutable { get; }
 		string Name { get; }
 		IUndoable UndoActivity { get; set; }
-		
 	}
 }
