@@ -60,7 +60,7 @@ namespace MonoHotDraw.Commands {
 //			UndoActivity.AffectedFigures = InsertFigures (UndoActivity.AffectedFigures, lastClick.X - r.X, lastClick.Y - r.Y);
 //		}
 
-		protected override IUndoable CreateUndoActivity () {
+		protected override IUndoActivity CreateUndoActivity () {
 			return new PasteUndoActivity (DrawingView);
 		}
 		
@@ -73,7 +73,7 @@ namespace MonoHotDraw.Commands {
 			return rectangle;
 		}
 		
-		internal class PasteUndoActivity : UndoableAdapter {
+		internal class PasteUndoActivity : AbstractUndoActivity {
 			public PasteUndoActivity (IDrawingView drawingView) : base (drawingView) {
 				Undoable = true;
 				Redoable = true;

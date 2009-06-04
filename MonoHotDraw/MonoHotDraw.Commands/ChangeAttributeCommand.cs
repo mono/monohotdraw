@@ -51,11 +51,11 @@ namespace MonoHotDraw.Commands {
 			}
 		}
 		
-		protected override IUndoable CreateUndoActivity () {
+		protected override IUndoActivity CreateUndoActivity () {
 			return new ChangeAttributeUndoActivity (DrawingView, _attribute, _value);
 		}
 
-		class ChangeAttributeUndoActivity : UndoableAdapter {
+		class ChangeAttributeUndoActivity : AbstractUndoActivity {
 			public ChangeAttributeUndoActivity (IDrawingView drawingView, 
 				FigureAttribute attribute, object value) : base (drawingView) {
 				_originalValues = new Dictionary<IFigure, object> ();

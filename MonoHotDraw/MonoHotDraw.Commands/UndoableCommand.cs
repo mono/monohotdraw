@@ -50,15 +50,15 @@ namespace MonoHotDraw.Commands {
 			get { return WrappedCommand.Name; }
 		}
 		
-		public IUndoable UndoActivity {
-			get { return new UndoableAdapter (DrawingView); }
+		public IUndoActivity UndoActivity {
+			get { return new AbstractUndoActivity (DrawingView); }
 			set {  }
 		}
 		
 		public void Execute () {
 			WrappedCommand.Execute ();
 
-			IUndoable undoableCommand = WrappedCommand.UndoActivity;
+			IUndoActivity undoableCommand = WrappedCommand.UndoActivity;
 			if (undoableCommand != null && undoableCommand.Undoable) {
 				DrawingEditor.UndoManager.PushUndo (undoableCommand);
 				DrawingEditor.UndoManager.ClearRedos ();

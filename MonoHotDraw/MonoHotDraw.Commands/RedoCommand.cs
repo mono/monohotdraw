@@ -40,7 +40,7 @@ namespace MonoHotDraw.Commands {
 				return;
 			}
 		
-			IUndoable lastRedoable = manager.PopRedo ();
+			IUndoActivity lastRedoable = manager.PopRedo ();
 			// Execute redo
 			bool hasBeenRedone = lastRedoable.Redo ();
 			// Add to undo stack

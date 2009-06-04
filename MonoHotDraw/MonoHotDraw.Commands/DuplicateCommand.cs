@@ -47,7 +47,7 @@ namespace MonoHotDraw.Commands {
 			get { return DrawingView.SelectionCount > 0; }
 		}
 		
-		protected override IUndoable CreateUndoActivity () {
+		protected override IUndoActivity CreateUndoActivity () {
 			return new PasteCommand.PasteUndoActivity (DrawingView);
 		}
 	}

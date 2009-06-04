@@ -36,7 +36,7 @@ namespace MonoHotDraw.Commands {
 		
 		public virtual IDrawingEditor DrawingEditor { get; private set; }
 		public virtual string Name { get; private set; }
-		public virtual IUndoable UndoActivity {	get; set; }
+		public virtual IUndoActivity UndoActivity {	get; set; }
 		
 		public virtual IDrawingView DrawingView {
 			get {
@@ -53,7 +53,7 @@ namespace MonoHotDraw.Commands {
 				throw new ArgumentNullException ("You can not execute command with no drawing view.");
 		}
 
-		protected virtual IUndoable CreateUndoActivity () { 
+		protected virtual IUndoActivity CreateUndoActivity () { 
 			return new NullUndoActivity (DrawingView);;
 		}
 	}

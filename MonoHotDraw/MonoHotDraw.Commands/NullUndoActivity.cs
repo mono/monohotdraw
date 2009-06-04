@@ -25,7 +25,7 @@
 //
 namespace MonoHotDraw.Commands {
 
-	public class NullUndoActivity : UndoableAdapter {
+	public class NullUndoActivity : AbstractUndoActivity {
 		
 		public NullUndoActivity (IDrawingView view) : base (view) {
 			Undoable = false;

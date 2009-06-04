@@ -37,8 +37,8 @@ namespace MonoHotDraw.Commands {
 		
 		public UndoManager (int bufferSize) {
 			_bufferSize = bufferSize;
-			_redoList   = new List<IUndoable> ();
-			_undoList   = new List<IUndoable> ();
+			_redoList   = new List<IUndoActivity> ();
+			_undoList   = new List<IUndoActivity> ();
 		}
 		
 		public bool Redoable {
@@ -67,21 +67,21 @@ namespace MonoHotDraw.Commands {
 			_undoList.Clear ();
 		}
 
-		public IUndoable PopUndo () {
-			IUndoable lastUndoable = PeekUndo ();
+		public IUndoActivity PopUndo () {
+			IUndoActivity lastUndoable = PeekUndo ();
 			_undoList.RemoveAt (_undoList.Count - 1);
 
 			return lastUndoable;
 		}
 
-		public IUndoable PopRedo () {
-			IUndoable lastUndoable = PeekRedo ();
+		public IUndoActivity PopRedo () {
+			IUndoActivity lastUndoable = PeekRedo ();
 			_redoList.RemoveAt (_redoList.Count - 1);
 
 			return lastUndoable;
 		}
 		
-		public void PushUndo (IUndoable undoActivity) {
+		public void PushUndo (IUndoActivity undoActivity) {
 			if (undoActivity.Undoable) {
 				RemoveFirstElementInFullList (_undoList);
 				_undoList.Add (undoActivity);
@@ -89,11 +89,11 @@ namespace MonoHotDraw.Commands {
 				// a not undoable activity clears the stack because
 				// the last activity does not correspond with the
 				// last undo activity
-				_undoList = new List<IUndoable> ();
+				_undoList = new List<IUndoActivity> ();
 			}
 		}
 		
-		public void PushRedo (IUndoable redoActivity) {
+		public void PushRedo (IUndoActivity redoActivity) {
 			if (redoActivity.Redoable) {
 				RemoveFirstElementInFullList (_redoList);
 				// add redo activity only if it is not already the last
@@ -105,32 +105,32 @@ namespace MonoHotDraw.Commands {
 				// a not undoable activity clears the tack because
 				// the last activity does not correspond with the
 				// last undo activity
-				_redoList = new List <IUndoable> ();
+				_redoList = new List <IUndoActivity> ();
 			}
 		}
 
-		private IUndoable GetLastElement (List<IUndoable> list) {
+		private IUndoActivity GetLastElement (List<IUndoActivity> list) {
 			return list.Count > 0 ? list [list.Count - 1] : null;
 		}
 		
-		private void RemoveFirstElementInFullList (List<IUndoable> list) {
+		private void RemoveFirstElementInFullList (List<IUndoActivity> list) {
 			if (list.Count >= _bufferSize) {
-				IUndoable removedActivity = list [0];
+				IUndoActivity removedActivity = list [0];
 				list.RemoveAt (0);
 				removedActivity.Release ();
 			}
 		}
 		
-		private IUndoable PeekRedo () {
+		private IUndoActivity PeekRedo () {
 			return _redoList.Count > 0 ? GetLastElement (_redoList) : null;
 		}
 		
-		private IUndoable PeekUndo () {
+		private IUndoActivity PeekUndo () {
 			return _undoList.Count > 0 ? GetLastElement (_undoList) : null;
 		}
 
 		private int             _bufferSize;
-		private List<IUndoable> _redoList;
-		private List<IUndoable> _undoList;
+		private List<IUndoActivity> _redoList;
+		private List<IUndoActivity> _undoList;
 	}
 }

@@ -42,7 +42,7 @@ namespace MonoHotDraw.Commands {
 				return;
 			}
 
-			IUndoable lastUndoable  = manager.PopUndo ();
+			IUndoActivity lastUndoable  = manager.PopUndo ();
 			// Execute undo
 			bool hasBeenUndone = lastUndoable.Undo ();
 

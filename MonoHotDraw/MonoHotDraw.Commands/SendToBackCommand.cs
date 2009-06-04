@@ -47,11 +47,11 @@ namespace MonoHotDraw.Commands {
 			}
 		}
 		
-		protected override IUndoable CreateUndoActivity () {
+		protected override IUndoActivity CreateUndoActivity () {
 			return new SendToBackUndoActivity (DrawingView);
 		}
 
-		class SendToBackUndoActivity : UndoableAdapter {
+		class SendToBackUndoActivity : AbstractUndoActivity {
 			public SendToBackUndoActivity (IDrawingView drawingView) : base (drawingView) {
 				Undoable = true;
 				Redoable = true;

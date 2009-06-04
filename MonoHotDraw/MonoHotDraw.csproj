@@ -61,13 +61,13 @@
     <Compile Include="MonoHotDraw.Commands\GenericCloner.cs" />
     <Compile Include="MonoHotDraw.Commands\ICommand.cs" />
     <Compile Include="MonoHotDraw.Commands\InsertIntoDrawingVisitor.cs" />
-    <Compile Include="MonoHotDraw.Commands\IUndoable.cs" />
+    <Compile Include="MonoHotDraw.Commands\IUndoActivity.cs" />
     <Compile Include="MonoHotDraw.Commands\NullUndoActivity.cs" />
     <Compile Include="MonoHotDraw.Commands\PasteCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\RedoCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\SelectAllCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\SendToBackCommand.cs" />
-    <Compile Include="MonoHotDraw.Commands\UndoableAdapter.cs" />
+    <Compile Include="MonoHotDraw.Commands\AbstractUndoActivity.cs" />
     <Compile Include="MonoHotDraw.Commands\UndoableCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\UndoCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\UndoManager.cs" />

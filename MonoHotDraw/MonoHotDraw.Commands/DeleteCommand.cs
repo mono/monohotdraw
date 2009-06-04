@@ -44,11 +44,11 @@ namespace MonoHotDraw.Commands {
 			DeleteFigures (figures);
 		}
 
-		protected override IUndoable CreateUndoActivity () {
+		protected override IUndoActivity CreateUndoActivity () {
 			return new DeleteUndoActivity (this);
 		}
 
-		class DeleteUndoActivity : UndoableAdapter {
+		class DeleteUndoActivity : AbstractUndoActivity {
 	
 			public DeleteUndoActivity (FigureTransferCommand command) : base (command.DrawingView) {
 				_command = command;
