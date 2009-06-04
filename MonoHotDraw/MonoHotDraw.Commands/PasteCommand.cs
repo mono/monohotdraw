@@ -86,8 +86,7 @@ namespace MonoHotDraw.Commands {
 					return false;
 
 				DeleteFromDrawingVisitor visitor = new DeleteFromDrawingVisitor (DrawingView.Drawing);
-				FigureCollection figures = AffectedFigures;
-				foreach (IFigure figure in figures) {
+				foreach (IFigure figure in AffectedFigures) {
 					figure.Visit (visitor);
 				}
 				DrawingView.ClearSelection ();

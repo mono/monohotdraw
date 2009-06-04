@@ -57,10 +57,9 @@ namespace MonoHotDraw.Commands {
 			}
 			
 			public override bool Undo () {
-				if (base.Undo () && AffectedFigures.Count > 0) {
+				if (base.Undo () && AffectedFigures.Count() > 0) {
 					DrawingView.ClearSelection ();
-					var reverseAffectedFigures = Enumerable.Reverse(AffectedFigures);
-					AffectedFigures = _command.InsertFigures (reverseAffectedFigures.ToFigures(), 0, 0);
+					AffectedFigures = _command.InsertFigures (AffectedFigures.Reverse().ToFigures(), 0, 0);
 					return true;
 				}
 				return false;
@@ -71,7 +70,7 @@ namespace MonoHotDraw.Commands {
 				if (Redoable == false)
 					return false;
 
-				_command.DeleteFigures (AffectedFigures); 
+				_command.DeleteFigures (AffectedFigures.ToFigures()); 
 				DrawingView.ClearSelection ();
 				return true;
 			}

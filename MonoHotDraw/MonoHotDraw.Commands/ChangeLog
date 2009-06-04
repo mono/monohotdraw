@@ -1,5 +1,16 @@
 2009-06-03  Manuel Cerón  <ceronman@gmail.com>
 
+	* IUndoable.cs:
+	* PasteCommand.cs:
+	* DeleteCommand.cs:
+	* UndoableAdapter.cs:
+	* SelectAllCommand.cs:
+	* FigureTransferCommand.cs:
+	* ChangeAttributeCommand.cs: Affected Figures is now
+	IEnumerable<IFigure>
+
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
 	* UndoableAdapter.cs: Updated some properties to Automatic
 	Properties of C# 3
 

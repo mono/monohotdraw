@@ -65,7 +65,7 @@ namespace MonoHotDraw.Commands {
 				Value           = value;
 			}
 			
-			public override FigureCollection AffectedFigures {
+			public override IEnumerable<IFigure> AffectedFigures {
 				get { return base.AffectedFigures; }
 				set { 
 					base.AffectedFigures = value;

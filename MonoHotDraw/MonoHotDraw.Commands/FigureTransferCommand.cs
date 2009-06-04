@@ -33,19 +33,19 @@ namespace MonoHotDraw.Commands {
 		protected FigureTransferCommand (string name, IDrawingEditor editor)  : base (name, editor) {
 		}		
 		
-		protected void CopyFigures (FigureCollection figures) {
+		protected void CopyFigures (IEnumerable<IFigure> figures) {
 			Clipboard.GetInstance ().Contents = figures;
 		}
 
-		public void DeleteFigures (FigureCollection figures) {
+		public void DeleteFigures (IEnumerable<IFigure> figures) {
 			foreach (IFigure figure in figures) {
 				DrawingView.Remove (figure);
 			}
 			DrawingView.ClearSelection ();
 		}
 		
-		public FigureCollection InsertFigures (FigureCollection figures, double dx, double dy) {
-			return DrawingView.InsertFigures (figures, dx, dy, false);
+		public FigureCollection InsertFigures (IEnumerable<IFigure> figures, double dx, double dy) {
+			return DrawingView.InsertFigures (figures.ToFigures(), dx, dy, false);
 		}
 		
 		// TODO: Refactor this. Maybe this could go to IDrawing and StandardDrawingView

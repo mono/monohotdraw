@@ -2,6 +2,7 @@
 //
 // Authors:
 //	Mario Carrión <mario@monouml.org>
+//  Manuel Cerón <ceronman@gmail.com>
 //
 // Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
@@ -36,6 +37,6 @@ namespace MonoHotDraw.Commands {
 		bool Redoable { get; set; }
 		void Release();
 		IDrawingView DrawingView { get; }
-		FigureCollection AffectedFigures { get; set; }
+		IEnumerable<IFigure> AffectedFigures { get; set; }
 	}
 }

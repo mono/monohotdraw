@@ -2,6 +2,7 @@
 //
 // Authors:
 //	Mario Carrión <mario@monouml.org>
+//  Manuel Cerón <ceronman@gmail.com>
 //
 // Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
@@ -38,7 +39,7 @@ namespace MonoHotDraw.Commands {
 		public bool Undoable { get; set; }
 		public bool Redoable { get; set; }
 		public IDrawingView DrawingView { get; protected set; }
-		public virtual FigureCollection AffectedFigures { get; set; }
+		public virtual IEnumerable<IFigure> AffectedFigures { get; set; }
 			
 		public virtual bool Undo () {
 			return Undoable; 

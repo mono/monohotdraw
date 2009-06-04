@@ -58,7 +58,7 @@ namespace MonoHotDraw.Commands {
 					return false;
 
 				DrawingView.ClearSelection ();
-				DrawingView.AddToSelection (AffectedFigures);
+				DrawingView.AddToSelection (AffectedFigures.ToFigures());
 
 				return true;
 			}
