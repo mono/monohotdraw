@@ -1,5 +1,10 @@
 2009-06-03  Manuel Cerón  <ceronman@gmail.com>
 
+	* UndoableCommand.cs: Cleaned up a little. Removed unnecesary
+	comentaries.
+
+2009-06-03  Manuel Cerón  <ceronman@gmail.com>
+
 	* ICommand.cs:
 	* AbstractCommand.cs: Fixed DrawingView Property
 

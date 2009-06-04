@@ -1,9 +1,8 @@
-// TODO: Review comments
-
 // MonoHotDraw. Diagramming Framework
 //
 // Authors:
 //	Mario Carrión <mario@monouml.org>
+//  Manuel Cerón <ceronman@gmail.com>
 //
 // Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
@@ -29,8 +28,10 @@ namespace MonoHotDraw.Commands {
 
 	public class UndoableCommand : ICommand {
 		
+		public ICommand WrappedCommand { get; protected set; }
+		
 		public UndoableCommand (ICommand wrappedCommand) {
-			_wrappedCommand = wrappedCommand;
+			WrappedCommand = wrappedCommand;
 		}
 
 		public IDrawingEditor DrawingEditor {
@@ -49,20 +50,12 @@ namespace MonoHotDraw.Commands {
 			get { return WrappedCommand.Name; }
 		}
 		
-		public ICommand WrappedCommand {
-			get { return _wrappedCommand; }
-		}
-		
 		public IUndoable UndoActivity {
 			get { return new UndoableAdapter (DrawingView); }
 			set {  }
 		}
 		
 		public void Execute () {
-//			hasSelectionChanged = false;
-			// listen for selection change events during executing the wrapped command
-//			view().addFigureSelectionListener(this);
-
 			WrappedCommand.Execute ();
 
 			IUndoable undoableCommand = WrappedCommand.UndoActivity;
@@ -70,18 +63,6 @@ namespace MonoHotDraw.Commands {
 				DrawingEditor.UndoManager.PushUndo (undoableCommand);
 				DrawingEditor.UndoManager.ClearRedos ();
 			}
-
-			// initiate manual update of undo/redo menu states if it has not
-			// been done automatically during executing the wrapped command
-//			if (!hasSelectionChanged || (getDrawingEditor().getUndoManager().getUndoSize() == 1)) {
-//				getDrawingEditor().figureSelectionChanged(view());
-//			}
-
-			// remove because not all commands are listeners that have to be notified
-			// all the time (bug-id 595461)
-//			view().removeFigureSelectionListener(this);
 		}
-		
-		private ICommand _wrappedCommand;
 	}
 }
