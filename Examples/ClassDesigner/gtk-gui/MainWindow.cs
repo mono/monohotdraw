@@ -18,6 +18,12 @@ public partial class MainWindow {
     
     private Gtk.Action AddClassAction;
     
+    private Gtk.Action EditAction;
+    
+    private Gtk.Action UndoAction;
+    
+    private Gtk.Action RedoAction;
+    
     private Gtk.VBox vbox2;
     
     private Gtk.MenuBar menubar1;
@@ -37,6 +43,15 @@ public partial class MainWindow {
         this.AddClassAction = new Gtk.Action("AddClassAction", Mono.Unix.Catalog.GetString("Add Class"), null, null);
         this.AddClassAction.ShortLabel = Mono.Unix.Catalog.GetString("Add Class");
         w1.Add(this.AddClassAction, null);
+        this.EditAction = new Gtk.Action("EditAction", Mono.Unix.Catalog.GetString("Edit"), null, null);
+        this.EditAction.ShortLabel = Mono.Unix.Catalog.GetString("Edit");
+        w1.Add(this.EditAction, null);
+        this.UndoAction = new Gtk.Action("UndoAction", Mono.Unix.Catalog.GetString("_Deshacer"), null, "gtk-undo");
+        this.UndoAction.ShortLabel = Mono.Unix.Catalog.GetString("_Deshacer");
+        w1.Add(this.UndoAction, null);
+        this.RedoAction = new Gtk.Action("RedoAction", Mono.Unix.Catalog.GetString("_Rehacer"), null, "gtk-redo");
+        this.RedoAction.ShortLabel = Mono.Unix.Catalog.GetString("_Rehacer");
+        w1.Add(this.RedoAction, null);
         this.UIManager.InsertActionGroup(w1, 0);
         this.AddAccelGroup(this.UIManager.AccelGroup);
         this.Name = "MainWindow";
@@ -47,7 +62,7 @@ public partial class MainWindow {
         this.vbox2.Name = "vbox2";
         this.vbox2.Spacing = 6;
         // Container child vbox2.Gtk.Box+BoxChild
-        this.UIManager.AddUiFromString("<ui><menubar name='menubar1'><menu name='FiguresAction' action='FiguresAction'><menuitem name='AddClassAction' action='AddClassAction'/></menu></menubar></ui>");
+        this.UIManager.AddUiFromString("<ui><menubar name='menubar1'><menu name='FiguresAction' action='FiguresAction'><menuitem name='AddClassAction' action='AddClassAction'/></menu><menu name='EditAction' action='EditAction'><menuitem name='UndoAction' action='UndoAction'/><menuitem name='RedoAction' action='RedoAction'/></menu></menubar></ui>");
         this.menubar1 = ((Gtk.MenuBar)(this.UIManager.GetWidget("/menubar1")));
         this.menubar1.Name = "menubar1";
         this.vbox2.Add(this.menubar1);
@@ -78,10 +93,12 @@ public partial class MainWindow {
         if ((this.Child != null)) {
             this.Child.ShowAll();
         }
-        this.DefaultWidth = 400;
+        this.DefaultWidth = 446;
         this.DefaultHeight = 300;
         this.Show();
         this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
         this.AddClassAction.Activated += new System.EventHandler(this.OnAddClassActionActivated);
+        this.UndoAction.Activated += new System.EventHandler(this.OnUndoActionActivated);
+        this.RedoAction.Activated += new System.EventHandler(this.OnRedoActionActivated);
     }
 }

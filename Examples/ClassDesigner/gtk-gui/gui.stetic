@@ -9,7 +9,7 @@
     <widget-library name="../../../MonoHotDraw/bin/Debug/MonoHotDraw.dll" />
     <widget-library name="../bin/Debug/ClassDesigner.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="400 300">
+  <widget class="Gtk.Window" id="MainWindow" design-size="446 300">
     <action-group name="Default">
       <action id="FiguresAction">
         <property name="Type">Action</property>
@@ -21,6 +21,25 @@
         <property name="Label" translatable="yes">Add Class</property>
         <property name="ShortLabel" translatable="yes">Add Class</property>
         <signal name="Activated" handler="OnAddClassActionActivated" />
+      </action>
+      <action id="EditAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Edit</property>
+        <property name="ShortLabel" translatable="yes">Edit</property>
+      </action>
+      <action id="UndoAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">_Deshacer</property>
+        <property name="ShortLabel" translatable="yes">_Deshacer</property>
+        <property name="StockId">gtk-undo</property>
+        <signal name="Activated" handler="OnUndoActionActivated" />
+      </action>
+      <action id="RedoAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">_Rehacer</property>
+        <property name="ShortLabel" translatable="yes">_Rehacer</property>
+        <property name="StockId">gtk-redo</property>
+        <signal name="Activated" handler="OnRedoActionActivated" />
       </action>
     </action-group>
     <property name="MemberName" />
@@ -37,6 +56,10 @@
             <node name="menubar1" type="Menubar">
               <node type="Menu" action="FiguresAction">
                 <node type="Menuitem" action="AddClassAction" />
+              </node>
+              <node type="Menu" action="EditAction">
+                <node type="Menuitem" action="UndoAction" />
+                <node type="Menuitem" action="RedoAction" />
               </node>
             </node>
           </widget>

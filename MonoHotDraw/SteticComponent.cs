@@ -42,16 +42,11 @@ namespace MonoHotDraw
 			View = new StandardDrawingView (this);
 			this.scrolledwindow.Add ((Widget) View);
 			Tool = new SelectionTool (this);
+			UndoManager = new UndoManager();
 		}
 		
-		public IDrawingView View {
-			get { return _view; }
-			set { _view = value; }
-		}
-		
-		public UndoManager UndoManager {
-			get { return null; }
-		}
+		public IDrawingView View { get; set; }
+		public UndoManager UndoManager { get; private set; }
 		
 		public ITool Tool {
 			get { return _tool; }
@@ -66,8 +61,16 @@ namespace MonoHotDraw
 				}
 			}
 		}
-			
-		private IDrawingView _view;
+		
+		public void Undo() {
+			ICommand command = new UndoCommand("Undo", this);
+			command.Execute();
+		}
+		
+		public void Redo() {
+			ICommand command = new RedoCommand("Redo", this);
+			command.Execute();
+		}
 		private ITool _tool;
 	}
 }

@@ -19,7 +19,16 @@ public partial class MainWindow: Gtk.Window
 
 	protected virtual void OnAddClassActionActivated (object sender, System.EventArgs e)
 	{
-		this.mhdcanvas.Tool = new DragCreationTool(this.mhdcanvas,
-		                                           new ClassFigure());
+		mhdcanvas.Tool = new DragCreationTool(this.mhdcanvas, new ClassFigure());
+	}
+
+	protected virtual void OnRedoActionActivated (object sender, System.EventArgs e)
+	{
+		mhdcanvas.Redo();
+	}
+
+	protected virtual void OnUndoActionActivated (object sender, System.EventArgs e)
+	{
+		mhdcanvas.Undo();
 	}
 }
