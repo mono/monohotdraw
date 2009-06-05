@@ -2,6 +2,7 @@
 //
 // Authors:
 //	Mario Carrión <mario@monouml.org>
+//  Manuel Cerón <ceronman@gmail.com>
 //
 // Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
@@ -25,12 +26,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MonoHotDraw.Commands {
 
 	public class UndoManager {
 	
 		public  static readonly int DefaultBufferSize = 30;
+		public EventHandler StackChanged;
 
 		public UndoManager () : this (UndoManager.DefaultBufferSize) {
 		}
@@ -44,7 +47,7 @@ namespace MonoHotDraw.Commands {
 		public bool Redoable {
 			get { 
 				if (_redoList.Count > 0) {
-					return GetLastElement (_redoList).Redoable;
+					return _redoList.Last().Redoable;
 				}
 				return false;	
 			}
@@ -53,7 +56,7 @@ namespace MonoHotDraw.Commands {
 		public bool Undoable {
 			get { 
 				if (_undoList.Count > 0) {
-					return GetLastElement (_undoList).Undoable;
+					return _undoList.Last().Undoable;
 				}
 				return false;	
 			}
@@ -61,15 +64,18 @@ namespace MonoHotDraw.Commands {
 		
 		public void ClearRedos () {
 			_redoList.Clear ();
+			OnStackChanged();
 		}
 		
 		public void ClearUndos () {
 			_undoList.Clear ();
+			OnStackChanged();
 		}
 
 		public IUndoActivity PopUndo () {
 			IUndoActivity lastUndoable = PeekUndo ();
 			_undoList.RemoveAt (_undoList.Count - 1);
+			OnStackChanged();
 
 			return lastUndoable;
 		}
@@ -77,6 +83,7 @@ namespace MonoHotDraw.Commands {
 		public IUndoActivity PopRedo () {
 			IUndoActivity lastUndoable = PeekRedo ();
 			_redoList.RemoveAt (_redoList.Count - 1);
+			OnStackChanged();
 
 			return lastUndoable;
 		}
@@ -91,6 +98,7 @@ namespace MonoHotDraw.Commands {
 				// last undo activity
 				_undoList = new List<IUndoActivity> ();
 			}
+			OnStackChanged();
 		}
 		
 		public void PushRedo (IUndoActivity redoActivity) {
@@ -107,12 +115,15 @@ namespace MonoHotDraw.Commands {
 				// last undo activity
 				_redoList = new List <IUndoActivity> ();
 			}
-		}
-
-		private IUndoActivity GetLastElement (List<IUndoActivity> list) {
-			return list.Count > 0 ? list [list.Count - 1] : null;
+			OnStackChanged();
 		}
 		
+		protected void OnStackChanged() {
+			if (StackChanged != null) {
+				StackChanged(this, new EventArgs());
+			}
+		}
+
 		private void RemoveFirstElementInFullList (List<IUndoActivity> list) {
 			if (list.Count >= _bufferSize) {
 				IUndoActivity removedActivity = list [0];
@@ -122,14 +133,14 @@ namespace MonoHotDraw.Commands {
 		}
 		
 		private IUndoActivity PeekRedo () {
-			return _redoList.Count > 0 ? GetLastElement (_redoList) : null;
+			return _redoList.Count > 0 ? _redoList.Last() : null;
 		}
 		
 		private IUndoActivity PeekUndo () {
-			return _undoList.Count > 0 ? GetLastElement (_undoList) : null;
+			return _undoList.Count > 0 ? _undoList.Last() : null;
 		}
 
-		private int             _bufferSize;
+		private int _bufferSize;
 		private List<IUndoActivity> _redoList;
 		private List<IUndoActivity> _undoList;
 	}

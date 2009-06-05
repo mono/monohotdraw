@@ -41,7 +41,9 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 		View = new StandardDrawingView (this);
 		_scrolledwindow.Add ((Widget) View);
 		Tool = new SelectionTool (this);
-		UpdateUndoRedoSensitiveness ();
+		UndoManager.StackChanged += delegate {
+			UpdateUndoRedoSensitiveness ();
+		};
 		ShowAll ();
 	}
 	
@@ -103,7 +105,6 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 		selectAll.Activated += delegate {
 			UndoableCommand command = new UndoableCommand (new SelectAllCommand ("Select all", this));
 			command.Execute ();
-			UpdateUndoRedoSensitiveness ();
 		};
 		commandsMenu.Append (selectAll);
 		
@@ -125,7 +126,6 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 		changeFontAttribute.Activated += delegate {
 
 			Console.WriteLine ("Executng");
-			UpdateUndoRedoSensitiveness ();
 		};
 		commandsMenu.Append (changeFontAttribute);
 	}
@@ -133,31 +133,26 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 	protected virtual void OnUndoActivated (object sender, System.EventArgs e) {
 		UndoCommand command = new UndoCommand ("Undo", this);
 		command.Execute ();
-		UpdateUndoRedoSensitiveness ();
 	}
 
 	protected virtual void OnRedoActivated (object sender, System.EventArgs e) {
 		RedoCommand command = new RedoCommand ("Redo", this);
 		command.Execute ();
-		UpdateUndoRedoSensitiveness ();
 	}
 	
 	protected virtual void OnCommandSendToBack (object sender, System.EventArgs e) {
 		UndoableCommand command = new UndoableCommand (new SendToBackCommand ("Send to back", this));
 		command.Execute ();
-		UpdateUndoRedoSensitiveness ();
 	}
 
 	protected virtual void OnCommandBringToFront (object sender, System.EventArgs e) {
 		UndoableCommand command = new UndoableCommand (new BringToFrontCommand ("Bring to front", this));
 		command.Execute ();
-		UpdateUndoRedoSensitiveness ();
 	}
 
 	protected virtual void OnCommandSelectAll (object sender, System.EventArgs e) {
 		UndoableCommand command = new UndoableCommand (new SelectAllCommand ("Select all", this));
 		command.Execute ();
-		UpdateUndoRedoSensitiveness ();
 	}
 
 	protected virtual void OnCommandFontFamily (object sender, System.EventArgs e) {
@@ -169,7 +164,6 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 			size.Execute ();
 		}
 		dialog.Destroy ();
-		UpdateUndoRedoSensitiveness ();
 	}
 
 	protected virtual void OnCommandFontColor (object sender, System.EventArgs e) {
@@ -180,7 +174,6 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 			fontColor.Execute ();
 		}
 		dialog.Destroy ();
-		UpdateUndoRedoSensitiveness ();
 	}
 
 	protected virtual void OnCommandFontSize (object sender, System.EventArgs e) {
@@ -195,7 +188,6 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 			}
 		}
 		dialog.Destroy ();
-		UpdateUndoRedoSensitiveness ();
 	}
 
 	protected virtual void OnColorLine (object sender, System.EventArgs e) {
@@ -206,7 +198,6 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 			colorLine.Execute ();
 		}
 		dialog.Destroy ();
-		UpdateUndoRedoSensitiveness ();
 	}
 
 	protected virtual void OnColorFill (object sender, System.EventArgs e) {
@@ -217,7 +208,6 @@ public partial class MainWindow: Gtk.Window, IDrawingEditor {
 			fillColor.Execute ();
 		}
 		dialog.Destroy ();
-		UpdateUndoRedoSensitiveness ();
 	}
 	
 	private void UpdateUndoRedoSensitiveness () {
