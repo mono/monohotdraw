@@ -1,5 +1,9 @@
 2009-06-04  Manuel Cerón  <ceronman@gmail.com>
 
+	* MonoHotDraw.csproj: Added UndoableHandle class
+
+2009-06-04  Manuel Cerón  <ceronman@gmail.com>
+
 	* SteticComponent.cs: Added Undo and Redo Methods
 
 2009-06-04  Manuel Cerón  <ceronman@gmail.com>

@@ -1,0 +1,7 @@
+2009-06-04  Manuel Cerón  <ceronman@gmail.com>
+
+	* UndoableHandle.cs: Added UndoableHandle class
+
+	* IHandle.cs:
+	* AbstractHandle.cs: Added UndoActivity Member
+

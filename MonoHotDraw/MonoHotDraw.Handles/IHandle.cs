@@ -30,6 +30,7 @@ using System;
 using System.Runtime.Serialization;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
+using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Handles {
 
@@ -45,5 +46,6 @@ namespace MonoHotDraw.Handles {
 		
 		RectangleD DisplayBox { get; }
 		IFigure Owner { get; }
+		IUndoActivity UndoActivity { get; set; }
 	}
 }

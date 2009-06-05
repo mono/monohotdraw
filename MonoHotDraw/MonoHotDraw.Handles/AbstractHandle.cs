@@ -27,6 +27,7 @@ using Cairo;
 using System;
 using System.Runtime.Serialization;
 using MonoHotDraw.Figures;
+using MonoHotDraw.Commands;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Handles {
@@ -56,10 +57,9 @@ namespace MonoHotDraw.Handles {
 			}
 		}
 
-		public virtual IFigure Owner {
-			get { return _owner; }
-			set { _owner = value; }
-		}
+		public virtual IFigure Owner { get; set; }
+		
+		public virtual IUndoActivity UndoActivity { get; set; }
 			
 		public virtual double LineWidth {
 			get { return _lineWidth; }
@@ -70,15 +70,9 @@ namespace MonoHotDraw.Handles {
 			}
 		}
 		
-		public Color FillColor {
-			get { return _fillColor; }
-			set { _fillColor = value; }
-		}
+		public Color FillColor { get; set; }	
 		
-		public Color LineColor {
-			get { return _lineColor; }
-			set { _lineColor = value; }
-		}
+		public Color LineColor { get; set; }
 
 		public bool ContainsPoint (double x, double y) {
 			return DisplayBox.Contains (x, y);
@@ -101,9 +95,6 @@ namespace MonoHotDraw.Handles {
 		
 		public abstract PointD Locate ();
 
-		private Color   _fillColor;
-		private Color   _lineColor;
 		private double  _lineWidth;
-		private IFigure _owner;
 	}
 }
