@@ -23,30 +23,62 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Cairo;
 using System;
 using MonoHotDraw.Figures;
+using MonoHotDraw.Commands;
 using MonoHotDraw.Locators;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Handles {
-
-	public class SouthEastHandle : ResizeHandle	{
 	
-		public SouthEastHandle (IFigure owner): base (owner, RelativeLocator.SouthEast) {
+	public abstract class ResizeHandle: LocatorHandle {
+		
+		public ResizeHandle(IFigure owner, ILocator locator): base (owner, locator) {
 		}
 		
-		public override Gdk.Cursor CreateCursor () {
-			return CursorFactory.GetCursorFromType (Gdk.CursorType.BottomRightCorner);
+		public override void InvokeStart (double x, double y, IDrawingView view){
+			CreateUndoActivity(view);
 		}
 
-		public override void InvokeStep (double x, double y, IDrawingView view) {
-			RectangleD r = Owner.DisplayBox;
-
-			PointD new_location = new PointD (r.X, r.Y);
-			PointD new_corner   = new PointD (Math.Max (r.X, x), Math.Max (r.Y, y));
-
-			Owner.DisplayBox = new RectangleD (new_location, new_corner);
+		public override void InvokeEnd (double x, double y, IDrawingView view) {
+			UpdateUndoActivity();
+		}
+		
+		public class ResizeHandleUndoActivity: AbstractUndoActivity {
+			public ResizeHandleUndoActivity(IDrawingView view, IFigure owner): base (view) {
+				Undoable = true;
+				Redoable = true;
+				Owner = owner;
+				OldDisplayBox = Owner.DisplayBox;
+				NewDisplayBox = Owner.DisplayBox;
+			}
+			
+			public override bool Undo () {
+				if (!base.Undo()  )
+					return false;
+				Owner.DisplayBox = OldDisplayBox;
+				return true;
+			}
+			
+			public override bool Redo () {
+				if (!base.Redo() )
+					return false;
+				Owner.DisplayBox = NewDisplayBox;
+				return true;
+			}
+			
+			public IFigure Owner { get; private set; }
+			public RectangleD OldDisplayBox { get; set; }
+			public RectangleD NewDisplayBox { get; set; }
+		}
+		
+		protected void CreateUndoActivity(IDrawingView view) {
+			UndoActivity = new ResizeHandleUndoActivity(view, Owner);
+		}
+		
+		protected void UpdateUndoActivity() {
+			ResizeHandleUndoActivity activity = UndoActivity as ResizeHandleUndoActivity;
+			activity.NewDisplayBox = Owner.DisplayBox;
 		}
 	}
 }

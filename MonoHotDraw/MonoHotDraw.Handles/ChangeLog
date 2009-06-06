@@ -1,3 +1,16 @@
+2009-06-06  Manuel Cerón  <ceronman@gmail.com>
+
+	* ResizeHandle.cs: Added ResizeHandle Class
+
+	* EastHandle.cs:
+	* WestHandle.cs:
+	* SouthHandle.cs:
+	* NorthHandle.cs:
+	* NorthWestHandle.cs:
+	* SouthWestHandle.cs:
+	* NorthEastHandle.cs:
+	* SouthEastHandle.cs: Changed father class to Resize Handle
+
 2009-06-04  Manuel Cerón  <ceronman@gmail.com>
 
 	* UndoableHandle.cs: Added UndoableHandle class

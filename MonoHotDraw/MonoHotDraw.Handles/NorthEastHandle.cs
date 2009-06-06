@@ -31,7 +31,7 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Handles {
 
-	public class NorthEastHandle: LocatorHandle {
+	public class NorthEastHandle: ResizeHandle {
 		public NorthEastHandle (IFigure owner): base (owner, RelativeLocator.NorthEast)	{
 		}
 		

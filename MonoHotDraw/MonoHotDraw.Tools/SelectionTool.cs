@@ -45,7 +45,7 @@ namespace MonoHotDraw.Tools {
 			
 			IHandle handle = view.FindHandle (ev.X, ev.Y);
 			if (handle != null) {
-				DelegateTool = new HandleTracker (Editor, handle);
+				DelegateTool = new HandleTracker (Editor, new UndoableHandle(handle));
 			}
 			else {
 				IFigure figure = view.Drawing.FindFigure (ev.X, ev.Y);
