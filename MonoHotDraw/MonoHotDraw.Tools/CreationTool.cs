@@ -28,13 +28,14 @@ using Gdk;
 using Gtk;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
+using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Tools {
 
 	public class CreationTool: AbstractTool {
 	
 		public CreationTool (IDrawingEditor editor, IFigure ptype): base (editor) {
-			_prototype = ptype;
+			Prototype = ptype;
 		}
 		
 		public override void Activate () {
@@ -52,21 +53,46 @@ namespace MonoHotDraw.Tools {
 		public override void MouseDown (MouseEvent ev)	{
 			IDrawingView view = ev.View;
 			base.MouseDown (ev);
-			view.Drawing.Add (_prototype);
+			view.Drawing.Add (Prototype);
 			Prototype.MoveTo (ev.X, ev.Y);
 			view.ClearSelection ();
-			view.AddToSelection (_prototype);
+			view.AddToSelection (Prototype);
+			CreateUndoActivity();
 		}
 		
 		public override void MouseUp (MouseEvent ev) {
 			Editor.Tool = new SelectionTool (Editor);
 		}
 		
-		protected IFigure Prototype {
-			get { return _prototype; }
-			set { _prototype = value; }
+		public class CreationToolUndoActivity: AbstractUndoActivity {
+			public CreationToolUndoActivity(IDrawingView view, IFigure prototype): base(view) {
+				Undoable = true;
+				Redoable = true;
+				Prototype = prototype;
+			}
+			
+			public override bool Undo () {
+				if (!base.Undo()  )
+					return false;
+				DrawingView.Drawing.Remove(Prototype);
+				DrawingView.RemoveFromSelection(Prototype);
+				return true;
+			}
+			
+			public override bool Redo () {
+				if (!base.Redo() )
+					return false;
+				DrawingView.Drawing.Add(Prototype);
+				return true;
+			}
+			
+			public IFigure Prototype { set; get; }
 		}
 		
-		private IFigure _prototype;
+		protected void CreateUndoActivity(){
+			UndoActivity = new CreationToolUndoActivity(Editor.View, Prototype);
+		}
+		
+		protected IFigure Prototype { get; set; }
 	}
 }

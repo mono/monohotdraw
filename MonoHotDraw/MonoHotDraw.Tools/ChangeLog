@@ -1,5 +1,9 @@
 2009-06-06  Manuel Cerón  <ceronman@gmail.com>
 
+	* CreationTool.cs: Added UndoActivity
+
+2009-06-06  Manuel Cerón  <ceronman@gmail.com>
+
 	* SelectionTool.cs: Using UndoableHandle when using a Handle
 
 2009-06-04  Manuel Cerón  <ceronman@gmail.com>
