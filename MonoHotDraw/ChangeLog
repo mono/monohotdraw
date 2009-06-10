@@ -1,3 +1,9 @@
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
+	* SteticComponent.cs: Added helper methods and events
+
+	* MonoHotDraw.csproj: Removed UndoableActivity
+
 2009-06-06  Manuel Cerón  <ceronman@gmail.com>
 
 	* MonoHotDraw.csproj: Added ResizeHandle Class

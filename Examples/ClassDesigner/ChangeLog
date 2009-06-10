@@ -1,3 +1,7 @@
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
+	* MainWindow.cs: Added Action callbacks
+
 2009-06-06  Manuel Cerón  <ceronman@gmail.com>
 
 	* MainWindow.cs: Using UndoableTool when creation

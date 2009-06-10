@@ -1,3 +1,25 @@
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
+	* CreationTool.cs: PushesUndoActivity on MouseUp
+
+	* UndoableTool.cs: Removed. Using PushUndoActivity in
+	AbstractTool instead
+
+	* SelectionTool.cs: Don't use UndoableTool anymore and don't
+	deactivate the tool at MouseUp
+
+	* FigureTool.cs: Removed UndoActivity override, not needed
+	anymore since UndoableTool is gone
+
+	* SimpleTextTool.cs: Added Undo behavior
+
+	* ITool.cs: Added Undoable property
+
+	* DragTool.cs: UpdateUndoActivity creation in MouseUp instead
+	Deactivate
+
+	* AbstractTool.cs: Added PushUndoActivity and Undoable
+
 2009-06-06  Manuel Cerón  <ceronman@gmail.com>
 
 	* CreationTool.cs: Added UndoActivity

@@ -1,19 +1,123 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
   <configuration>
+    <images-root-path>..</images-root-path>
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <widget-library name="../../../MonoHotDraw/bin/Debug/MonoHotDraw.dll" />
     <widget-library name="../bin/Debug/Demo.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="400 300">
+  <widget class="Gtk.Window" id="MainWindow" design-size="446 300">
+    <action-group name="Default">
+      <action id="FiguresAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Figures</property>
+        <property name="ShortLabel" translatable="yes">Figures</property>
+      </action>
+      <action id="AddEllipseAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add Ellipse</property>
+        <property name="ShortLabel" translatable="yes">Add Ellipse</property>
+        <signal name="Activated" handler="OnAddEllipseActionActivated" />
+      </action>
+      <action id="AddRectangleAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add Rectangle</property>
+        <property name="ShortLabel" translatable="yes">Add Rectangle</property>
+        <signal name="Activated" handler="OnAddRectangleActionActivated" />
+      </action>
+      <action id="AddPolyLineAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add PolyLine</property>
+        <property name="ShortLabel" translatable="yes">Add PolyLine</property>
+        <signal name="Activated" handler="OnAddPolyLineActionActivated" />
+      </action>
+      <action id="AddSimpleTextAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add SimpleText</property>
+        <property name="ShortLabel" translatable="yes">Add SimpleText</property>
+        <signal name="Activated" handler="OnAddSimpleTextActionActivated" />
+      </action>
+      <action id="AddMultiLineTextAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add MultiLineText</property>
+        <property name="ShortLabel" translatable="yes">Add MultiLineText</property>
+        <signal name="Activated" handler="OnAddMultiLineTextActionActivated" />
+      </action>
+      <action id="AddLineConnectionAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add LineConnection</property>
+        <property name="ShortLabel" translatable="yes">Add LineConnection</property>
+        <signal name="Activated" handler="OnAddLineConnectionActionActivated" />
+      </action>
+      <action id="EditAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Edit</property>
+        <property name="ShortLabel" translatable="yes">Edit</property>
+      </action>
+      <action id="UndoAction">
+        <property name="Type">Action</property>
+        <property name="Accelerator">&lt;Control&gt;z</property>
+        <property name="Label" translatable="yes">_Deshacer</property>
+        <property name="ShortLabel" translatable="yes">_Deshacer</property>
+        <property name="StockId">gtk-undo</property>
+        <signal name="Activated" handler="OnUndoActionActivated" />
+      </action>
+      <action id="RedoAction">
+        <property name="Type">Action</property>
+        <property name="Accelerator">&lt;Control&gt;y</property>
+        <property name="Label" translatable="yes">_Rehacer</property>
+        <property name="ShortLabel" translatable="yes">_Rehacer</property>
+        <property name="StockId">gtk-redo</property>
+        <signal name="Activated" handler="OnRedoActionActivated" />
+      </action>
+    </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
     <property name="WindowPosition">CenterOnParent</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
-      <placeholder />
+      <widget class="Gtk.VBox" id="vbox1">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child>
+          <widget class="Gtk.MenuBar" id="menubar1">
+            <property name="MemberName" />
+            <node name="menubar1" type="Menubar">
+              <node type="Menu" action="FiguresAction">
+                <node type="Menuitem" action="AddEllipseAction" />
+                <node type="Menuitem" action="AddRectangleAction" />
+                <node type="Menuitem" action="AddPolyLineAction" />
+                <node type="Menuitem" action="AddSimpleTextAction" />
+                <node type="Menuitem" action="AddMultiLineTextAction" />
+                <node type="Menuitem" action="AddLineConnectionAction" />
+              </node>
+              <node type="Menu" action="EditAction">
+                <node type="Menuitem" action="UndoAction" />
+                <node type="Menuitem" action="RedoAction" />
+              </node>
+            </node>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="MonoHotDraw.SteticComponent" id="mhdcanvas">
+            <property name="MemberName" />
+            <property name="Events">ButtonPressMask</property>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">False</property>
+          </packing>
+        </child>
+      </widget>
     </child>
   </widget>
 </stetic-interface>

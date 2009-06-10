@@ -43,6 +43,7 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Mono.Posix" />
+    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -56,5 +57,16 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MonoHotDraw\MonoHotDraw.csproj">
+      <Project>{D5D2EB0A-662A-471D-94C0-FD51C96E9429}</Project>
+      <Name>MonoHotDraw</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties InternalTargetFrameworkVersion="3.5" xmlns="" />
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

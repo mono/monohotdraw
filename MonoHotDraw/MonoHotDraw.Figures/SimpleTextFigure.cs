@@ -154,6 +154,13 @@ namespace MonoHotDraw.Figures {
 			SetupLayout (context);
 			DrawText (context);
 		}
+		
+		public override void BasicDrawSelected (Cairo.Context context)
+		{
+			context.Rectangle(GdkCairoHelper.CairoRectangle(DisplayBox));
+			context.Stroke();
+		}
+
 	
 		public override ITool CreateFigureTool (IDrawingEditor editor, ITool dt) {
 			return TextEditable ? new SimpleTextTool (editor, this, dt) : dt;

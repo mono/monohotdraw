@@ -32,8 +32,8 @@ namespace MonoHotDraw.Commands {
 
 	public class UndoManager {
 	
-		public  static readonly int DefaultBufferSize = 30;
-		public EventHandler StackChanged;
+		public static readonly int DefaultBufferSize = 30;
+		public event EventHandler StackChanged;
 
 		public UndoManager () : this (UndoManager.DefaultBufferSize) {
 		}

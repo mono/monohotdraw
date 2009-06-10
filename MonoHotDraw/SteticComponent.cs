@@ -28,6 +28,7 @@ using Gtk;
 
 using MonoHotDraw.Commands;
 using MonoHotDraw.Tools;
+using MonoHotDraw.Figures;
 
 namespace MonoHotDraw
 {
@@ -43,7 +44,12 @@ namespace MonoHotDraw
 			this.scrolledwindow.Add ((Widget) View);
 			Tool = new SelectionTool (this);
 			UndoManager = new UndoManager();
+			UndoManager.StackChanged += delegate {
+				OnUndoStackChanged();
+			};
 		}
+		
+		public event EventHandler UndoStackChanged;
 		
 		public IDrawingView View { get; set; }
 		public UndoManager UndoManager { get; private set; }
@@ -71,6 +77,25 @@ namespace MonoHotDraw
 			ICommand command = new RedoCommand("Redo", this);
 			command.Execute();
 		}
+		
+		public void AddWithDragging(IFigure figure) {
+			Tool = new DragCreationTool(this, figure);
+		}
+		
+		public void AddWithResizing(IFigure figure) {
+			Tool = new ResizeCreationTool(this, figure);
+		}
+		
+		public void AddConnection(IConnectionFigure figure) {
+			Tool = new ConnectionCreationTool(this, figure);
+		}
+		
+		protected void OnUndoStackChanged() {
+			if (UndoStackChanged != null) {
+				UndoStackChanged(this, new EventArgs());
+			}
+		}
+		
 		private ITool _tool;
 	}
 }

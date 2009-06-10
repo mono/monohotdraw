@@ -29,6 +29,7 @@ using Gtk;
 using System;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
+using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Tools {
 
@@ -67,13 +68,12 @@ namespace MonoHotDraw.Tools {
 		}
 
 		public override void MouseDown (MouseEvent ev) {
-			IDrawingView view = ev.View;
-			SetAnchorCoords (ev.X, ev.Y);
-			View = view;
+			View = ev.View;
 			
 			Gdk.EventType type = ev.GdkEvent.Type;
 			
 			if (type == EventType.TwoButtonPress) {
+				CreateUndoActivity();
 				_showingEntry = true;
 				_entry.Text = (Figure as SimpleTextFigure).Text;
 				
@@ -94,8 +94,11 @@ namespace MonoHotDraw.Tools {
 		}
 
 		public override void Deactivate () {
-			_entry.Changed -= new System.EventHandler (ChangedHandler);
-			View.RemoveWidget (_entry);
+			if (_showingEntry) {
+				View.RemoveWidget (_entry);
+				UpdateUndoActivity();
+				PushUndoActivity();
+			}
 			base.Deactivate ();
 		}
 		
@@ -104,7 +107,49 @@ namespace MonoHotDraw.Tools {
 				DefaultTool.MouseDrag (ev);
 			}
 		}
+		
+		public class TextToolUndoActivity: AbstractUndoActivity {
+			public TextToolUndoActivity(IDrawingView view): base(view) {
+				Undoable = true;
+				Redoable = true;
+			}
+			
+			public override bool Undo () {
+				if (!base.Undo ()) {
+					return false;
+				}
+				AffectedFigure.Text = OldText;
+				return true;
+			}
+			
+			public override bool Redo () {
+				if (!base.Undo ()) {
+					return false;
+				}
+				AffectedFigure.Text = NewText;
+				return true;
+			}
+			
+			public string OldText { get; set; }
+			public string NewText { get; set; }
+			public SimpleTextFigure AffectedFigure { get; set; }
+		}
+		
+		protected void CreateUndoActivity() {
+			TextToolUndoActivity activity = new TextToolUndoActivity(Editor.View);
+			activity.AffectedFigure = Figure as SimpleTextFigure;
+			activity.OldText = activity.AffectedFigure.Text;
+			UndoActivity = activity;
+		}
 
+		protected void UpdateUndoActivity() {
+			TextToolUndoActivity activity = UndoActivity as TextToolUndoActivity;
+			activity.NewText = activity.AffectedFigure.Text;
+			if (activity.NewText == activity.OldText) {
+				UndoActivity = null;
+			}
+		}
+		
 		private Gtk.Entry _entry;
 		private bool _showingEntry = false;
 	}

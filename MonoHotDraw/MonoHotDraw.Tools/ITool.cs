@@ -43,5 +43,6 @@ namespace MonoHotDraw.Tools {
 		bool Activated { get; }
 		IDrawingEditor Editor { set; get; }
 		IUndoActivity UndoActivity { get; set; }
+		bool Undoable { get; set; }
 	}
 }

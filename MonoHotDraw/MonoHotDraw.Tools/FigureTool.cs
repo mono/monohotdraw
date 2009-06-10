@@ -89,20 +89,5 @@ namespace MonoHotDraw.Tools {
 				DefaultTool.Deactivate();
 			}
 		}
-		
-		public override IUndoActivity UndoActivity {
-			get {
-				if (DefaultTool != null) {
-					return DefaultTool.UndoActivity;
-				}
-				return null;
-			}
-			set {
-				if (DefaultTool != null) {
-					DefaultTool.UndoActivity = value;
-				}
-			}
-		}
-
 	}
 }

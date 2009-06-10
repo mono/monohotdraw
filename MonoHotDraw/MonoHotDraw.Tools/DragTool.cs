@@ -65,7 +65,7 @@ namespace MonoHotDraw.Tools {
 				view.ClearSelection ();
 				view.AddToSelection (AnchorFigure);
 			}
-			UndoActivity = CreateUndoActivity();
+			CreateUndoActivity();
 		}
 
 		public override void MouseDrag (MouseEvent ev) {
@@ -80,19 +80,8 @@ namespace MonoHotDraw.Tools {
 		}
 		
 		public override void MouseUp (MouseEvent ev) {
-		}
-		
-		public override void Deactivate () {
-			base.Deactivate ();
-			
-			if (HasMoved){
-				DragToolUndoActivity activity = UndoActivity as DragToolUndoActivity;
-				activity.EndPoint = new PointD(LastX, LastY);
-			}
-			
-			else {
-				UndoActivity = null;
-			}
+			UpdateUndoActivity();
+			PushUndoActivity();
 		}
 		
 		public class DragToolUndoActivity: AbstractUndoActivity {
@@ -131,12 +120,23 @@ namespace MonoHotDraw.Tools {
 			public PointD EndPoint { get; set; } 
 		}
 		
-		protected IUndoActivity CreateUndoActivity() {
+		protected void CreateUndoActivity() {
 			IDrawingView view = Editor.View;
 			DragToolUndoActivity activity = new DragToolUndoActivity(view);
 			activity.AffectedFigures = view.SelectionEnumerator.ToFigures();
 			activity.StartPoint = new PointD(AnchorX, AnchorY);
-			return activity;
+			UndoActivity = activity;
+		}
+		
+		protected void UpdateUndoActivity() {
+			if (HasMoved){
+				DragToolUndoActivity activity = UndoActivity as DragToolUndoActivity;
+				activity.EndPoint = new PointD(LastX, LastY);
+			}
+			
+			else {
+				UndoActivity = null;
+			}
 		}
 	}
 }

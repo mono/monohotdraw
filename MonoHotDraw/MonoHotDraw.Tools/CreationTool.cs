@@ -62,6 +62,7 @@ namespace MonoHotDraw.Tools {
 		
 		public override void MouseUp (MouseEvent ev) {
 			Editor.Tool = new SelectionTool (Editor);
+			PushUndoActivity();
 		}
 		
 		public class CreationToolUndoActivity: AbstractUndoActivity {

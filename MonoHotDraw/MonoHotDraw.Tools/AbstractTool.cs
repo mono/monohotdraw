@@ -34,12 +34,14 @@ namespace MonoHotDraw.Tools {
 	
 		protected AbstractTool (IDrawingEditor editor) {
 			Editor = editor;
+			Undoable = true;
 		}
 
 		public IDrawingEditor Editor { get; set;}
 		public IDrawingView View { get; set; }
 		public bool Activated { get; protected set; }
 		public virtual IUndoActivity UndoActivity { get; set; }
+		public bool Undoable { get; set; }
 		
 		public virtual void Activate () {
 			Activated = true;
@@ -67,6 +69,18 @@ namespace MonoHotDraw.Tools {
 		}
 			
 		public virtual void MouseUp (MouseEvent ev) {
+		}
+		
+		protected void PushUndoActivity() {
+			if (!Undoable) {
+				return;
+			}
+			
+			IUndoActivity activity = UndoActivity;
+			if (activity != null && activity.Undoable) {
+				Editor.UndoManager.PushUndo(activity);
+				Editor.UndoManager.ClearRedos();
+			}
 		}
 
 		protected double AnchorX { get; set; }

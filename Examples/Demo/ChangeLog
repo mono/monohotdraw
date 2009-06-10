@@ -1,5 +1,10 @@
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
+	* Demo.csproj:
+	* MainWindow.cs: Added Action callbacks
+
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
 	* gtk-gui:
 	* Main.cs:
 	* Demo.csproj:

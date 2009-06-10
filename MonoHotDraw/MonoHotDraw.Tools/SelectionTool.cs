@@ -50,7 +50,7 @@ namespace MonoHotDraw.Tools {
 			else {
 				IFigure figure = view.Drawing.FindFigure (ev.X, ev.Y);
 				if (figure != null) {
-					DelegateTool = new UndoableTool(figure.CreateFigureTool (Editor, new DragTool (Editor, figure)));
+					DelegateTool = figure.CreateFigureTool (Editor, new DragTool (Editor, figure));
 				} else {
 					DelegateTool = new SelectAreaTracker (Editor);
 				}
@@ -64,7 +64,6 @@ namespace MonoHotDraw.Tools {
 		public override void MouseUp (MouseEvent ev) {
 			if (DelegateTool != null) {
 				DelegateTool.MouseUp (ev);
-				DelegateTool.Deactivate();
 			}
 		}
 		

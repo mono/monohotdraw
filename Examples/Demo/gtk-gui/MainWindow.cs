@@ -12,18 +12,109 @@
 
 public partial class MainWindow {
     
+    private Gtk.UIManager UIManager;
+    
+    private Gtk.Action FiguresAction;
+    
+    private Gtk.Action AddEllipseAction;
+    
+    private Gtk.Action AddRectangleAction;
+    
+    private Gtk.Action AddPolyLineAction;
+    
+    private Gtk.Action AddSimpleTextAction;
+    
+    private Gtk.Action AddMultiLineTextAction;
+    
+    private Gtk.Action AddLineConnectionAction;
+    
+    private Gtk.Action EditAction;
+    
+    private Gtk.Action UndoAction;
+    
+    private Gtk.Action RedoAction;
+    
+    private Gtk.VBox vbox1;
+    
+    private Gtk.MenuBar menubar1;
+    
+    private MonoHotDraw.SteticComponent mhdcanvas;
+    
     protected virtual void Build() {
         Stetic.Gui.Initialize(this);
         // Widget MainWindow
+        this.UIManager = new Gtk.UIManager();
+        Gtk.ActionGroup w1 = new Gtk.ActionGroup("Default");
+        this.FiguresAction = new Gtk.Action("FiguresAction", Mono.Unix.Catalog.GetString("Figures"), null, null);
+        this.FiguresAction.ShortLabel = Mono.Unix.Catalog.GetString("Figures");
+        w1.Add(this.FiguresAction, null);
+        this.AddEllipseAction = new Gtk.Action("AddEllipseAction", Mono.Unix.Catalog.GetString("Add Ellipse"), null, null);
+        this.AddEllipseAction.ShortLabel = Mono.Unix.Catalog.GetString("Add Ellipse");
+        w1.Add(this.AddEllipseAction, null);
+        this.AddRectangleAction = new Gtk.Action("AddRectangleAction", Mono.Unix.Catalog.GetString("Add Rectangle"), null, null);
+        this.AddRectangleAction.ShortLabel = Mono.Unix.Catalog.GetString("Add Rectangle");
+        w1.Add(this.AddRectangleAction, null);
+        this.AddPolyLineAction = new Gtk.Action("AddPolyLineAction", Mono.Unix.Catalog.GetString("Add PolyLine"), null, null);
+        this.AddPolyLineAction.ShortLabel = Mono.Unix.Catalog.GetString("Add PolyLine");
+        w1.Add(this.AddPolyLineAction, null);
+        this.AddSimpleTextAction = new Gtk.Action("AddSimpleTextAction", Mono.Unix.Catalog.GetString("Add SimpleText"), null, null);
+        this.AddSimpleTextAction.ShortLabel = Mono.Unix.Catalog.GetString("Add SimpleText");
+        w1.Add(this.AddSimpleTextAction, null);
+        this.AddMultiLineTextAction = new Gtk.Action("AddMultiLineTextAction", Mono.Unix.Catalog.GetString("Add MultiLineText"), null, null);
+        this.AddMultiLineTextAction.ShortLabel = Mono.Unix.Catalog.GetString("Add MultiLineText");
+        w1.Add(this.AddMultiLineTextAction, null);
+        this.AddLineConnectionAction = new Gtk.Action("AddLineConnectionAction", Mono.Unix.Catalog.GetString("Add LineConnection"), null, null);
+        this.AddLineConnectionAction.ShortLabel = Mono.Unix.Catalog.GetString("Add LineConnection");
+        w1.Add(this.AddLineConnectionAction, null);
+        this.EditAction = new Gtk.Action("EditAction", Mono.Unix.Catalog.GetString("Edit"), null, null);
+        this.EditAction.ShortLabel = Mono.Unix.Catalog.GetString("Edit");
+        w1.Add(this.EditAction, null);
+        this.UndoAction = new Gtk.Action("UndoAction", Mono.Unix.Catalog.GetString("_Deshacer"), null, "gtk-undo");
+        this.UndoAction.ShortLabel = Mono.Unix.Catalog.GetString("_Deshacer");
+        w1.Add(this.UndoAction, "<Control>z");
+        this.RedoAction = new Gtk.Action("RedoAction", Mono.Unix.Catalog.GetString("_Rehacer"), null, "gtk-redo");
+        this.RedoAction.ShortLabel = Mono.Unix.Catalog.GetString("_Rehacer");
+        w1.Add(this.RedoAction, "<Control>y");
+        this.UIManager.InsertActionGroup(w1, 0);
+        this.AddAccelGroup(this.UIManager.AccelGroup);
         this.Name = "MainWindow";
         this.Title = Mono.Unix.Catalog.GetString("MainWindow");
         this.WindowPosition = ((Gtk.WindowPosition)(4));
+        // Container child MainWindow.Gtk.Container+ContainerChild
+        this.vbox1 = new Gtk.VBox();
+        this.vbox1.Name = "vbox1";
+        this.vbox1.Spacing = 6;
+        // Container child vbox1.Gtk.Box+BoxChild
+        this.UIManager.AddUiFromString("<ui><menubar name='menubar1'><menu name='FiguresAction' action='FiguresAction'><menuitem name='AddEllipseAction' action='AddEllipseAction'/><menuitem name='AddRectangleAction' action='AddRectangleAction'/><menuitem name='AddPolyLineAction' action='AddPolyLineAction'/><menuitem name='AddSimpleTextAction' action='AddSimpleTextAction'/><menuitem name='AddMultiLineTextAction' action='AddMultiLineTextAction'/><menuitem name='AddLineConnectionAction' action='AddLineConnectionAction'/></menu><menu name='EditAction' action='EditAction'><menuitem name='UndoAction' action='UndoAction'/><menuitem name='RedoAction' action='RedoAction'/></menu></menubar></ui>");
+        this.menubar1 = ((Gtk.MenuBar)(this.UIManager.GetWidget("/menubar1")));
+        this.menubar1.Name = "menubar1";
+        this.vbox1.Add(this.menubar1);
+        Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.vbox1[this.menubar1]));
+        w2.Position = 0;
+        w2.Expand = false;
+        w2.Fill = false;
+        // Container child vbox1.Gtk.Box+BoxChild
+        this.mhdcanvas = new MonoHotDraw.SteticComponent();
+        this.mhdcanvas.Events = ((Gdk.EventMask)(256));
+        this.mhdcanvas.Name = "mhdcanvas";
+        this.vbox1.Add(this.mhdcanvas);
+        Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox1[this.mhdcanvas]));
+        w3.Position = 1;
+        this.Add(this.vbox1);
         if ((this.Child != null)) {
             this.Child.ShowAll();
         }
-        this.DefaultWidth = 400;
+        this.DefaultWidth = 446;
         this.DefaultHeight = 300;
         this.Show();
         this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
+        this.AddEllipseAction.Activated += new System.EventHandler(this.OnAddEllipseActionActivated);
+        this.AddRectangleAction.Activated += new System.EventHandler(this.OnAddRectangleActionActivated);
+        this.AddPolyLineAction.Activated += new System.EventHandler(this.OnAddPolyLineActionActivated);
+        this.AddSimpleTextAction.Activated += new System.EventHandler(this.OnAddSimpleTextActionActivated);
+        this.AddMultiLineTextAction.Activated += new System.EventHandler(this.OnAddMultiLineTextActionActivated);
+        this.AddLineConnectionAction.Activated += new System.EventHandler(this.OnAddLineConnectionActionActivated);
+        this.UndoAction.Activated += new System.EventHandler(this.OnUndoActionActivated);
+        this.RedoAction.Activated += new System.EventHandler(this.OnRedoActionActivated);
     }
 }
