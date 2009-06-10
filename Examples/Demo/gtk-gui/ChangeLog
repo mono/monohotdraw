@@ -1,0 +1,6 @@
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
+	* gui.stetic:
+	* generated.cs:
+	* MainWindow.cs: Added Demo Project
+
