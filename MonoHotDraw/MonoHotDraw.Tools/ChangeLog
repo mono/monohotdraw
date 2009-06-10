@@ -1,5 +1,14 @@
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
+	* TextTool.cs: Added new base class for the Tools
+
+	* SimpleTextTool.cs: Now inherits from TextTool
+
+	* MultiLineTextTool.cs: Now inherits from TextTool. Uses
+	UndoActivity now
+
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
 	* CreationTool.cs: PushesUndoActivity on MouseUp
 
 	* UndoableTool.cs: Removed. Using PushUndoActivity in

@@ -33,7 +33,7 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Tools {
 
-	public class MultiLineTextTool: FigureTool {
+	public class MultiLineTextTool: TextTool {
 	
 		public MultiLineTextTool (IDrawingEditor editor, MultiLineTextFigure fig, ITool dt): base (editor, fig, dt) {	
 			_textview = new Gtk.TextView ();
@@ -88,7 +88,8 @@ namespace MonoHotDraw.Tools {
 			
 			Gdk.EventType type = ev.GdkEvent.Type;
 			if (type == EventType.TwoButtonPress) {
-				_showingEntry = true;
+				CreateUndoActivity();
+				_showingWidget = true;
 				_textview.Buffer.Text = ((MultiLineTextFigure)Figure).Text;
 				
 				View.AddWidget(_textview, 0, 0);
@@ -105,22 +106,15 @@ namespace MonoHotDraw.Tools {
 			DefaultTool.MouseDown (ev);
 		}
 
-		public override void Activate () {
-			_showingEntry = false;
-		}
-
 		public override void Deactivate () {
-			_textview.Buffer.Changed -= new System.EventHandler (ChangedHandler);
-			View.RemoveWidget (_textview);
+			if (_showingWidget) {
+				View.RemoveWidget (_textview);
+				UpdateUndoActivity();
+				PushUndoActivity();
+			}
+			base.Deactivate();
 		}
 		
-		public override void MouseDrag (MouseEvent ev) {
-			if (!_showingEntry) {
-				DefaultTool.MouseDrag (ev);
-			}
-		}
-
 		private Gtk.TextView _textview;
-		private bool _showingEntry = false;
 	}
 }
