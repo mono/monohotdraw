@@ -45,6 +45,7 @@ namespace MonoHotDraw.Handles {
 					figure.RemovePointAt (Index);
 				}
 			}
+			base.InvokeEnd(x, y, view);
 		}
 	}
 }

@@ -28,6 +28,7 @@ using System;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Locators;
 using MonoHotDraw.Util;
+using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Handles {
 
@@ -40,7 +41,7 @@ namespace MonoHotDraw.Handles {
 		public override Gdk.Cursor CreateCursor () {
 			return CursorFactory.GetCursorFromType (Gdk.CursorType.Hand2);
 		}
-
+		
 		public override void InvokeStep (double x, double y, IDrawingView view) {
 			((PolyLineFigure) Owner).SetPointAt (Index, x, y);
 		}
@@ -58,12 +59,46 @@ namespace MonoHotDraw.Handles {
 			context.Color = new Cairo.Color (0.0, 0.0, 0.0, 1.0);
 			context.Stroke ();
 		}
-
-		protected int Index {
-			get { return index; }
-			set { index = value; }
+		
+		public class PolyLineHandleUndoActivity: AbstractUndoActivity {
+			public PolyLineHandleUndoActivity(IDrawingView view): base (view) {
+				Undoable = true;
+				Redoable = true;
+			}
+			
+			public override bool Undo () {
+				if (!base.Undo()  )
+					return false;
+				Owner.SetPointAt(Index, OldPoint.X, OldPoint.Y);
+				return true;
+			}
+			
+			public override bool Redo () {
+				if (!base.Redo() )
+					return false;
+				Owner.SetPointAt(Index, NewPoint.X, NewPoint.Y);
+				return true;
+			}
+			
+			public int Index { get; set; }
+			public PointD OldPoint { get; set; }
+			public PointD NewPoint { get; set; }
+			public PolyLineFigure Owner { get; set; }
 		}
-
-		private int index;
+		
+		protected override void CreateUndoActivity(IDrawingView view) {
+			PolyLineHandleUndoActivity activity = new PolyLineHandleUndoActivity(view);
+			activity.Owner = Owner as PolyLineFigure;
+			activity.Index = Index;
+			activity.OldPoint = activity.Owner.PointAt(Index);
+			UndoActivity = activity;
+		}
+		
+		protected override void UpdateUndoActivity () {
+			PolyLineHandleUndoActivity activity = UndoActivity as PolyLineHandleUndoActivity;
+			activity.NewPoint = activity.Owner.PointAt(Index);
+		}
+		
+		protected int Index { get; set; }
 	}
 }

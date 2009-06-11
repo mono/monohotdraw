@@ -44,16 +44,7 @@ namespace MonoHotDraw.Handles {
 				return new PointD (0, 0);
 			}
 		}
-
-		public override void InvokeStep (double x, double y, IDrawingView view)	{
-		}
-
-		public override void InvokeStart (double x, double y, IDrawingView view){
-		}
-
-		public override void InvokeEnd (double x, double y, IDrawingView view) {
-		}
-
+		
 		private ILocator _locator;
 	}
 }

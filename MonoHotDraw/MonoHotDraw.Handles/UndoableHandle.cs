@@ -57,6 +57,7 @@ namespace MonoHotDraw.Handles {
 			WrappedHandle.InvokeEnd(x, y, view);
 			
 			IUndoActivity activity = WrappedHandle.UndoActivity;
+			
 			if (activity != null && activity.Undoable) {
 				view.Editor.UndoManager.PushUndo(activity);
 				view.Editor.UndoManager.ClearRedos();

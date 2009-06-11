@@ -87,13 +87,22 @@ namespace MonoHotDraw.Handles {
 			context.Stroke ();
 		}
 
-		public abstract void InvokeStart (double x, double y, IDrawingView view);
+		public virtual void InvokeStart (double x, double y, IDrawingView view) {
+			CreateUndoActivity(view);
+		}
 
-		public abstract void InvokeStep (double x, double y, IDrawingView view);
+		public virtual void InvokeStep (double x, double y, IDrawingView view) {
+		}
 
-		public abstract void InvokeEnd (double x, double y, IDrawingView view);
+		public virtual void InvokeEnd (double x, double y, IDrawingView view) {
+			UpdateUndoActivity();
+		}
 		
 		public abstract PointD Locate ();
+		
+		protected abstract void CreateUndoActivity(IDrawingView view);
+		
+		protected abstract void UpdateUndoActivity();
 
 		private double  _lineWidth;
 	}

@@ -36,14 +36,6 @@ namespace MonoHotDraw.Handles {
 		public ResizeHandle(IFigure owner, ILocator locator): base (owner, locator) {
 		}
 		
-		public override void InvokeStart (double x, double y, IDrawingView view){
-			CreateUndoActivity(view);
-		}
-
-		public override void InvokeEnd (double x, double y, IDrawingView view) {
-			UpdateUndoActivity();
-		}
-		
 		public class ResizeHandleUndoActivity: AbstractUndoActivity {
 			public ResizeHandleUndoActivity(IDrawingView view, IFigure owner): base (view) {
 				Undoable = true;
@@ -72,11 +64,11 @@ namespace MonoHotDraw.Handles {
 			public RectangleD NewDisplayBox { get; set; }
 		}
 		
-		protected void CreateUndoActivity(IDrawingView view) {
+		protected override void CreateUndoActivity(IDrawingView view) {
 			UndoActivity = new ResizeHandleUndoActivity(view, Owner);
 		}
 		
-		protected void UpdateUndoActivity() {
+		protected override void UpdateUndoActivity() {
 			ResizeHandleUndoActivity activity = UndoActivity as ResizeHandleUndoActivity;
 			activity.NewDisplayBox = Owner.DisplayBox;
 		}

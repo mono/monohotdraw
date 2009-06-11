@@ -1,3 +1,24 @@
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
+	* ResizeHandle.cs: Added CreateUndoActivity and
+	UpdateUndoActivity
+
+	* LocatorHandle.cs: Removed stubs for Invoke{End,Start,Step}
+	Moved to AbstractHandle
+
+	* AbstractHandle.cs: Added default stubs for InvokeStart,
+	InvokeEnd, InvokeStep. Added Stubs for UpdateUndoaActivity and
+	CreateUndoActivity
+
+	* LineConnectionHandle.cs: Invoking base in InvokeEnd().
+
+	* UndoableHandle.cs: Cosmetic changes
+
+	* PolyLineHandle.cs: Added UndoActivity
+
+	* ChangeConnectionHandle.cs: Added Stubs for
+	UpdateUndoaActivity and CreateUndoActivity.
+
 2009-06-06  Manuel Cerón  <ceronman@gmail.com>
 
 	* ResizeHandle.cs: Added ResizeHandle Class
