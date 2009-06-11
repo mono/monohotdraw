@@ -100,9 +100,11 @@ namespace MonoHotDraw.Handles {
 		
 		public abstract PointD Locate ();
 		
-		protected abstract void CreateUndoActivity(IDrawingView view);
+		protected virtual void CreateUndoActivity(IDrawingView view) {
+		}
 		
-		protected abstract void UpdateUndoActivity();
+		protected virtual void UpdateUndoActivity() {
+		}
 
 		private double  _lineWidth;
 	}

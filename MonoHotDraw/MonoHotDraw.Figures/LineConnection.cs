@@ -168,6 +168,16 @@ namespace MonoHotDraw.Figures {
 			base.SetPointAt (index, x, y);
 			UpdateConnection ();
 		}
+		
+		public override void RemovePointAt (int i) {
+			base.RemovePointAt (i);
+			UpdateConnection();
+		}
+		
+		public override void InsertPointAt (int index, double x, double y) {
+			base.InsertPointAt (index, x, y);
+			UpdateConnection();
+		}
 
 		public override IEnumerable <IHandle> HandlesEnumerator {
 			get {

@@ -102,12 +102,6 @@ namespace MonoHotDraw.Handles {
 			set { _targetFigure = value; }
 		}
 		
-		protected override void CreateUndoActivity(IDrawingView view) {
-		}
-		
-		protected override void UpdateUndoActivity () {
-		}
-
 		private IFigure FindConnectableFigure (double x, double y, IDrawing drawing) {
 			foreach (IFigure figure in drawing.FiguresEnumeratorReverse) {
 				if (figure.ContainsPoint (x, y) && IsConnectionPossible (figure)) {

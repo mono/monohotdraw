@@ -40,7 +40,8 @@ namespace MonoHotDraw.Figures {
 
 			context.LineWidth = LineWidth;
 			context.Save ();
-			context.Rectangle (displayBox.X, displayBox.Y, displayBox.Width, displayBox.Height);
+			displayBox.OffsetDot5 ();
+			context.Rectangle (GdkCairoHelper.CairoRectangle(displayBox));
 			context.Restore ();
 			context.Color = FillColor;
 			context.FillPreserve ();

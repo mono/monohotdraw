@@ -1,5 +1,15 @@
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
+	* PolyLineHandle.cs: Index is now public and private set
+
+	* AbstractHandle.cs: CreateUndoActivity and UpdateUndoActivity
+	now are virtual stubs
+
+	* ChangeConnectionHandle.cs: Removed CreateUndoActivity and
+	UpdateUndoActivity Stubs
+
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
 	* ResizeHandle.cs: Added CreateUndoActivity and
 	UpdateUndoActivity
 

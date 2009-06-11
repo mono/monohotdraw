@@ -1,5 +1,13 @@
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
+	* LineConnection.cs: Added overrides for RemovePointAt and
+	InsertPointAt
+
+	* RectangleFigure.cs: using OffsetDot5 to improve rendring in
+	Drawing
+
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
 	* SimpleTextFigure.cs: BasicDrawSelected overriden
 
 2009-06-03  Manuel Cerón  <ceronman@gmail.com>

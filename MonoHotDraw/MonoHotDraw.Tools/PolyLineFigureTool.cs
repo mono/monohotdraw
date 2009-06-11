@@ -25,8 +25,10 @@
 
 using Gdk;
 using System;
+using Cairo;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Handles;
+using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Tools {
 	// TODO: Should be this inside PolyLineFigure ???
@@ -46,11 +48,67 @@ namespace MonoHotDraw.Tools {
 				connection.SplitSegment (ev.X, ev.Y);
 				view.ClearSelection ();
 				view.AddToSelection (Figure);
-				IHandle handle = view.FindHandle (ev.X, ev.Y);
-				((Gtk.Widget) view).GdkWindow.Cursor = handle.CreateCursor ();
-				DefaultTool = new HandleTracker (Editor, handle);
+				_handle = view.FindHandle (ev.X, ev.Y) as PolyLineHandle;
+				((Gtk.Widget) view).GdkWindow.Cursor = _handle.CreateCursor ();
+				_handle.InvokeStart(ev.X, ev.Y, ev.View);
+				CreateUndoActivity();
 			}
-			DefaultTool.MouseDown (ev);
+			else {
+				DefaultTool.MouseDown (ev);
+			}
 		}
+		
+		public override void MouseDrag (MouseEvent ev) {
+			if (_handle != null) {
+				_handle.InvokeStep(ev.X, ev.Y, ev.View);
+			}
+		}
+		
+		public override void MouseUp (MouseEvent ev) {
+			if (_handle != null) {
+				_handle.InvokeEnd(ev.X, ev.Y, ev.View);
+				UpdateUndoActivity();
+				PushUndoActivity();
+			}
+		}
+		
+		public class PolyLineFigureToolUndoActivity: AbstractUndoActivity {
+			public PolyLineFigureToolUndoActivity(IDrawingView view): base (view) {
+				Undoable = true;
+				Redoable = true;
+			}
+			
+			public override bool Undo () {
+				if (!base.Undo()  )
+					return false;
+				Figure.RemovePointAt(Index);
+				return true;
+			}
+			
+			public override bool Redo () {
+				if (!base.Redo() )
+					return false;
+				Figure.InsertPointAt(Index, NewPoint.X, NewPoint.Y);
+				return true;
+			}
+			
+			public PolyLineFigure Figure { get; set; }
+			public int Index { get; set; }
+			public PointD NewPoint { get; set; }
+		}
+		
+		protected void CreateUndoActivity() {
+			PolyLineFigureToolUndoActivity activity = new PolyLineFigureToolUndoActivity(View);
+			activity.Figure = Figure as PolyLineFigure;
+			activity.Index = _handle.Index;
+			UndoActivity = activity;
+		}
+		
+		protected void UpdateUndoActivity() {
+			PolyLineFigureToolUndoActivity activity = UndoActivity as PolyLineFigureToolUndoActivity;
+			activity.NewPoint = activity.Figure.PointAt(activity.Index);
+		}
+		
+		private PolyLineHandle _handle;
 	}
 }

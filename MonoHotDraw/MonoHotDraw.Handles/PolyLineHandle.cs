@@ -99,6 +99,6 @@ namespace MonoHotDraw.Handles {
 			activity.NewPoint = activity.Owner.PointAt(Index);
 		}
 		
-		protected int Index { get; set; }
+		public int Index { get; protected set; }
 	}
 }

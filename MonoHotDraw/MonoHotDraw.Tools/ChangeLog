@@ -1,5 +1,10 @@
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
+	* PolyLineFigureTool.cs: Added UndoActivity Support. Changed
+	behavior a littler to suport that.
+
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
 	* ConnectionCreationTool.cs: Inherited from CreationTool.
 	Added UndoActivity subclass
 
