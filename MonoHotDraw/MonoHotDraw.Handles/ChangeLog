@@ -1,3 +1,10 @@
+2009-06-11  Manuel Cerón  <ceronman@gmail.com>
+
+	* ChangeConnectionEndHandle.cs:
+	* ChangeConnectionStartHandle.cs: Added FindPoint
+
+	* ChangeConnectionHandle.cs: Added UndoActivity functionality.
+
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
 	* PolyLineHandle.cs: Index is now public and private set

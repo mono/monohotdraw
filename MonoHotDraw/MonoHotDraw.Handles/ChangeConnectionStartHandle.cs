@@ -63,5 +63,10 @@ namespace MonoHotDraw.Handles {
 		protected override PointD Point {
 			set { Connection.StartPoint = value; }
 		}
+		
+		protected override PointD FindPoint (IConnector connector) {
+			return connector.FindStart(Connection);
+		}
+
 	}
 }

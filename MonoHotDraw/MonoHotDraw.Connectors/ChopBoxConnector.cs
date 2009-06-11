@@ -45,10 +45,9 @@ namespace MonoHotDraw.Connectors {
 				return DisplayBox.Center;
 			}
 				
-			IFigure start = connection.StartConnector.Owner;
 			PointD point = connection.PointAt (1);
 	
-			return Chop (start, point);
+			return Chop (Owner, point);
 		}
 
 		public override PointD FindEnd (IConnectionFigure connection) {
@@ -57,10 +56,9 @@ namespace MonoHotDraw.Connectors {
 				return DisplayBox.Center;
 			}
 
-			IFigure end = connection.EndConnector.Owner;
 			PointD point = connection.PointAt (connection.PointCount - 2);
 
-			return Chop (end, point);
+			return Chop (Owner, point);
 		}
 
 		protected virtual PointD Chop (IFigure target, PointD point) {	

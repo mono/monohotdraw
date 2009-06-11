@@ -206,6 +206,7 @@ namespace MonoHotDraw.Figures {
 			if (connector != null) {
 				connector.Owner.FigureChanged += FigureChangedHandler;
 				connector.Owner.AddDependentFigure (this);
+				UpdateConnection ();
 			}
 		}
 		

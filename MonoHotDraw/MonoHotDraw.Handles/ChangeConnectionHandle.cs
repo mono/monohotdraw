@@ -26,6 +26,7 @@
 using Cairo;
 using System;
 using MonoHotDraw.Connectors;
+using MonoHotDraw.Commands;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
 
@@ -43,27 +44,22 @@ namespace MonoHotDraw.Handles {
 		}
 
 		public override void InvokeStart (double x, double y, IDrawingView view) {
-			_originalTarget = Target;
+			_oldTarget = Target;
+			CreateUndoActivity(view);
 			Disconnect ();
 		}
 
 		public override void InvokeStep (double x, double y, IDrawingView view) {
-			PointD p = new PointD (x, y);
-			IFigure figure = FindConnectableFigure (x, y, view.Drawing);
-			TargetFigure = figure;
-			IConnector target = FindConnectionTarget (x, y, view.Drawing);
-			if (target != null) {
-				p = target.DisplayBox.Center;
-			}
-
-			Point = p;
-			_connection.UpdateConnection ();
+			TargetFigure = FindConnectableFigure (x, y, view.Drawing);
+			_newTarget = FindConnectionTarget (x, y, view.Drawing);
+			Point = _newTarget != null ? FindPoint(_newTarget) : new PointD(x, y);
+			Connection.UpdateConnection ();
 		}
 
 		public override void InvokeEnd (double x, double y, IDrawingView view) {
-			IConnector target = FindConnectionTarget (x, y, view.Drawing) ?? _originalTarget;
-			Point = new PointD (x, y);
-			Connect (target);
+			_newTarget = _newTarget ?? _oldTarget;
+			UpdateUndoActivity();
+			Connect (_newTarget);
 			Connection.UpdateConnection ();
 		}
 
@@ -81,8 +77,55 @@ namespace MonoHotDraw.Handles {
 			context.Color = new Cairo.Color (0.0, 0.0, 0.0, 1.0);
 			context.Stroke ();
 		}
+		
+		public class ChangeConnectionHandleUndoActivity: AbstractUndoActivity {
+			public ChangeConnectionHandleUndoActivity(IDrawingView view): base (view) {
+				Undoable = true;
+				Redoable = true;
+			}
+			
+			public override bool Undo () {
+				if (!base.Undo()  )
+					return false;
+				Owner.Disconnect();
+				Owner.Connect (OldConnector);
+				return true;
+			}
+			
+			public override bool Redo () {
+				if (!base.Redo() )
+					return false;
+				Owner.Disconnect ();
+				Owner.Connect (NewConnector);
+				return true;
+			}
+			
+			public ChangeConnectionHandle Owner { get; set; }
+			public IConnector OldConnector { get; set; }
+			public IConnector NewConnector { get; set; }
+		}
+		
+		protected override void CreateUndoActivity (IDrawingView view) {
+			ChangeConnectionHandleUndoActivity activity = new ChangeConnectionHandleUndoActivity(view);
+			activity.Owner = this;
+			activity.OldConnector = _oldTarget;
+			UndoActivity = activity;
+		}
+		
+		protected override void UpdateUndoActivity () {
+			ChangeConnectionHandleUndoActivity activity = UndoActivity as ChangeConnectionHandleUndoActivity;
+			if (activity == null) {
+				return;
+			}
+			if (activity.OldConnector.Owner == _newTarget.Owner) {
+				UndoActivity = null;
+			}
+			else {
+				activity.NewConnector = _newTarget;
+			}
+		}
 
-		protected abstract PointD Point {set; }
+		protected abstract PointD Point { set; }
 
 		protected abstract IConnector Target { get; }
 
@@ -91,16 +134,12 @@ namespace MonoHotDraw.Handles {
 		protected abstract void Disconnect ();
 
 		protected abstract bool IsConnectionPossible (IFigure figure);
+		
+		protected abstract PointD FindPoint(IConnector connector);
 
-		protected IConnectionFigure Connection {
-			get { return _connection; }
-			set { _connection = value; }
-		}
+		protected IConnectionFigure Connection { get; set; }
 
-		protected IFigure TargetFigure {
-			get { return _targetFigure; }
-			set { _targetFigure = value; }
-		}
+		protected IFigure TargetFigure { get; set; }
 		
 		private IFigure FindConnectableFigure (double x, double y, IDrawing drawing) {
 			foreach (IFigure figure in drawing.FiguresEnumeratorReverse) {
@@ -116,8 +155,7 @@ namespace MonoHotDraw.Handles {
 			return target != null ? target.ConnectorAt (x, y) : null;
 		}
 
-		private IConnectionFigure _connection;
-		private IFigure _targetFigure;
-		private IConnector _originalTarget;
+		private IConnector _oldTarget;
+		private IConnector _newTarget;
 	}
 }

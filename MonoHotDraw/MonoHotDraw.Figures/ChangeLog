@@ -1,3 +1,7 @@
+2009-06-11  Manuel Cerón  <ceronman@gmail.com>
+
+	* LineConnection.cs: UpdatingConnection when connecting
+
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
 	* LineConnection.cs: Added overrides for RemovePointAt and
