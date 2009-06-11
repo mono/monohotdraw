@@ -28,15 +28,17 @@ using Gdk;
 using Gtk;
 using System;
 using MonoHotDraw.Figures;
+using MonoHotDraw.Commands;
 using MonoHotDraw.Handles;
+using MonoHotDraw.Connectors;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Tools {
 
-	public class ConnectionCreationTool: AbstractTool {
+	public class ConnectionCreationTool: CreationTool {
 	
-		public ConnectionCreationTool (IDrawingEditor editor, IConnectionFigure ction): base (editor) {
-			_connection = ction;
+		public ConnectionCreationTool (IDrawingEditor editor, IConnectionFigure fig): base (editor, fig) {
+			_connection = fig;
 			_connection.DisconnectStart ();
 			_connection.DisconnectEnd ();
 		}
@@ -48,7 +50,6 @@ namespace MonoHotDraw.Tools {
 		}
 		
 		public override void MouseDown (MouseEvent ev) {
-			base.MouseDown (ev);
 			IDrawingView view = ev.View;
 			IFigure figure = view.Drawing.FindFigure (ev.X, ev.Y);
 
@@ -61,11 +62,11 @@ namespace MonoHotDraw.Tools {
 				view.ClearSelection ();
 				view.AddToSelection (_connection);
 				_handle = _connection.EndHandle;
+				CreateUndoActivity();
 			}
 			else {
-				Editor.Tool = new SelectionTool (Editor);
+				Editor.Tool = new SelectionTool(Editor);
 			}
-
 		}
 		
 		public override void MouseUp (MouseEvent ev) {
@@ -78,20 +79,61 @@ namespace MonoHotDraw.Tools {
 				_connection.DisconnectEnd ();
 				ev.View.Drawing.Remove (_connection);
 				ev.View.ClearSelection ();
-
+				UndoActivity = null;
 			}
-			Editor.Tool = new SelectionTool (Editor);
+			else {
+				ConnectionCreationToolUndoActivity activity = UndoActivity as ConnectionCreationToolUndoActivity;
+				activity.EndConnector = _connection.EndConnector;
+			}
+			base.MouseUp(ev);
 		}
 		
 		public override void MouseMove (MouseEvent ev) {
 			Widget widget = (Widget) ev.View;
 			IFigure figure = ev.View.Drawing.FindFigure (ev.X, ev.Y);
 			if (figure != null) {
-				widget.GdkWindow.Cursor = CursorFactory.GetCursorFromType (Gdk.CursorType.Cross);
+				widget.GdkWindow.Cursor = CursorFactory.GetCursorFromType (Gdk.CursorType.SbHDoubleArrow);
 			}
 			else {
 				widget.GdkWindow.Cursor = CursorFactory.GetCursorFromType (Gdk.CursorType.Crosshair);
 			}
+		}
+		
+		public class ConnectionCreationToolUndoActivity: AbstractUndoActivity {
+			public ConnectionCreationToolUndoActivity(IDrawingView view): base(view) {
+				Undoable = true;
+				Redoable = true;
+			}
+			
+			public override bool Undo () {
+				if (!base.Undo()  )
+					return false;
+				Connection.DisconnectStart();
+				Connection.DisconnectEnd();
+				DrawingView.Drawing.Remove(Connection);
+				DrawingView.RemoveFromSelection(Connection);
+				return true;
+			}
+			
+			public override bool Redo () {
+				if (!base.Redo() )
+					return false;
+				DrawingView.Drawing.Add(Connection);
+				Connection.ConnectStart(StartConnector);
+				Connection.ConnectEnd(EndConnector);
+				return true;
+			}
+			
+			public IConnectionFigure Connection { set; get; }
+			public IConnector StartConnector { set; get; }
+			public IConnector EndConnector { set; get; }
+		}
+		
+		protected void CreateUndoActivity(){
+			ConnectionCreationToolUndoActivity activity = new ConnectionCreationToolUndoActivity(Editor.View);
+			activity.Connection = _connection;
+			activity.StartConnector = _connection.StartConnector;
+			UndoActivity = activity;
 		}
 		
 		private IHandle _handle;

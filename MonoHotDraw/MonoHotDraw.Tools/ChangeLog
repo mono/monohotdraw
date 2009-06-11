@@ -1,5 +1,10 @@
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
+	* ConnectionCreationTool.cs: Inherited from CreationTool.
+	Added UndoActivity subclass
+
+2009-06-10  Manuel Cerón  <ceronman@gmail.com>
+
 	* TextTool.cs: Added new base class for the Tools
 
 	* SimpleTextTool.cs: Now inherits from TextTool
