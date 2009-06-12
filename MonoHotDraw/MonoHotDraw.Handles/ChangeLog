@@ -1,3 +1,8 @@
+2009-06-12  Manuel Cerón  <ceronman@gmail.com>
+
+	* UndoableHandle.cs: checking if UndoManager exists before
+	pushing undo
+
 2009-06-11  Manuel Cerón  <ceronman@gmail.com>
 
 	* ChangeConnectionEndHandle.cs:

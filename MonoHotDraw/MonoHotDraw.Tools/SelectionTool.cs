@@ -108,13 +108,11 @@ namespace MonoHotDraw.Tools {
 		protected ITool DelegateTool {
 			set { 
 				if (_delegateTool != null && _delegateTool.Activated) {
-					System.Console.WriteLine("deactivating {0}", _delegateTool);
 					_delegateTool.Deactivate ();
 				}
 
 				_delegateTool = value;
 				if (_delegateTool != null) {
-					System.Console.WriteLine("activating {0}", _delegateTool);
 					_delegateTool.Activate ();
 				}
 			}
