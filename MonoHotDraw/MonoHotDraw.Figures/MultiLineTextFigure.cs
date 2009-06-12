@@ -31,6 +31,7 @@ using MonoHotDraw.Tools;
 
 namespace MonoHotDraw.Figures {
 
+	[Serializable]
 	public class MultiLineTextFigure: SimpleTextFigure {
 	
 		public MultiLineTextFigure (string text):  base (text) {

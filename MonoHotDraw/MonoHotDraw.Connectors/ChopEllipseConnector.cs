@@ -25,14 +25,19 @@
 
 using Cairo;
 using System;
+using System.Runtime.Serialization;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Connectors {
 
+	[Serializable]
 	public class ChopEllipseConnector : ChopBoxConnector {
 	
 		public ChopEllipseConnector (IFigure figure): base (figure) {
+		}
+		
+		protected ChopEllipseConnector (SerializationInfo info, StreamingContext context) : base (info, context) {
 		}
 		
 		protected override PointD Chop (IFigure target, PointD point) {

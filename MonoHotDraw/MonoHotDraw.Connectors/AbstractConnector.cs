@@ -27,16 +27,22 @@
 
 using Cairo;
 using System;
+using System.Runtime.Serialization;
 using MonoHotDraw.Commands;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Connectors{
 
+	[Serializable]
 	public abstract class AbstractConnector : IConnector {
 	
 		protected AbstractConnector (IFigure owner) {
 			Owner = owner;
+		}
+
+		protected AbstractConnector (SerializationInfo info, StreamingContext context) {
+			_owner = (IFigure) info.GetValue ("Owner", typeof (IFigure));
 		}
 
 		public virtual IFigure Owner {
@@ -48,6 +54,10 @@ namespace MonoHotDraw.Connectors{
 			get { return Owner.DisplayBox; }
 		}
 		
+		public virtual object Clone () {
+			return GenericCloner.Clone <AbstractConnector> (this);
+		}
+
 		public virtual bool ContainsPoint (double x, double y) {
 			return Owner.ContainsPoint (x, y);
 		}
@@ -63,6 +73,10 @@ namespace MonoHotDraw.Connectors{
 			return DisplayBox.Center;
 		}
 		
+		public virtual void GetObjectData (SerializationInfo info, StreamingContext context) {
+			info.AddValue ("Owner", Owner);
+		}
+
 		private IFigure _owner;
 	}
 }

@@ -29,11 +29,13 @@ using Gtk;
 using Pango;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using MonoHotDraw.Tools;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures {
 
+	[Serializable]
 	public class SimpleTextFigure : AttributeFigure {
 	
 		public event EventHandler TextChanged;
@@ -50,6 +52,18 @@ namespace MonoHotDraw.Figures {
 			GenerateDummyContext ();
 		}
 
+		protected SimpleTextFigure (SerializationInfo info, StreamingContext context) : base (info, context) {
+			FontColor     = (Cairo.Color) info.GetValue ("FontColor", typeof (Cairo.Color));
+			FontAlignment = (Pango.Alignment) info.GetValue ("FontAlignment", typeof (Pango.Alignment));
+			FontFamily    = (string) info.GetValue ("FontFamily", typeof (string));
+			FontSize      = info.GetInt32 ("FontSize");
+			FontStyle     = (Pango.Style) info.GetValue ("FontStyle", typeof (Pango.Style));
+			_displayBox   = (RectangleD) info.GetValue ("DisplayBox", typeof (RectangleD));
+			_text         = (string) info.GetValue ("Text", typeof (string));
+			_textEditable = info.GetBoolean ("TextEditable");
+			_padding      = info.GetDouble ("Padding");
+		}
+		
 		public Pango.Alignment FontAlignment {
 			get { return _fontAlignment; }
 			set { _fontAlignment = value; }
@@ -168,6 +182,20 @@ namespace MonoHotDraw.Figures {
 					return LineColor;
 			}
 			return base.GetAttribute (attribute); 
+		}
+
+		public override void GetObjectData (SerializationInfo info, StreamingContext context) {
+			info.AddValue ("DisplayBox", _displayBox);
+			info.AddValue ("FontAlignment", _fontAlignment);
+			info.AddValue ("FontColor", FontColor);
+			info.AddValue ("FontFamily", _fontFamily);
+			info.AddValue ("FontSize", _fontSize);
+			info.AddValue ("FontStyle", _fontStyle);
+			info.AddValue ("Padding", _padding);
+			info.AddValue ("Text", _text);
+			info.AddValue ("TextEditable", _textEditable);
+
+			base.GetObjectData (info, context);
 		}
 
 		public override void SetAttribute (FigureAttribute attribute, object value) {

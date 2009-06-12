@@ -27,14 +27,20 @@
 using Cairo;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using MonoHotDraw.Handles;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures {
 
+	[Serializable]
 	public abstract class BaseBoxFigure : AttributeFigure {
 
 		protected BaseBoxFigure () {
+		}
+
+		protected BaseBoxFigure (SerializationInfo info, StreamingContext context) : base (info, context) {
+			DisplayBox = ((RectangleD) info.GetValue ("DisplayBox", typeof (RectangleD)));
 		}
 		
 		public override RectangleD BasicDisplayBox {
@@ -52,6 +58,12 @@ namespace MonoHotDraw.Figures {
 					yield return handle;
 				}
 			}
+		}
+		
+		public override void GetObjectData (SerializationInfo info, StreamingContext context) {
+			info.AddValue ("DisplayBox", _displayBox);
+
+			base.GetObjectData (info, context);
 		}
 		
 		private void InstantiateHandles () {

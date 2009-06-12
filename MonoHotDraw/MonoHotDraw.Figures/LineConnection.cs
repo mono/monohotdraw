@@ -29,17 +29,24 @@
 using Cairo;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using MonoHotDraw.Connectors;
 using MonoHotDraw.Handles;
 using MonoHotDraw.Locators;
 
 namespace MonoHotDraw.Figures {
 
-	public class LineConnection : PolyLineFigure, IConnectionFigure {
+	[Serializable]
+	public class LineConnection : PolyLineFigure, IConnectionFigure, IDeserializationCallback {
 	
 		public LineConnection () : base () {
 			AddPoint (0.0, 0.0);
 			AddPoint (0.0, 0.0);
+		}
+
+		protected LineConnection (SerializationInfo info, StreamingContext context) : base (info, context) {
+			_endConnector = (IConnector) info.GetValue ("EndConnector", typeof (IConnector));
+			_startConnector = (IConnector) info.GetValue ("StartConnector", typeof (IConnector));
 		}
 
 		public LineConnection (IFigure fig1, IFigure fig2): this ()	{
@@ -188,9 +195,17 @@ namespace MonoHotDraw.Figures {
 			}
 		}
 		
+		public override void GetObjectData (SerializationInfo info, StreamingContext context) {
+			info.AddValue ("EndConnector",   EndConnector);
+			info.AddValue ("StartConnector", StartConnector);
+			
+			base.GetObjectData (info, context);
+		}
+		
 		private void ConnectFigure (IConnector connector) {
 			if (connector != null) {
 				connector.Owner.FigureChanged += FigureChangedHandler;
+				connector.Owner.AddDependentFigure (this);
 				UpdateConnection ();
 			}
 		}
@@ -198,6 +213,7 @@ namespace MonoHotDraw.Figures {
 		private void DisconnectFigure (IConnector connector) {
 			if (connector != null) {
 				connector.Owner.FigureChanged -= FigureChangedHandler;
+				connector.Owner.RemoveDependentFigure (this);
 			}
 		}
 

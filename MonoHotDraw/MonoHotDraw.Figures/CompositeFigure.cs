@@ -32,6 +32,7 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures {
 
+	[Serializable]
 	public abstract class CompositeFigure : AttributeFigure {
 
 		protected CompositeFigure () {

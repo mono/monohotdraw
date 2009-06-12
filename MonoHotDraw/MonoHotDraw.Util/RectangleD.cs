@@ -29,6 +29,7 @@ using System;
 
 namespace MonoHotDraw.Util {
 
+	[Serializable]
 	public struct RectangleD : IEquatable<RectangleD> {
 	
 		public RectangleD (double x, double y): this (x, y, 0.0, 0.0) {

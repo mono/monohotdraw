@@ -64,6 +64,15 @@ namespace MonoHotDraw.Commands {
 			return new PasteUndoActivity (DrawingView);
 		}
 		
+		// TODO: Move this to FigureCollection
+		private RectangleD GetBounds (FigureCollection figures) {
+			RectangleD rectangle = new RectangleD (0, 0, 0, 0);
+			foreach (IFigure figure in figures) {
+				rectangle.Add (figure.DisplayBox);
+			}
+			return rectangle;
+		}
+		
 		internal class PasteUndoActivity : AbstractUndoActivity {
 			public PasteUndoActivity (IDrawingView drawingView) : base (drawingView) {
 				Undoable = true;

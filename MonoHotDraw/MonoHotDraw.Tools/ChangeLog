@@ -1,11 +1,5 @@
 2009-06-12  Manuel Cerón  <ceronman@gmail.com>
 
-	* SelectionTool.cs:
-	* ConnectionCreationTool.cs: Removed all references to
-	Serialization
-
-2009-06-12  Manuel Cerón  <ceronman@gmail.com>
-
 	* SelectionTool.cs: Removed debug prints
 
 2009-06-12  Manuel Cerón  <ceronman@gmail.com>

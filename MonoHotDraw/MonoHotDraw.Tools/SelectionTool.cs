@@ -124,6 +124,9 @@ namespace MonoHotDraw.Tools {
 			
 			foreach (IFigure fig in view.SelectionEnumerator) {
 				figures.Add (fig);
+				foreach (IFigure dep in fig.DependentFiguresEnumerator) {
+					figures.Add (dep);
+				}
 			}
 			
 			view.ClearSelection ();

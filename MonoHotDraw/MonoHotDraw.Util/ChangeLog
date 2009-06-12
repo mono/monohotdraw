@@ -1,7 +1,0 @@
-2009-06-12  Manuel Cerón  <ceronman@gmail.com>
-
-	* RectangleD.cs:
-	* ColorSerializationSurrogate.cs:
-	* PointDSerializationSurrogate.cs: Removed all references to
-	Serialization
-

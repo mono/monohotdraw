@@ -1,21 +1,3 @@
-2009-06-12  Manuel Cerón  <ceronman@gmail.com>
-
-	* IFigure.cs:
-	* LineTerminal.cs:
-	* EllipseFigure.cs:
-	* BaseBoxFigure.cs:
-	* AbstractFigure.cs:
-	* PolyLineFigure.cs:
-	* LineConnection.cs:
-	* AttributeFigure.cs:
-	* RectangleFigure.cs:
-	* CompositeFigure.cs:
-	* FigureCollection.cs:
-	* SimpleTextFigure.cs:
-	* MultiLineTextFigure.cs:
-	* TriangleArrowLineTerminal.cs: Removed all references to
-	Serialization
-
 2009-06-11  Manuel Cerón  <ceronman@gmail.com>
 
 	* LineConnection.cs: UpdatingConnection when connecting
