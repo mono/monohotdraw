@@ -89,11 +89,9 @@ namespace MonoHotDraw.Tools {
 		}
 		
 		public override void Deactivate () {
-			if (_showingWidget && UndoActivity != null) {
-				View.RemoveWidget (_entry);
-				UpdateUndoActivity();
-				PushUndoActivity();
-			}
+			View.RemoveWidget (_entry);
+			UpdateUndoActivity();
+			PushUndoActivity();
 			base.Deactivate ();
 		}
 

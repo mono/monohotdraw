@@ -86,6 +86,8 @@ namespace MonoHotDraw.Tools {
 
 		protected void UpdateUndoActivity() {
 			TextToolUndoActivity activity = UndoActivity as TextToolUndoActivity;
+			if (activity == null)
+				return;
 			activity.NewText = activity.AffectedFigure.Text;
 			if (activity.NewText == activity.OldText) {
 				UndoActivity = null;

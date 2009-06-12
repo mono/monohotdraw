@@ -77,7 +77,7 @@ namespace MonoHotDraw.Tools {
 			}
 			
 			IUndoActivity activity = UndoActivity;
-			if (activity != null && activity.Undoable) {
+			if (activity != null && activity.Undoable && Editor.UndoManager != null) {
 				Editor.UndoManager.PushUndo(activity);
 				Editor.UndoManager.ClearRedos();
 			}

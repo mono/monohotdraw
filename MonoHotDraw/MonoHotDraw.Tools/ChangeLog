@@ -1,3 +1,17 @@
+2009-06-12  Manuel Cerón  <ceronman@gmail.com>
+
+	* SelectionTool.cs: Avoids double activate of tools
+
+	* TextTool.cs: added check for UndoActivity
+
+	* SimpleTextTool.cs: Removed checks for _showingWidget 
+
+	* CompositeFigureTool.cs: remove Deactivate Activate, using
+	those from parent
+
+	* AbstractTool.cs: checking if UndoManager exist when
+	PushingUndo
+
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
 	* PolyLineFigureTool.cs: Added UndoActivity Support. Changed

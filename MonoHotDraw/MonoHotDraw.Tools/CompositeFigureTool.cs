@@ -61,18 +61,6 @@ namespace MonoHotDraw.Tools {
 			}
 		}
 		
-		public override void Activate () {
-			if (DelegateTool != null) {
-				DelegateTool.Activate ();
-			}
-		}
-		
-		public override void Deactivate () {
-			if (DelegateTool != null) {
-				DelegateTool.Deactivate ();
-			}
-		}
-
 		protected ITool DelegateTool {
 			set { 
 				if (_delegateTool != null) {
