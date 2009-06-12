@@ -48,11 +48,6 @@ namespace MonoHotDraw.Database {
 			LineColor = new Color (0, 0, 0, 1);
 		}
 
-		protected Attribute (SerializationInfo info, StreamingContext context) : base (info, context) {
-			Multivalued  = ((bool) info.GetValue ("Multivalued", typeof (bool)));
-			IsPrimaryKey = ((bool) info.GetValue ("IsPrimaryKey", typeof (bool)));
-		}
-		
 		public IEnumerable <Gtk.MenuItem> MenuItemsEnumerator { 
 			get {
 				List<Gtk.CheckMenuItem> items = new List<Gtk.CheckMenuItem> ();
@@ -95,13 +90,6 @@ namespace MonoHotDraw.Database {
 
 		public override void BasicDrawSelected (Context context) {
 			DrawAttribute (context, true);
-		}
-		
-		public override void GetObjectData (SerializationInfo info, StreamingContext context) {
-			info.AddValue ("Multivalued", Multivalued);
-			info.AddValue ("IsPrimaryKey", IsPrimaryKey);
-
-			base.GetObjectData (info, context);
 		}
 		
 		public override IConnector ConnectorAt (double x, double y) {

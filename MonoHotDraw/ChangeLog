@@ -1,3 +1,8 @@
+2009-06-12  Manuel Cerón  <ceronman@gmail.com>
+
+	* MonoHotDraw.csproj:
+	* StandardDrawing.cs: Removed all references to Serialization
+
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
 	* MonoHotDraw.csproj: Added TextTool.

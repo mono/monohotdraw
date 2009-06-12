@@ -124,12 +124,6 @@ namespace MonoHotDraw.Database {
 			context.Stroke ();
 		}
 		
-		public override void GetObjectData (SerializationInfo info, StreamingContext context) {
-			info.AddValue ("WeakEntity", WeakEntity);
-
-			base.GetObjectData (info, context);
-		}
-
 		private void InitializeHandles () {
 			_handles = new List <IHandle> ();
 			_handles.Add (new EntityAttributeHandle (this, new QuickActionLocator (7.5, 0.5, QuickActionPosition.Right)));

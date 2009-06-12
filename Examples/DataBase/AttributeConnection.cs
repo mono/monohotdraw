@@ -40,9 +40,6 @@ namespace MonoHotDraw.Database {
 		public AttributeConnection (IFigure fig1, IFigure fig2) : base (fig1, fig2) {
 		}
 		
-		protected AttributeConnection (SerializationInfo info, StreamingContext context) : base (info, context) {
-		}
-
 		public override bool CanConnectEnd (IFigure figure) {
 			if (figure is Attribute) {
 				foreach (IFigure fig in figure.DependentFiguresEnumerator) {

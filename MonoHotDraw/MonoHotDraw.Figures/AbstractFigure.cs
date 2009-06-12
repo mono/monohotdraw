@@ -1,5 +1,3 @@
-// TODO: Remove Serialization
-
 // MonoHotDraw. Diagramming Framework
 //
 // Authors:
@@ -27,7 +25,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Cairo;
 using MonoHotDraw.Commands;
 using MonoHotDraw.Connectors;
@@ -37,21 +34,11 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures {
 
-	[Serializable]
 	public abstract class AbstractFigure : IFigure {
 	
 		protected AbstractFigure () {
 			FillColor = new Cairo.Color (1.0, 1.0, 0.2, 0.8);
 			LineColor = (Color) AttributeFigure.GetDefaultAttribute (FigureAttribute.LineColor);
-		}
-
-		protected AbstractFigure (SerializationInfo info, StreamingContext context) {
-			bool hasDependentFigures = (bool) info.GetValue ("HasDependentFigures", typeof (bool));
-			if (hasDependentFigures) {
-				_dependentFigures = (List<IFigure>) info.GetValue ("DependentFigures", typeof (List<IFigure>));
-			}
-			FillColor = (Cairo.Color) info.GetValue ("FillColor", typeof (Cairo.Color));
-			LineColor = (Cairo.Color) info.GetValue ("LineColor", typeof (Cairo.Color));
 		}
 
 		public virtual RectangleD DisplayBox {
@@ -78,15 +65,9 @@ namespace MonoHotDraw.Figures {
 			get { yield break; }
 		}
 		
-		public virtual Color FillColor {
-			get { return _fillColor; }
-			set { _fillColor = value; }
-		}
+		public virtual Color FillColor { get; set; }
 		
-		public virtual Color LineColor {
-			get { return _lineColor; }
-			set { _lineColor = value; }
-		}
+		public virtual Color LineColor { get; set; }
 
 		public virtual double LineWidth {
 			get { return (double) GetAttribute (FigureAttribute.LineWidth); }
@@ -101,32 +82,10 @@ namespace MonoHotDraw.Figures {
 			return defaultTool;
 		}
 		
-		public virtual void GetObjectData (SerializationInfo info, StreamingContext context) {
-			info.AddValue ("FillColor", FillColor);
-			info.AddValue ("LineColor", LineColor);
-			if (_dependentFigures != null && _dependentFigures.Count > 0) {
-				info.AddValue ("HasDependentFigures", true);
-				info.AddValue ("DependentFigures", _dependentFigures);
-			} else {
-				info.AddValue ("HasDependentFigures", false);
-			}
-		}
-
 		public virtual IEnumerable <IHandle> HandlesEnumerator {
 			get { yield break; }
 		}
 
-		public virtual IEnumerable <IFigure> DependentFiguresEnumerator {
-			get {
-				if (_dependentFigures == null)
-					yield break;
-
-				foreach (IFigure figure in _dependentFigures) {
-					yield return figure;
-				}
-			}
-		}
-		
 		public virtual void Draw (Context context) {
 			context.Save ();
 			BasicDraw (context);
@@ -195,10 +154,6 @@ namespace MonoHotDraw.Figures {
 			return DisplayBox.Contains (x, y);
 		}
 		
-		public virtual object Clone () {
-			return GenericCloner.Clone <AbstractFigure> (this);
-		}
-
 		public void Invalidate () {
 			OnFigureInvalidated (new FigureEventArgs (this, InvalidateDisplayBox));
 		}
@@ -214,18 +169,6 @@ namespace MonoHotDraw.Figures {
 				return rect;
 			}
 		}
-
-		public void AddDependentFigure (IFigure figure)	{
-			if (_dependentFigures == null)
-				_dependentFigures = new List <IFigure> ();
-			_dependentFigures.Add (figure);
-		}
-
-		public void RemoveDependentFigure (IFigure figure) {
-			if (_dependentFigures == null)
-				return;
-			_dependentFigures.Remove (figure);
-		}
 		
 		public void Visit (IFigureVisitor visitor) {
 			visitor.VisitFigure (this);
@@ -237,15 +180,6 @@ namespace MonoHotDraw.Figures {
 			foreach (IHandle handle in HandlesEnumerator) {
 				visitor.VisitHandle (handle);
 			}
-			
-			if (_dependentFigures != null) {
-				FigureCollection dependents = new FigureCollection (DependentFiguresEnumerator);
-
-				foreach (IFigure dependent in dependents) {
-					dependent.Visit (visitor);
-				}
-			}
-
 		}
 		
 		public event EventHandler <FigureEventArgs> FigureInvalidated;
@@ -271,9 +205,5 @@ namespace MonoHotDraw.Figures {
 				FigureChanged (this, e);
 			}
 		}
-
-		private List <IFigure> _dependentFigures;
-		private Cairo.Color    _fillColor;
-		private Cairo.Color    _lineColor;
 	}
 }

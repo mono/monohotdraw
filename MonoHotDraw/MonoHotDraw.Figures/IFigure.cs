@@ -27,7 +27,6 @@
 using Cairo;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using MonoHotDraw.Connectors;
 using MonoHotDraw.Handles;
 using MonoHotDraw.Tools;
@@ -35,7 +34,7 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures { 
 
-	public interface IFigure : ICloneable, ISerializable {
+	public interface IFigure {
 	
 		void MoveBy (double x, double y);
 		void MoveTo (double x, double y);
@@ -45,14 +44,11 @@ namespace MonoHotDraw.Figures {
 		bool ContainsPoint (double x, double y);
 		void Invalidate ();
 		IConnector ConnectorAt (double x, double y);
-		void AddDependentFigure (IFigure figure);
-		void RemoveDependentFigure (IFigure figure);
 		ITool CreateFigureTool (IDrawingEditor editor, ITool defaultTool);
 		
 		RectangleD DisplayBox { get; set; }
 		IEnumerable <IFigure> FiguresEnumerator { get; }
 		IEnumerable <IHandle> HandlesEnumerator { get; }
-		IEnumerable <IFigure> DependentFiguresEnumerator { get;	}
 		bool CanConnect { get; }
 		
 		object GetAttribute (FigureAttribute attribute);

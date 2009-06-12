@@ -28,7 +28,6 @@
 using Cairo;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using MonoHotDraw.Handles;
 using MonoHotDraw.Locators;
 using MonoHotDraw.Tools;
@@ -36,20 +35,12 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures {
 
-	[Serializable]
 	public class PolyLineFigure : AttributeFigure {
 	
 		public PolyLineFigure () {
 			_points = new List <PointD> ();
 		}
 		
-		protected PolyLineFigure (SerializationInfo info, StreamingContext context) : base (info, context) {
-			_dashes  = (double[])  info.GetValue ("Dashes", typeof (double[]));
-			_startTerminal = (LineTerminal) info.GetValue ("StartTerminal", typeof (LineTerminal));
-			_endTerminal = (LineTerminal) info.GetValue ("EndTerminal", typeof (LineTerminal));
-			_points = (List <PointD>) info.GetValue ("Points", typeof (List <PointD>));
-		}
-
 		public virtual double[] Dashes {
 			get { return _dashes; }
 			set { _dashes = value; }
@@ -263,15 +254,6 @@ namespace MonoHotDraw.Figures {
 				}
 			}
 			return false;
-		}
-		
-		public override void GetObjectData (SerializationInfo info, StreamingContext context) {		
-			info.AddValue ("Dashes", _dashes);
-			info.AddValue ("StartTerminal", _startTerminal);
-			info.AddValue ("EndTerminal", _endTerminal);
-			info.AddValue ("Points", _points);
-			
-			base.GetObjectData (info, context);
 		}
 		
 		private double[] _dashes;

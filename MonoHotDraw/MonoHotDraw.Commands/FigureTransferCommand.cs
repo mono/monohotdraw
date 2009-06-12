@@ -50,15 +50,6 @@ namespace MonoHotDraw.Commands {
 		
 		// TODO: Refactor this. Maybe this could go to IDrawing and StandardDrawingView
 		protected FigureCollection GetWithDependents (FigureCollection figures) {
-			FigureCollection dependents = new FigureCollection (); 
-			foreach (IFigure figure in figures) {
-				foreach (IFigure dependentFig in figure.DependentFiguresEnumerator) {
-					dependents.Add (dependentFig);
-				}
-			}
-			foreach (IFigure dependent in dependents) {
-				figures.Add (dependent);
-			}
 			return figures;
 		}
 	}

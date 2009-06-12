@@ -23,14 +23,13 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using Cairo;
 using System;
-using System.Runtime.Serialization;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures {
 	
-	[Serializable]
 	public class TriangleArrowLineTerminal : LineTerminal {
 
 		public TriangleArrowLineTerminal (): this (10.0, 20.0) {
@@ -41,11 +40,6 @@ namespace MonoHotDraw.Figures {
 			_pointDistance = pDistance;
 		}
 
-		protected TriangleArrowLineTerminal (SerializationInfo info, StreamingContext context) : base (info, context) {
-			_lineDistance  = info.GetDouble ("LineDistance");
-			_pointDistance = info.GetDouble ("PointDistance");
-		}
-		
 		public override PointD Draw (Context context, PointD a, PointD b) {
 			PointD leftPoint = new PointD ();
 			PointD middlePoint = new PointD ();
@@ -61,13 +55,6 @@ namespace MonoHotDraw.Figures {
 			context.Stroke ();
 			
 			return middlePoint;
-		}
-		
-		public override void GetObjectData (SerializationInfo info, StreamingContext context) {
-			info.AddValue ("LineDistance", _lineDistance);
-			info.AddValue ("PointDistance", _pointDistance);
-
-			base.GetObjectData (info, context);
 		}
 		
 		public override RectangleD InvalidateRect (PointD b) {

@@ -30,7 +30,6 @@ using MonoHotDraw.Connectors;
 
 namespace MonoHotDraw.Figures {
 
-	[Serializable]
 	public class EllipseFigure: BaseBoxFigure {
 	
 		public EllipseFigure (): base () {

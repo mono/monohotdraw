@@ -40,7 +40,6 @@ namespace MonoHotDraw.Commands {
 		
 		public object Contents { get; set; }
 
-		private object _content;
 		private static Clipboard _instance; 
 	}
 }

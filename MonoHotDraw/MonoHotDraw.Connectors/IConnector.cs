@@ -26,13 +26,12 @@
 
 using Cairo;
 using System;
-using System.Runtime.Serialization;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Connectors {
 
-	public interface IConnector : ICloneable, ISerializable {
+	public interface IConnector {
 	
 		PointD FindStart (IConnectionFigure connection);
 		PointD FindEnd (IConnectionFigure connection);

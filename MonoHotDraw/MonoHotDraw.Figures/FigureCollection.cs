@@ -1,3 +1,5 @@
+// TODO: Look how to change this
+
 // MonoHotDraw. Diagramming Framework
 //
 // Authors:
@@ -25,12 +27,11 @@
 // THE SOFTWARE.
 
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using MonoHotDraw.Commands;
 
 namespace MonoHotDraw.Figures {
 
-	public class FigureCollection: List <IFigure>, System.ICloneable {
+	public class FigureCollection: List <IFigure> {
 	
 		public FigureCollection (): base()
 		{
@@ -38,14 +39,6 @@ namespace MonoHotDraw.Figures {
 		public FigureCollection (IEnumerable <IFigure> enumeration):
 			base (enumeration)
 		{
-		}
-		
-		object System.ICloneable.Clone () {
-			return GenericCloner.Clone<FigureCollection> (this); 
-		}
-		
-		public FigureCollection Clone () {
-			return (FigureCollection) GenericCloner.Clone<FigureCollection> (this); 
 		}
 	}
 

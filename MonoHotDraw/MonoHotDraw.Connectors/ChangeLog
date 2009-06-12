@@ -1,3 +1,11 @@
+2009-06-12  Manuel Cerón  <ceronman@gmail.com>
+
+	* IConnector.cs:
+	* ChopBoxConnector.cs:
+	* AbstractConnector.cs:
+	* ChopEllipseConnector.cs: Removed all references to
+	Serialization
+
 2009-06-11  Manuel Cerón  <ceronman@gmail.com>
 
 	* ChopBoxConnector.cs: Improved FindEnd and FindStart

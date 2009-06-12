@@ -129,7 +129,7 @@ namespace MonoHotDraw.Tools {
 			public IConnector EndConnector { set; get; }
 		}
 		
-		protected void CreateUndoActivity(){
+		protected new void CreateUndoActivity(){
 			ConnectionCreationToolUndoActivity activity = new ConnectionCreationToolUndoActivity(Editor.View);
 			activity.Connection = _connection;
 			activity.StartConnector = _connection.StartConnector;

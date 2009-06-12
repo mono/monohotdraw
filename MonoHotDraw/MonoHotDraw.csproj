@@ -58,7 +58,6 @@
     <Compile Include="MonoHotDraw.Commands\DeleteFromDrawingVisitor.cs" />
     <Compile Include="MonoHotDraw.Commands\DuplicateCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\FigureTransferCommand.cs" />
-    <Compile Include="MonoHotDraw.Commands\GenericCloner.cs" />
     <Compile Include="MonoHotDraw.Commands\ICommand.cs" />
     <Compile Include="MonoHotDraw.Commands\InsertIntoDrawingVisitor.cs" />
     <Compile Include="MonoHotDraw.Commands\IUndoActivity.cs" />
@@ -130,13 +129,11 @@
     <Compile Include="MonoHotDraw.Tools\SelectionTool.cs" />
     <Compile Include="MonoHotDraw.Tools\SimpleTextTool.cs" />
     <Compile Include="MonoHotDraw.Util\CairoFigures.cs" />
-    <Compile Include="MonoHotDraw.Util\ColorSerializationSurrogate.cs" />
     <Compile Include="MonoHotDraw.Util\CursorFactory.cs" />
     <Compile Include="MonoHotDraw.Util\Dash.cs" />
     <Compile Include="MonoHotDraw.Util\FontFactory.cs" />
     <Compile Include="MonoHotDraw.Util\GdkCairoHelper.cs" />
     <Compile Include="MonoHotDraw.Util\Geometry.cs" />
-    <Compile Include="MonoHotDraw.Util\PointDSerializationSurrogate.cs" />
     <Compile Include="MonoHotDraw.Util\RectangleD.cs" />
     <Compile Include="MouseEvent.cs" />
     <Compile Include="StandardDrawing.cs" />

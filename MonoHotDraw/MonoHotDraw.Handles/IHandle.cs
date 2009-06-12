@@ -27,7 +27,6 @@
 using Cairo;
 using Gdk;
 using System;
-using System.Runtime.Serialization;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
 using MonoHotDraw.Commands;

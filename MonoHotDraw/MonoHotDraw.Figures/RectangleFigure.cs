@@ -29,7 +29,6 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures {
 
-	[Serializable]
 	public class RectangleFigure: BaseBoxFigure	{
 	
 		public RectangleFigure (): base () {

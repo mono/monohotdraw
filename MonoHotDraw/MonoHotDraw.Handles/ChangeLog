@@ -1,5 +1,10 @@
 2009-06-12  Manuel Cerón  <ceronman@gmail.com>
 
+	* IHandle.cs:
+	* AbstractHandle.cs: Removed all references to Serialization
+
+2009-06-12  Manuel Cerón  <ceronman@gmail.com>
+
 	* UndoableHandle.cs: checking if UndoManager exists before
 	pushing undo
 

@@ -1,3 +1,7 @@
+2009-06-12  Manuel Cerón  <ceronman@gmail.com>
+
+	* monohotdraw.sln: Removed all references to Serialization
+
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
 	* monohotdraw.sln: Added Demo Project

@@ -25,13 +25,11 @@
 
 using System;
 using Cairo;
-
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
 
 namespace MonoHotDraw {
 	
-	[Serializable]
 	public class StandardDrawing : CompositeFigure, IDrawing {
 	
 		public event EventHandler <DrawingEventArgs> DrawingInvalidated;
