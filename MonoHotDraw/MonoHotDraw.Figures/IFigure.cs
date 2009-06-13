@@ -45,19 +45,15 @@ namespace MonoHotDraw.Figures {
 		bool ContainsPoint (double x, double y);
 		void Invalidate ();
 		IConnector ConnectorAt (double x, double y);
-		void AddDependentFigure (IFigure figure);
-		void RemoveDependentFigure (IFigure figure);
 		ITool CreateFigureTool (IDrawingEditor editor, ITool defaultTool);
 		
 		RectangleD DisplayBox { get; set; }
 		IEnumerable <IFigure> FiguresEnumerator { get; }
 		IEnumerable <IHandle> HandlesEnumerator { get; }
-		IEnumerable <IFigure> DependentFiguresEnumerator { get;	}
 		bool CanConnect { get; }
 		
 		object GetAttribute (FigureAttribute attribute);
 		void SetAttribute (FigureAttribute attribute, object value);
-		//int ZValue { get; set; }
 		
 		void Visit (IFigureVisitor visitor);
 

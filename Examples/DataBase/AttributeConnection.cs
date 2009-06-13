@@ -45,9 +45,6 @@ namespace MonoHotDraw.Database {
 
 		public override bool CanConnectEnd (IFigure figure) {
 			if (figure is Attribute) {
-				foreach (IFigure fig in figure.DependentFiguresEnumerator) {
-					return false;
-				}
 				if (!figure.Includes (StartFigure)) {					
 					return true;
 				}

@@ -1,3 +1,8 @@
+2009-06-12  Manuel Cerón  <ceronman@gmail.com>
+
+	* FigureTransferCommand.cs: Removed references to
+	DependentFigures
+
 2009-06-10  Manuel Cerón  <ceronman@gmail.com>
 
 	* UndoManager.cs: fixed StackChanged event

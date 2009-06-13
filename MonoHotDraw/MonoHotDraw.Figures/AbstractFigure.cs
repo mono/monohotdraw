@@ -1,5 +1,3 @@
-// TODO: Remove Serialization
-
 // MonoHotDraw. Diagramming Framework
 //
 // Authors:
@@ -46,10 +44,6 @@ namespace MonoHotDraw.Figures {
 		}
 
 		protected AbstractFigure (SerializationInfo info, StreamingContext context) {
-			bool hasDependentFigures = (bool) info.GetValue ("HasDependentFigures", typeof (bool));
-			if (hasDependentFigures) {
-				_dependentFigures = (List<IFigure>) info.GetValue ("DependentFigures", typeof (List<IFigure>));
-			}
 			FillColor = (Cairo.Color) info.GetValue ("FillColor", typeof (Cairo.Color));
 			LineColor = (Cairo.Color) info.GetValue ("LineColor", typeof (Cairo.Color));
 		}
@@ -65,10 +59,7 @@ namespace MonoHotDraw.Figures {
 			}
 		}
 		
-		public abstract RectangleD BasicDisplayBox {
-			get; 
-			set;
-		}
+		public abstract RectangleD BasicDisplayBox { get; set; }
 		
 		public virtual bool CanConnect {
 			get { return true; }
@@ -104,29 +95,12 @@ namespace MonoHotDraw.Figures {
 		public virtual void GetObjectData (SerializationInfo info, StreamingContext context) {
 			info.AddValue ("FillColor", FillColor);
 			info.AddValue ("LineColor", LineColor);
-			if (_dependentFigures != null && _dependentFigures.Count > 0) {
-				info.AddValue ("HasDependentFigures", true);
-				info.AddValue ("DependentFigures", _dependentFigures);
-			} else {
-				info.AddValue ("HasDependentFigures", false);
-			}
 		}
 
 		public virtual IEnumerable <IHandle> HandlesEnumerator {
 			get { yield break; }
 		}
 
-		public virtual IEnumerable <IFigure> DependentFiguresEnumerator {
-			get {
-				if (_dependentFigures == null)
-					yield break;
-
-				foreach (IFigure figure in _dependentFigures) {
-					yield return figure;
-				}
-			}
-		}
-		
 		public virtual void Draw (Context context) {
 			context.Save ();
 			BasicDraw (context);
@@ -215,18 +189,6 @@ namespace MonoHotDraw.Figures {
 			}
 		}
 
-		public void AddDependentFigure (IFigure figure)	{
-			if (_dependentFigures == null)
-				_dependentFigures = new List <IFigure> ();
-			_dependentFigures.Add (figure);
-		}
-
-		public void RemoveDependentFigure (IFigure figure) {
-			if (_dependentFigures == null)
-				return;
-			_dependentFigures.Remove (figure);
-		}
-		
 		public void Visit (IFigureVisitor visitor) {
 			visitor.VisitFigure (this);
 
@@ -237,15 +199,6 @@ namespace MonoHotDraw.Figures {
 			foreach (IHandle handle in HandlesEnumerator) {
 				visitor.VisitHandle (handle);
 			}
-			
-			if (_dependentFigures != null) {
-				FigureCollection dependents = new FigureCollection (DependentFiguresEnumerator);
-
-				foreach (IFigure dependent in dependents) {
-					dependent.Visit (visitor);
-				}
-			}
-
 		}
 		
 		public event EventHandler <FigureEventArgs> FigureInvalidated;

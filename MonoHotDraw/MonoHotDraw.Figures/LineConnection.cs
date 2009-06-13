@@ -205,7 +205,6 @@ namespace MonoHotDraw.Figures {
 		private void ConnectFigure (IConnector connector) {
 			if (connector != null) {
 				connector.Owner.FigureChanged += FigureChangedHandler;
-				connector.Owner.AddDependentFigure (this);
 				UpdateConnection ();
 			}
 		}
@@ -213,7 +212,6 @@ namespace MonoHotDraw.Figures {
 		private void DisconnectFigure (IConnector connector) {
 			if (connector != null) {
 				connector.Owner.FigureChanged -= FigureChangedHandler;
-				connector.Owner.RemoveDependentFigure (this);
 			}
 		}
 
