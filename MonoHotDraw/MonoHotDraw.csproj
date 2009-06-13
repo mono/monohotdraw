@@ -49,6 +49,7 @@
     <Compile Include="IDrawingView.cs" />
     <Compile Include="KeyEvent.cs" />
     <Compile Include="MonoHotDraw.Commands\AbstractCommand.cs" />
+    <Compile Include="MonoHotDraw.Commands\AbstractUndoActivity.cs" />
     <Compile Include="MonoHotDraw.Commands\BringToFrontCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\ChangeAttributeCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\Clipboard.cs" />
@@ -58,7 +59,6 @@
     <Compile Include="MonoHotDraw.Commands\DeleteFromDrawingVisitor.cs" />
     <Compile Include="MonoHotDraw.Commands\DuplicateCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\FigureTransferCommand.cs" />
-    <Compile Include="MonoHotDraw.Commands\GenericCloner.cs" />
     <Compile Include="MonoHotDraw.Commands\ICommand.cs" />
     <Compile Include="MonoHotDraw.Commands\InsertIntoDrawingVisitor.cs" />
     <Compile Include="MonoHotDraw.Commands\IUndoActivity.cs" />
@@ -67,7 +67,6 @@
     <Compile Include="MonoHotDraw.Commands\RedoCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\SelectAllCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\SendToBackCommand.cs" />
-    <Compile Include="MonoHotDraw.Commands\AbstractUndoActivity.cs" />
     <Compile Include="MonoHotDraw.Commands\UndoableCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\UndoCommand.cs" />
     <Compile Include="MonoHotDraw.Commands\UndoManager.cs" />
@@ -105,15 +104,20 @@
     <Compile Include="MonoHotDraw.Handles\NorthHandle.cs" />
     <Compile Include="MonoHotDraw.Handles\NorthWestHandle.cs" />
     <Compile Include="MonoHotDraw.Handles\PolyLineHandle.cs" />
+    <Compile Include="MonoHotDraw.Handles\ResizeHandle.cs" />
     <Compile Include="MonoHotDraw.Handles\SouthEastHandle.cs" />
     <Compile Include="MonoHotDraw.Handles\SouthHandle.cs" />
     <Compile Include="MonoHotDraw.Handles\SouthWestHandle.cs" />
+    <Compile Include="MonoHotDraw.Handles\UndoableHandle.cs" />
     <Compile Include="MonoHotDraw.Handles\WestHandle.cs" />
     <Compile Include="MonoHotDraw.Locators\ILocator.cs" />
     <Compile Include="MonoHotDraw.Locators\PolyLineLocator.cs" />
     <Compile Include="MonoHotDraw.Locators\QuickActionLocator.cs" />
     <Compile Include="MonoHotDraw.Locators\QuickActionPosition.cs" />
     <Compile Include="MonoHotDraw.Locators\RelativeLocator.cs" />
+    <Compile Include="MonoHotDraw.Serialization\ColorSerializationSurrogate.cs" />
+    <Compile Include="MonoHotDraw.Serialization\GenericCloner.cs" />
+    <Compile Include="MonoHotDraw.Serialization\PointDSerializationSurrogate.cs" />
     <Compile Include="MonoHotDraw.Tools\AbstractTool.cs" />
     <Compile Include="MonoHotDraw.Tools\CompositeFigureTool.cs" />
     <Compile Include="MonoHotDraw.Tools\ConnectionCreationTool.cs" />
@@ -129,22 +133,18 @@
     <Compile Include="MonoHotDraw.Tools\SelectAreaTracker.cs" />
     <Compile Include="MonoHotDraw.Tools\SelectionTool.cs" />
     <Compile Include="MonoHotDraw.Tools\SimpleTextTool.cs" />
+    <Compile Include="MonoHotDraw.Tools\TextTool.cs" />
     <Compile Include="MonoHotDraw.Util\CairoFigures.cs" />
-    <Compile Include="MonoHotDraw.Util\ColorSerializationSurrogate.cs" />
     <Compile Include="MonoHotDraw.Util\CursorFactory.cs" />
     <Compile Include="MonoHotDraw.Util\Dash.cs" />
     <Compile Include="MonoHotDraw.Util\FontFactory.cs" />
     <Compile Include="MonoHotDraw.Util\GdkCairoHelper.cs" />
     <Compile Include="MonoHotDraw.Util\Geometry.cs" />
-    <Compile Include="MonoHotDraw.Util\PointDSerializationSurrogate.cs" />
     <Compile Include="MonoHotDraw.Util\RectangleD.cs" />
     <Compile Include="MouseEvent.cs" />
     <Compile Include="StandardDrawing.cs" />
     <Compile Include="StandardDrawingView.cs" />
     <Compile Include="SteticComponent.cs" />
-    <Compile Include="MonoHotDraw.Handles\UndoableHandle.cs" />
-    <Compile Include="MonoHotDraw.Handles\ResizeHandle.cs" />
-    <Compile Include="MonoHotDraw.Tools\TextTool.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -159,6 +159,7 @@
     <Folder Include="MonoHotDraw.Commands\" />
     <Folder Include="MonoHotDraw.Connectors\" />
     <Folder Include="MonoHotDraw.Locators\" />
+    <Folder Include="MonoHotDraw.Serialization\" />
     <Folder Include="MonoHotDraw.Util\" />
   </ItemGroup>
   <ProjectExtensions>
@@ -167,3 +168,4 @@
     </MonoDevelop>
   </ProjectExtensions>
 </Project>
+
