@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A82476FD-9BAC-470C-AD56-F12DACC6A62E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <AssemblyName>Demo</AssemblyName>
+    <ProjectGuid>{73A8571A-9FA6-43A5-BC04-B7C1EE13D63B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>MonoDevelop.ClassDesigner</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -16,7 +16,8 @@
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -24,45 +25,47 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MonoDevelop.Core, Version=2.0.0.0, Culture=neutral">
+      <Package>monodevelop</Package>
     </Reference>
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MonoDevelop.Core.Gui, Version=2.0.0.0, Culture=neutral">
+      <Package>monodevelop</Package>
     </Reference>
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MonoDevelop.Ide, Version=2.0.0.0, Culture=neutral">
+      <Package>monodevelop</Package>
     </Reference>
-    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MonoDevelop.Projects, Version=2.0.0.0, Culture=neutral">
+      <Package>monodevelop</Package>
     </Reference>
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="Mono.Posix" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="MainWindow.cs" />
-    <Compile Include="gtk-gui\MainWindow.cs" />
-    <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Commands.cs" />
+    <Compile Include="ShowClassDesignerHandler.cs" />
+    <Compile Include="ClassDesignerView.cs" />
+    <Compile Include="MonoDevelop.ClassDesigner.Figures\ClassFigure.cs" />
+    <Compile Include="MonoDevelop.ClassDesigner.Figures\TypeFigure.cs" />
+    <Compile Include="MonoDevelop.ClassDesigner.Figures\TypeHeaderFigure.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <EmbeddedResource Include="MonoDevelop.ClassDesigner.addin.xml" />
+  </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
       <Properties InternalTargetFrameworkVersion="3.5" />
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="MonoDevelop.ClassDesigner.Figures\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MonoHotDraw\MonoHotDraw.csproj">
       <Project>{D5D2EB0A-662A-471D-94C0-FD51C96E9429}</Project>

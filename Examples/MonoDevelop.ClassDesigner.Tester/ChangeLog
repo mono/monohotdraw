@@ -1,0 +1,9 @@
+2009-07-06  Manuel Cerón  <ceronman@gmail.com>
+
+	* Main.cs:
+	* gtk-gui:
+	* MainWindow.cs:
+	* AssemblyInfo.cs:
+	* MonoDevelop.ClassDesigner.Tester.csproj: Added new project.
+	A tester for the MonoDevelop Add In
+

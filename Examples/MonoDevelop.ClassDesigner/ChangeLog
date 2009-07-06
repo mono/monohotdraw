@@ -1,0 +1,11 @@
+2009-07-06  Manuel Cerón  <ceronman@gmail.com>
+
+	* Commands.cs:
+	* AssemblyInfo.cs:
+	* ClassDesignerView.cs:
+	* ShowClassDesignerHandler.cs:
+	* MonoDevelop.ClassDesigner.csproj:
+	* MonoDevelop.ClassDesigner.Figures:
+	* MonoDevelop.ClassDesigner.addin.xml: Added new Class
+	Designer Addin Project for MonoDevelop
+

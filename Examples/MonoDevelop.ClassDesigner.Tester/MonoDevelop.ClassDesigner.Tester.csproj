@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A82476FD-9BAC-470C-AD56-F12DACC6A62E}</ProjectGuid>
+    <ProjectGuid>{C9D17E96-DC3C-4AB6-8A89-3F7CC64489D2}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Demo</AssemblyName>
+    <AssemblyName>MonoDevelop.ClassDesigner.Tester</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,7 +43,6 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Mono.Posix" />
-    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -57,16 +56,20 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonoDevelop.ClassDesigner\MonoDevelop.ClassDesigner.csproj">
+      <Project>{73A8571A-9FA6-43A5-BC04-B7C1EE13D63B}</Project>
+      <Name>MonoDevelop.ClassDesigner</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MonoHotDraw\MonoHotDraw.csproj">
+      <Project>{D5D2EB0A-662A-471D-94C0-FD51C96E9429}</Project>
+      <Name>MonoHotDraw</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties InternalTargetFrameworkVersion="3.5" />
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MonoHotDraw\MonoHotDraw.csproj">
-      <Project>{D5D2EB0A-662A-471D-94C0-FD51C96E9429}</Project>
-      <Name>MonoHotDraw</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

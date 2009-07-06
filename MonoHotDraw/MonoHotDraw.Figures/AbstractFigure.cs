@@ -59,6 +59,7 @@ namespace MonoHotDraw.Figures {
 			}
 		}
 		
+		//TODO: This needs to be protected
 		public abstract RectangleD BasicDisplayBox { get; set; }
 		
 		public virtual bool CanConnect {

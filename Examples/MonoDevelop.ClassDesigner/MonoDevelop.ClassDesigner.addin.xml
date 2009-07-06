@@ -1,0 +1,38 @@
+<Addin id          = "ClassDesigner"
+       namespace   = "MonoDevelop"
+       name        = "Visual Class Designer"
+       author      = "Manuel Cerón	"
+       copyright   = "MIT X11"
+       url         = "http://www.monodevelop.com"
+       description = "A Visual Class Designer for MonoDevelop"
+       category    = "Visual Designers"	   
+       version     = "2.0">
+
+	<Runtime>
+		<Import assembly = "MonoDevelop.ClassDesigner.dll"/>
+		<Import assembly = "MonoHotDraw.dll"/>
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Core" version="2.0"/>
+		<Addin id="Core.Gui" version="2.0"/>
+		<Addin id="Projects" version="2.0"/>
+		<Addin id="Ide" version="2.0"/>
+	</Dependencies>
+
+	<Extension path = "/MonoDevelop/Ide/Commands">
+		<Command id = "MonoDevelop.ClassDesigner.Commands.ShowClassDesigner"
+		         defaultHandler = "MonoDevelop.ClassDesigner.ShowClassDesignerHandler"
+		         _label = "Class Designer"
+		         icon = "gtk-convert"/>
+	</Extension>
+
+	<Extension path="/MonoDevelop/Ide/ContextMenu/ProjectPad">
+		<Condition id="ItemType" value="Project">
+			<CommandItem id="MonoDevelop.ClassDesigner.Commands.ShowClassDesigner"
+			             _label = "_Show Class Diagram"
+			             insertafter = "Options"/>
+		</Condition>
+	</Extension>
+
+</Addin>
