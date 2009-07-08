@@ -88,5 +88,12 @@ namespace MonoHotDraw.Util {
 		public static Gdk.Rectangle GdkRectangle (RectangleD r) {
 			return new Gdk.Rectangle ((int) r.X, (int) r.Y, (int) r.Width, (int) r.Height);
 		}
+		
+		public static PointD OffsetDot5(PointD point) {
+			return new PointD {
+				X = Math.Truncate(point.X) + 0.5,
+				Y = Math.Truncate(point.Y) + 0.5
+			};
+		}
 	}
 }

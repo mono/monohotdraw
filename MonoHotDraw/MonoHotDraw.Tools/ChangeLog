@@ -1,3 +1,7 @@
+2009-07-07  Manuel Cerón  <ceronman@gmail.com>
+
+	* SelectionTool.cs: Added DelegateTool for MouseMove
+
 2009-06-12  Manuel Cerón  <ceronman@gmail.com>
 
 	* SelectionTool.cs: Removed references to DependentFigures

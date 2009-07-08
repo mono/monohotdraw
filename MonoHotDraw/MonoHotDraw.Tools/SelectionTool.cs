@@ -88,6 +88,10 @@ namespace MonoHotDraw.Tools {
 					widget.GdkWindow.Cursor = null;
 				}
 			}
+			
+			if (DelegateTool != null) {
+				DelegateTool.MouseMove (ev);
+			}
 		}
 		
 		public override void KeyDown (KeyEvent ev) {

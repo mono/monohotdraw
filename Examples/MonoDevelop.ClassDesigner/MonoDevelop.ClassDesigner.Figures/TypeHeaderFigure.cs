@@ -24,9 +24,12 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Cairo;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
+using MonoHotDraw.Handles;
+using MonoHotDraw.Locators;
 
 namespace MonoDevelop.ClassDesigner.Figures {
 	
@@ -42,6 +45,8 @@ namespace MonoDevelop.ClassDesigner.Figures {
 			
 			nameFigure = new SimpleTextFigure("Name");
 			nameFigure.FontSize = 14;
+			
+			expanderHandle = new ToggleButtonHandle(this, new RelativeLocator(0.8, 0.5));
 		}
 		
 		public override void BasicDraw (Cairo.Context context)
@@ -81,9 +86,16 @@ namespace MonoDevelop.ClassDesigner.Figures {
 			}
 		}
 		
+		public override IEnumerable<IHandle> HandlesEnumerator {
+			get {
+				yield return expanderHandle;
+			}
+		}
+		
 		protected override void OnFigureChanged (FigureEventArgs e)
 		{
 			RectangleD rect = DisplayBox;
+			rect.OffsetDot5();
 			
 			double x = rect.X + marginLeft;
 			double y = rect.Y + marginTop;
@@ -108,6 +120,7 @@ namespace MonoDevelop.ClassDesigner.Figures {
 		private SimpleTextFigure namespaceFigure;
 		private SimpleTextFigure typeFigure;
 		private SimpleTextFigure nameFigure;
+		private ToggleButtonHandle expanderHandle;
 		
 		private double marginTop = 2.0;
 		private double marginLeft = 2.0;

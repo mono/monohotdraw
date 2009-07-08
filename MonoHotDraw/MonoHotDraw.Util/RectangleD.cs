@@ -117,10 +117,10 @@ namespace MonoHotDraw.Util {
 		}
 
 		public void OffsetDot5 () {
-			X = Math.Round (X) + 0.5;
-			Y = Math.Round (Y) + 0.5;
-			Width = Math.Round (Width - 1);
-			Height = Math.Round (Height - 1);
+			X = Math.Truncate (X) + 0.5;
+			Y = Math.Truncate (Y) + 0.5;
+			Width = Math.Truncate (Width);
+			Height = Math.Truncate (Height);
 		}
 
 		public void Normalize () {
