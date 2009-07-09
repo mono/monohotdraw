@@ -1,9 +1,9 @@
-// MonoDevelop ClassDesigner
+// MonoHotDraw. Diagramming Framework
 //
 // Authors:
 //	Manuel Cerón <ceronman@gmail.com>
 //
-// Copyright (C) 2009 Manuel Cerón
+// Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,51 +23,47 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System.Text;
-using Gtk;
-using MonoDevelop.Core;
-using MonoDevelop.Ide.Gui;
-using MonoHotDraw;
-using MonoHotDraw.Tools;
-using MonoDevelop.ClassDesigner.Figures;
+using System;
+using Cairo;
+using Gdk;
+using MonoHotDraw.Locators;
+using MonoHotDraw.Figures;
+using MonoHotDraw.Util;
 
-namespace MonoDevelop.ClassDesigner {
-	
-	public class ClassDesignerView: AbstractViewContent {
-		
-		public override string StockIconId {
-			get {
-				return Stock.Convert;
-			}
-		}
-		
-		public override void Load (string fileName)
-		{
-		}
-		
-		public override bool IsFile {
-			get {
-				return false;
-			}
-		}
-		
-		public override Widget Control {
-			get {
-				return mhdEditor;
-			}
-		}
+namespace MonoHotDraw.Handles {
 
-		public ClassDesignerView()
-		{
-			ContentName = GettextCatalog.GetString ("Class Diagram");
-			IsViewOnly = true;
-			mhdEditor = new SteticComponent();
-			mhdEditor.ShowAll();
-			TypeHeaderFigure figure = new TypeHeaderFigure();
-			mhdEditor.View.Drawing.Add(figure);
-			figure.MoveTo(10.0, 10.0);
+	public class PixbufHandle: LocatorHandle {
+		
+		public PixbufHandle(IFigure owner, ILocator locator, Pixbuf pixbuf):
+			base(owner, locator) {
+			Image = pixbuf;
 		}
 		
-		private SteticComponent mhdEditor;
+		public Pixbuf Image {
+			get {
+				return _pixbuf;
+			}
+			
+			set {
+				_pixbuf = value;
+				_image = GdkCairoHelper.PixbufToImageSurface(_pixbuf);
+			}
+		}
+		
+		public override RectangleD DisplayBox {
+			get {
+				RectangleD rect = new RectangleD(Locate());
+				rect.Inflate((double)_pixbuf.Width/2, (double)_pixbuf.Height/2);
+				return rect;
+			}
+		}
+		
+		public override void Draw(Context context) {
+			RectangleD r = DisplayBox;
+			_image.Show (context, Math.Round (r.X), Math.Round (r.Y));
+		}
+		
+		private Pixbuf _pixbuf;
+		private ImageSurface _image;
 	}
 }

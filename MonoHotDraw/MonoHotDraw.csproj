@@ -147,6 +147,7 @@
     <Compile Include="SteticComponent.cs" />
     <Compile Include="MonoHotDraw.Handles\ToggleButtonHandle.cs" />
     <Compile Include="MonoHotDraw.Locators\AbsoluteLocator.cs" />
+    <Compile Include="MonoHotDraw.Handles\PixbufHandle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
