@@ -39,13 +39,6 @@ namespace MonoHotDraw.Figures {
 			Figures = new FigureCollection ();
 		}
 
-		public override void BasicMoveBy (double x, double y) {
-			foreach (IFigure figure in FiguresEnumerator) {
-				AbstractFigure af = figure as AbstractFigure;
-				af.BasicMoveBy (x, y);
-			}
-		}
-		
 		public override bool ContainsPoint (double x, double y) {
 			foreach (IFigure figure in FiguresEnumerator) {
 				if (figure.ContainsPoint (x, y) ) {
@@ -55,6 +48,7 @@ namespace MonoHotDraw.Figures {
 			return false;
 		}
 
+		// TODO replace with linq
 		public IEnumerable <IFigure> FiguresEnumeratorReverse {
 			get {
 				for (int i=1; i <= Figures.Count; i++) {
@@ -168,16 +162,16 @@ namespace MonoHotDraw.Figures {
 		
 		public void SendToBack (IFigure figure) {
 			if (Includes (figure)) {
-				_figures.Remove (figure);
-				_figures.Insert (0, figure);
+				Figures.Remove (figure);
+				Figures.Insert (0, figure);
 				figure.Invalidate ();
 			}
 		}
 		
 		public void BringToFront (IFigure figure) {
 			if (Includes (figure)) {
-				_figures.Remove (figure);
-				_figures.Add (figure);
+				Figures.Remove (figure);
+				Figures.Add (figure);
 				figure.Invalidate ();
 			}
 		}
@@ -186,11 +180,6 @@ namespace MonoHotDraw.Figures {
 			OnFigureInvalidated (new FigureEventArgs (this, args.Rectangle));
 		}
 		
-		protected FigureCollection Figures {
-			set { _figures = value; }
-			get { return _figures;}
-		}
-		
-		private FigureCollection _figures;
+		protected FigureCollection Figures { get; set; }
 	}
 }

@@ -108,6 +108,7 @@ namespace MonoHotDraw.Figures {
 			context.Restore ();
 		}
 		
+		// TODO: This needs to be protected
 		public virtual void BasicDraw (Context context) {
 		}
 		

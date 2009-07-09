@@ -53,6 +53,7 @@
     <Compile Include="MonoDevelop.ClassDesigner.Figures\ClassFigure.cs" />
     <Compile Include="MonoDevelop.ClassDesigner.Figures\TypeFigure.cs" />
     <Compile Include="MonoDevelop.ClassDesigner.Figures\TypeHeaderFigure.cs" />
+    <Compile Include="MonoDevelop.ClassDesigner.Figures\TypeMemberFigure.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

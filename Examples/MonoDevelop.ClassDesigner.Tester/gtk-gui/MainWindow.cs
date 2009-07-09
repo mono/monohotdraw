@@ -18,6 +18,8 @@ public partial class MainWindow {
     
     private Gtk.Action AddClassFigureAction;
     
+    private Gtk.Action AddStackFigureAction;
+    
     private Gtk.VBox vbox1;
     
     private Gtk.MenuBar menubar1;
@@ -35,6 +37,9 @@ public partial class MainWindow {
         this.AddClassFigureAction = new Gtk.Action("AddClassFigureAction", Mono.Unix.Catalog.GetString("Add Class Figure"), null, null);
         this.AddClassFigureAction.ShortLabel = Mono.Unix.Catalog.GetString("Add Class Figure");
         w1.Add(this.AddClassFigureAction, null);
+        this.AddStackFigureAction = new Gtk.Action("AddStackFigureAction", Mono.Unix.Catalog.GetString("Add StackFigure"), null, null);
+        this.AddStackFigureAction.ShortLabel = Mono.Unix.Catalog.GetString("Add StackFigure");
+        w1.Add(this.AddStackFigureAction, null);
         this.UIManager.InsertActionGroup(w1, 0);
         this.AddAccelGroup(this.UIManager.AccelGroup);
         this.Name = "MainWindow";
@@ -45,7 +50,7 @@ public partial class MainWindow {
         this.vbox1.Name = "vbox1";
         this.vbox1.Spacing = 6;
         // Container child vbox1.Gtk.Box+BoxChild
-        this.UIManager.AddUiFromString("<ui><menubar name='menubar1'><menu name='FiguresAction' action='FiguresAction'><menuitem name='AddClassFigureAction' action='AddClassFigureAction'/></menu></menubar></ui>");
+        this.UIManager.AddUiFromString("<ui><menubar name='menubar1'><menu name='FiguresAction' action='FiguresAction'><menuitem name='AddClassFigureAction' action='AddClassFigureAction'/><menuitem name='AddStackFigureAction' action='AddStackFigureAction'/></menu></menubar></ui>");
         this.menubar1 = ((Gtk.MenuBar)(this.UIManager.GetWidget("/menubar1")));
         this.menubar1.Name = "menubar1";
         this.vbox1.Add(this.menubar1);
@@ -69,5 +74,6 @@ public partial class MainWindow {
         this.Show();
         this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
         this.AddClassFigureAction.Activated += new System.EventHandler(this.OnAddClassFigureActionActivated);
+        this.AddStackFigureAction.Activated += new System.EventHandler(this.OnAddStackFigureActionActivated);
     }
 }

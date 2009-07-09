@@ -19,4 +19,9 @@ public partial class MainWindow: Gtk.Window
 	{
 		mhdcanvas.AddWithDragging(new TypeHeaderFigure());
 	}
+
+	protected virtual void OnAddStackFigureActionActivated (object sender, System.EventArgs e)
+	{
+		mhdcanvas.AddWithDragging(new TypeMemberFigure("Hello", "World"));
+	}
 }

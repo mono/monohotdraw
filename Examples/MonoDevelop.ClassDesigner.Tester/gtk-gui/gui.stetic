@@ -6,6 +6,9 @@
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <widget-library name="MonoDevelop.Core.Gui, Version=2.0.0.0, Culture=neutral" />
+    <widget-library name="MonoDevelop.Components, Version=2.0.0.0, Culture=neutral" />
+    <widget-library name="MonoDevelop.Ide, Version=2.0.0.0, Culture=neutral" />
     <widget-library name="../../MonoDevelop.ClassDesigner/bin/Debug/MonoDevelop.ClassDesigner.dll" />
     <widget-library name="../../../MonoHotDraw/bin/Debug/MonoHotDraw.dll" />
     <widget-library name="../bin/Debug/MonoDevelop.ClassDesigner.Tester.exe" internal="true" />
@@ -23,6 +26,12 @@
         <property name="ShortLabel" translatable="yes">Add Class Figure</property>
         <signal name="Activated" handler="OnAddClassFigureActionActivated" />
       </action>
+      <action id="AddStackFigureAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add StackFigure</property>
+        <property name="ShortLabel" translatable="yes">Add StackFigure</property>
+        <signal name="Activated" handler="OnAddStackFigureActionActivated" />
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
@@ -38,6 +47,7 @@
             <node name="menubar1" type="Menubar">
               <node type="Menu" action="FiguresAction">
                 <node type="Menuitem" action="AddClassFigureAction" />
+                <node type="Menuitem" action="AddStackFigureAction" />
               </node>
             </node>
           </widget>
