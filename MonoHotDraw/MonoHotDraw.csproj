@@ -150,7 +150,7 @@
     <Compile Include="MonoHotDraw.Handles\PixbufHandle.cs" />
     <Compile Include="MonoHotDraw.Figures\HStackFigure.cs" />
     <Compile Include="MonoHotDraw.Figures\StackFigure.cs" />
-    <Compile Include="MonoHotDraw.Figures\VerStackFigure.cs" />
+    <Compile Include="MonoHotDraw.Figures\VStackFigure.cs" />
     <Compile Include="MonoHotDraw.Figures\PixbufFigure.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
