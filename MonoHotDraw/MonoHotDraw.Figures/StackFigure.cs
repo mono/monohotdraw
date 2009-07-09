@@ -31,61 +31,71 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures {
 	
-	public enum HStackAlignment {
-		Center,
-		Top,
-		Bottom,
-	}
-	
-	public class HStackFigure: StackFigure {
+	public abstract class StackFigure: CompositeFigure {
 		
-		protected HStackFigure(): base() {
-			Alignment = HStackAlignment.Center;
+		protected StackFigure(): base() {
+			Position = new PointD(0.0, 0.0);
+			Spacing = 5.0;
 		}
 		
-		public HStackAlignment Alignment { get; set; }
+		public override RectangleD BasicDisplayBox {
+			get {
+				return new RectangleD {
+					X = Position.X,
+					Y = Position.Y,
+					Width = this.Width,
+					Height = this.Height,
+				};
+			}
+			set {
+				Position = value.TopLeft;
+				UpdateFiguresPosition();
+			}
+		}
 		
-		protected override double CalculateHeight()
+		public override void Add (IFigure figure)
 		{
-			if (Figures.Count() == 0)
-				return 0.0;
-			return (from IFigure fig in this.Figures
-			        select fig.DisplayBox.Height).Max();
+			base.Add(figure);
+			figure.FigureChanged += FigureChangedHandler;
+			CalculateDimensions();
+			UpdateFiguresPosition();
 		}
 		
-		protected override double CalculateWidth() {
-			int count = Figures.Count();
-			
-			if (count == 0)
-				return 0.0;
-			
-			return (from IFigure fig in this.Figures
-			        select fig.DisplayBox.Width).Sum() + Spacing * count-1;
+		public override void Remove (IFigure figure)
+		{
+			base.Remove (figure);
+			figure.FigureChanged -= FigureChangedHandler;
+			CalculateDimensions();
 		}
 		
-		protected override void UpdateFiguresPosition() {
-			double width = 0.0;
-			foreach (IFigure figure in Figures) {
-				RectangleD r = figure.DisplayBox;
-				r.X = Position.X + width;
-				r.Y = CalculateFigureY(figure);
-				AbstractFigure af = figure as AbstractFigure;
-				af.BasicDisplayBox = r;
-				width += r.Width + Spacing;
+		public double Spacing {
+			get { return _spacing; }
+			set { 
+				_spacing = value;
+				CalculateDimensions();
 			}
 		}
 		
-		private double CalculateFigureY(IFigure figure) {
-			switch (Alignment) {
-			case HStackAlignment.Center:
-				return Position.Y + (Height - figure.DisplayBox.Height)/2;
-			case HStackAlignment.Top:
-				return Position.Y;
-			case HStackAlignment.Bottom:
-				return Position.Y + (Height - figure.DisplayBox.Height);
-			default:
-				return Position.Y;
-			}
+		protected void FigureChangedHandler (object sender, FigureEventArgs args) {
+			CalculateDimensions();
 		}
+		
+		protected abstract double CalculateWidth();
+		protected abstract double CalculateHeight();
+		protected abstract void UpdateFiguresPosition();
+		
+		private void CalculateDimensions()
+		{
+			WillChange();
+			Width = CalculateWidth();
+			Height = CalculateHeight();
+			UpdateFiguresPosition();
+			Changed();
+		}
+		
+		protected PointD Position { get; set; }
+		protected double Width { get; set; } 
+		protected double Height { get; set; }
+		private double _spacing;
 	}
 }

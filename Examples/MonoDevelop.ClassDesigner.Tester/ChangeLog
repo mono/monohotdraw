@@ -1,5 +1,9 @@
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>
 
+	* MainWindow.cs: Redering an icon for testing
+
+2009-07-09  Manuel Cerón  <ceronman@gmail.com>
+
 	* MainWindow.cs: Added Test Command
 
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>

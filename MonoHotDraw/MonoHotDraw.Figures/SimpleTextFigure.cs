@@ -259,8 +259,8 @@ namespace MonoHotDraw.Figures {
 				PangoLayout.GetPixelSize (out w, out h);
 			}
 			
-			w = Math.Max (w, 10);
-			h = Math.Max (h, 10);
+			w = Math.Max (w, 2);
+			h = Math.Max (h, 2);
 			RectangleD r = new RectangleD (DisplayBox.X + Padding, DisplayBox.Y + Padding, 
 									(double) w, (double) h);
 

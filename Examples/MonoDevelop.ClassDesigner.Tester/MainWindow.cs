@@ -1,4 +1,5 @@
 using System;
+using Gdk;
 using Gtk;
 using MonoDevelop.ClassDesigner.Figures;
 
@@ -22,6 +23,7 @@ public partial class MainWindow: Gtk.Window
 
 	protected virtual void OnAddStackFigureActionActivated (object sender, System.EventArgs e)
 	{
-		mhdcanvas.AddWithDragging(new TypeMemberFigure("Hello", "World"));
+		Pixbuf pb = RenderIcon("gtk-info", IconSize.Button, "");
+		mhdcanvas.AddWithDragging(new TypeMemberFigure(pb, "Hello", "World"));
 	}
 }

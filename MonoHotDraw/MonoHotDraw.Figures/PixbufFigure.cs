@@ -1,9 +1,9 @@
-// MonoDevelop ClassDesigner
+// MonoHotDraw. Diagramming Framework
 //
 // Authors:
 //	Manuel Cerón <ceronman@gmail.com>
 //
-// Copyright (C) 2009 Manuel Cerón
+// Copyright (C) 2006, 2007, 2008, 2009 MonoUML Team (http://www.monouml.org)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,29 +26,56 @@
 using System;
 using Cairo;
 using Gdk;
-using MonoHotDraw.Figures;
 using MonoHotDraw.Util;
 
-namespace MonoDevelop.ClassDesigner.Figures {
+namespace MonoHotDraw.Figures {
 	
-	public class TypeMemberFigure: HStackFigure {
+	public class PixbufFigure: AbstractFigure {
 		
-		public TypeMemberFigure(Pixbuf icon, string retvalue, string name): base()
-		{
-			_icon = new PixbufFigure(icon);
-			_retvalue = new SimpleTextFigure(retvalue);
-			_name = new SimpleTextFigure(name);
-			
-			_name.Padding = 0.0;
-			_retvalue.Padding = 0.0;
-			
-			Add(_icon);
-			Add(_retvalue);
-			Add(_name);
+		public PixbufFigure(Pixbuf pixbuf): base() {
+			Image = pixbuf;
 		}
 		
-		private SimpleTextFigure _retvalue;
-		private SimpleTextFigure _name;
-		private PixbufFigure _icon;
+		public Pixbuf Image {
+			get {
+				return _pixbuf;
+			}
+			
+			set {
+				_pixbuf = value;
+				_image = GdkCairoHelper.PixbufToImageSurface(_pixbuf);
+			}
+		}
+		
+		public override RectangleD BasicDisplayBox {
+			get {
+				return new RectangleD {
+					X = Position.X,
+					Y = Position.Y,
+					Width = _image.Width,
+					Height = _image.Height,
+				};
+			}
+			
+			set {
+				Position = value.TopLeft;
+			}
+		}
+		
+		public override void BasicDraw(Context context) {
+			RectangleD r = DisplayBox;
+			_image.Show (context, Math.Round (r.X), Math.Round (r.Y));
+		}
+		
+		public override void BasicDrawSelected (Cairo.Context context)
+		{
+			context.Rectangle(GdkCairoHelper.CairoRectangle(DisplayBox));
+		}
+
+		
+		protected PointD Position { get; set; }
+		
+		private Pixbuf _pixbuf;
+		private ImageSurface _image;
 	}
 }

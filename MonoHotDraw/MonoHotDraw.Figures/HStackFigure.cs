@@ -31,60 +31,62 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Figures {
 	
-	public enum HStackAlignment {
+	public enum VStackAlignment {
 		Center,
-		Top,
-		Bottom,
+		Left,
+		Right,
 	}
 	
-	public class HStackFigure: StackFigure {
+	public class VStackFigure: StackFigure {
 		
-		protected HStackFigure(): base() {
-			Alignment = HStackAlignment.Center;
+		protected VStackFigure(): base() {
+			Alignment = VStackAlignment.Left;
 		}
 		
-		public HStackAlignment Alignment { get; set; }
+		public VStackAlignment Alignment { get; set; }
 		
 		protected override double CalculateHeight()
 		{
-			if (Figures.Count() == 0)
-				return 0.0;
-			return (from IFigure fig in this.Figures
-			        select fig.DisplayBox.Height).Max();
-		}
-		
-		protected override double CalculateWidth() {
 			int count = Figures.Count();
 			
 			if (count == 0)
 				return 0.0;
 			
 			return (from IFigure fig in this.Figures
-			        select fig.DisplayBox.Width).Sum() + Spacing * count-1;
+			        select fig.DisplayBox.Height).Sum() + Spacing * count-1;
+		}
+		
+		protected override double CalculateWidth() {
+			if (Figures.Count() == 0)
+				return 0.0;
+			
+			return (from IFigure fig in this.Figures
+			        select fig.DisplayBox.Width).Max();
 		}
 		
 		protected override void UpdateFiguresPosition() {
-			double width = 0.0;
+			double height = 0.0;
 			foreach (IFigure figure in Figures) {
 				RectangleD r = figure.DisplayBox;
-				r.X = Position.X + width;
-				r.Y = CalculateFigureY(figure);
+				r.X = CalculateFigureX(figure);
+				r.Y = Position.Y + height;
 				AbstractFigure af = figure as AbstractFigure;
 				af.BasicDisplayBox = r;
-				width += r.Width + Spacing;
+				height += r.Height + Spacing;
 			}
 		}
 		
-		private double CalculateFigureY(IFigure figure) {
+		private double CalculateFigureX(IFigure figure) {
+			
 			switch (Alignment) {
-			case HStackAlignment.Center:
-				return Position.Y + (Height - figure.DisplayBox.Height)/2;
-			case HStackAlignment.Top:
-				return Position.Y;
-			case HStackAlignment.Bottom:
-				return Position.Y + (Height - figure.DisplayBox.Height);
+			case VStackAlignment.Center:
+				return Position.X + (Width - figure.DisplayBox.Width)/2;
+			case VStackAlignment.Left:
+				return Position.X;
+			case VStackAlignment.Right:
+				return Position.X + (Width - figure.DisplayBox.Width);
 			default:
-				return Position.Y;
+				return Position.X;
 			}
 		}
 	}
