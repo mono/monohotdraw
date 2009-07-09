@@ -1,5 +1,10 @@
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>
 
+	* VStackFigure.cs:
+	* HStackFigure.cs: Renamed VStackFigure to HStackFigure
+
+2009-07-09  Manuel Cerón  <ceronman@gmail.com>
+
 	* HStackFigure.cs:
 	* VerStackFigure.cs: Renamed HStackFigure to VerStackFigure
 

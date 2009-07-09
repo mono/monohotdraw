@@ -1,5 +1,9 @@
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>
 
+	* MonoHotDraw.csproj: Renamed VStackFigure to HStackFigure
+
+2009-07-09  Manuel Cerón  <ceronman@gmail.com>
+
 	* MonoHotDraw.csproj: Renamed HStackFigure to VerStackFigure
 
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>

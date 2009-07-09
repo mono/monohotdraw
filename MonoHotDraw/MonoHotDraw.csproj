@@ -148,7 +148,7 @@
     <Compile Include="MonoHotDraw.Handles\ToggleButtonHandle.cs" />
     <Compile Include="MonoHotDraw.Locators\AbsoluteLocator.cs" />
     <Compile Include="MonoHotDraw.Handles\PixbufHandle.cs" />
-    <Compile Include="MonoHotDraw.Figures\VStackFigure.cs" />
+    <Compile Include="MonoHotDraw.Figures\HStackFigure.cs" />
     <Compile Include="MonoHotDraw.Figures\StackFigure.cs" />
     <Compile Include="MonoHotDraw.Figures\VerStackFigure.cs" />
     <Compile Include="MonoHotDraw.Figures\PixbufFigure.cs" />
