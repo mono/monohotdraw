@@ -1,5 +1,13 @@
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>
 
+	* SimpleTextFigure.cs: Removed BasicMoveBy, Improved
+	DrawSelected, Improved RecalculateDisplayBox
+
+	* VStackFigure.cs:
+	* HStackFigure.cs: Constructor is now public
+
+2009-07-09  Manuel Cerón  <ceronman@gmail.com>
+
 	* VStackFigure.cs:
 	* VerStackFigure.cs: Renamed VerStackFigure to VStackFigure
 

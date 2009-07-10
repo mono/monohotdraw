@@ -145,11 +145,6 @@ namespace MonoHotDraw.Figures {
 			}
 		}
 
-		public override void BasicMoveBy (double x, double y) {
-			_displayBox.X += x;
-			_displayBox.Y += y;
-		}
-
 		public override void BasicDraw (Cairo.Context context) {
 			SetupLayout (context);
 			DrawText (context);
@@ -157,10 +152,12 @@ namespace MonoHotDraw.Figures {
 		
 		public override void BasicDrawSelected (Cairo.Context context)
 		{
-			context.Rectangle(GdkCairoHelper.CairoRectangle(DisplayBox));
+			context.LineWidth = 1.0;
+			RectangleD rect = DisplayBox;
+			rect.OffsetDot5();
+			context.Rectangle(GdkCairoHelper.CairoRectangle(rect));
 			context.Stroke();
 		}
-
 	
 		public override ITool CreateFigureTool (IDrawingEditor editor, ITool dt) {
 			return TextEditable ? new SimpleTextTool (editor, this, dt) : dt;
@@ -252,15 +249,15 @@ namespace MonoHotDraw.Figures {
 		}
 
 		protected void RecalculateDisplayBox () {
-			int w = 0;
-			int h = 0;
+			Pango.Rectangle ink = new Pango.Rectangle();
+			Pango.Rectangle log = new Pango.Rectangle();
 			
-			if (PangoLayout != null) {
-				PangoLayout.GetPixelSize (out w, out h);
-			}
+			if (PangoLayout != null)
+				PangoLayout.GetPixelExtents(out ink, out log);
 			
-			w = Math.Max (w, 2);
-			h = Math.Max (h, 2);
+			int w = log.Width;
+			int h = log.Height;
+			
 			RectangleD r = new RectangleD (DisplayBox.X + Padding, DisplayBox.Y + Padding, 
 									(double) w, (double) h);
 

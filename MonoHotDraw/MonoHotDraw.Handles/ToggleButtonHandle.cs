@@ -109,7 +109,7 @@ namespace MonoHotDraw.Handles {
 			RectangleD rect = DisplayBox;
 			PointD center = rect.Center;
 			
-			double margin = 5.0;
+			double margin = width * 0.2;
 			
 			context.MoveTo(rect.Left + margin, Dot5(center.Y));
 			context.LineTo(rect.Right - margin, Dot5(center.Y));
@@ -121,14 +121,15 @@ namespace MonoHotDraw.Handles {
 			RectangleD rect = DisplayBox;
 			PointD center = rect.Center;
 			
-			double margin = 5.0;
+			double margin_w = width * 0.2;
+			double margin_h = height * 0.2;
 			
-			context.MoveTo(rect.Left + margin, Dot5(center.Y));
-			context.LineTo(rect.Right - margin, Dot5(center.Y));
+			context.MoveTo(rect.Left + margin_w, Dot5(center.Y));
+			context.LineTo(rect.Right - margin_w, Dot5(center.Y));
 			context.Stroke();
 			
-			context.MoveTo(Dot5(center.X), rect.Top + margin);
-			context.LineTo(Dot5(center.X), rect.Bottom - margin);
+			context.MoveTo(Dot5(center.X), rect.Top + margin_h);
+			context.LineTo(Dot5(center.X), rect.Bottom - margin_h);
 			context.Stroke();
 		}
 		
@@ -137,8 +138,8 @@ namespace MonoHotDraw.Handles {
 			return Math.Truncate(val) + 0.5;
 		}
 		
-		private double width = 20.0;
-		private double height = 20.0;
+		private double width = 15.0;
+		private double height = 15.0;
 		private bool active = false;
 		private bool clicked = false;
 	}

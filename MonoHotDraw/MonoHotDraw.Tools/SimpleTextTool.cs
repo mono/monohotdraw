@@ -54,13 +54,14 @@ namespace MonoHotDraw.Tools {
 			int padding = (int)(Figure as SimpleTextFigure).Padding;
 			RectangleD r = Figure.DisplayBox;
 			r.Inflate(-padding, -padding);
+			r.Inflate(5, 5);
 			
 			// Drawing Coordinates must be translated to View's coordinates in order to 
 			// Correctly put the widget in the DrawingView
 			PointD point = View.DrawingToView(r.X, r.Y);
 			int x = (int) Math.Round(point.X, 0);
 			int y = (int) Math.Round(point.Y, 0);
-			int w = (int) Math.Max (r.Width, 10.0) + 2; // for some reason Entry needs this 2 pixel space
+			int w = (int) Math.Max (r.Width, 10.0);
 			int h = (int) Math.Max (r.Height, 10.0);
 			
 			View.MoveWidget (_entry, x, y);

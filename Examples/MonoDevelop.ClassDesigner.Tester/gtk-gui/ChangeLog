@@ -1,6 +1,11 @@
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>
 
 	* gui.stetic:
+	* MainWindow.cs: Added helper actions
+
+2009-07-09  Manuel Cerón  <ceronman@gmail.com>
+
+	* gui.stetic:
 	* MainWindow.cs: Added Test Command
 
 2009-07-06  Manuel Cerón  <ceronman@gmail.com>

@@ -25,39 +25,63 @@
 
 using System;
 using System.Collections.Generic;
-using Cairo;
+using Gdk;
 using MonoHotDraw.Figures;
-using MonoHotDraw.Util;
 using MonoHotDraw.Handles;
 using MonoHotDraw.Locators;
+using MonoHotDraw.Util;
 
 namespace MonoDevelop.ClassDesigner.Figures {
 	
-	public class TypeHeaderFigure: VStackFigure {
+	public class TypeMemberGroupFigure: VStackFigure {
 		
-		public TypeHeaderFigure(): base() {
-			namespaceFigure = new SimpleTextFigure("Namespace");
-			namespaceFigure.Padding = 0;
-			namespaceFigure.FontSize = 7;
+		public TypeMemberGroupFigure(string name): base() {
+			Spacing = 5;
+			Alignment = VStackAlignment.Left;
 			
-			typeFigure = new SimpleTextFigure("Type");
-			typeFigure.Padding = 0;
-			typeFigure.FontSize = 7;
-
-			nameFigure = new SimpleTextFigure("Name");
-			nameFigure.Padding = 0;
-			nameFigure.FontSize = 10;
+			groupName = new SimpleTextFigure(name);
+			groupName.Padding = 0;
+			groupName.FontSize = 10;
 			
-			Spacing = 0.0;
+			Add(groupName);
 			
-			Add(typeFigure);
-			Add(namespaceFigure);
-			Add(nameFigure);
+			membersStack = new VStackFigure();
+			membersStack.Spacing = 2;
+			
+			expandHandle = new ToggleButtonHandle(this, new AbsoluteLocator(-10, 7.5));
+			expandHandle.Toggled += delegate(object sender, ToggleEventArgs e) {
+				if (e.Active) {
+					Add(membersStack);
+				}
+				else {
+					Remove(membersStack);
+				}
+			};
+			expandHandle.Active = true;
 		}
 		
-		private SimpleTextFigure namespaceFigure;
-		private SimpleTextFigure typeFigure;
-		private SimpleTextFigure nameFigure;
-		private ToggleButtonHandle expanderHandle;
+		public void AddMember(Pixbuf icon, string retValue, string name) {
+			TypeMemberFigure member = new TypeMemberFigure(icon, retValue, name);
+			membersStack.Add(member);
+		}
+		
+		public override IEnumerable<IHandle> HandlesEnumerator {
+			get {
+				yield return expandHandle;
+			}
+		}
+		
+		public override RectangleD InvalidateDisplayBox {
+			get {
+				RectangleD rect = base.InvalidateDisplayBox;
+				rect.Inflate(15, 0);
+				return rect;
+			}
+		}
+
+		
+		private SimpleTextFigure groupName;
+		private VStackFigure membersStack;
+		private ToggleButtonHandle expandHandle;
 	}
 }

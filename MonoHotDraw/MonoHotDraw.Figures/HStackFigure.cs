@@ -39,7 +39,7 @@ namespace MonoHotDraw.Figures {
 	
 	public class HStackFigure: StackFigure {
 		
-		protected HStackFigure(): base() {
+		public HStackFigure(): base() {
 			Alignment = HStackAlignment.Center;
 		}
 		

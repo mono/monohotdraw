@@ -39,7 +39,7 @@ namespace MonoHotDraw.Figures {
 	
 	public class VStackFigure: StackFigure {
 		
-		protected VStackFigure(): base() {
+		public VStackFigure(): base() {
 			Alignment = VStackAlignment.Left;
 		}
 		

@@ -32,6 +32,18 @@
         <property name="ShortLabel" translatable="yes">Add StackFigure</property>
         <signal name="Activated" handler="OnAddStackFigureActionActivated" />
       </action>
+      <action id="AddMemberGroupAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add MemberGroup</property>
+        <property name="ShortLabel" translatable="yes">Add MemberGroup</property>
+        <signal name="Activated" handler="OnAddMemberGroupActionActivated" />
+      </action>
+      <action id="AddSimpleTextFigureAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Add SimpleTextFigure</property>
+        <property name="ShortLabel" translatable="yes">Add SimpleTextFigure</property>
+        <signal name="Activated" handler="OnAddSimpleTextFigureActionActivated" />
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
@@ -48,6 +60,8 @@
               <node type="Menu" action="FiguresAction">
                 <node type="Menuitem" action="AddClassFigureAction" />
                 <node type="Menuitem" action="AddStackFigureAction" />
+                <node type="Menuitem" action="AddMemberGroupAction" />
+                <node type="Menuitem" action="AddSimpleTextFigureAction" />
               </node>
             </node>
           </widget>
