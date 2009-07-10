@@ -1,3 +1,12 @@
+2009-07-10  Manuel Cerón  <ceronman@gmail.com>
+
+	* VStackFigure.cs: Height is now properly calculated
+
+	* CompositeFigure.cs: Using BasicDraw and BasicDrawSelected
+	instead of Draw and DrawSelected
+
+	* HStackFigure.cs: Width is now properly calculated
+
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>
 
 	* SimpleTextFigure.cs: Removed BasicMoveBy, Improved

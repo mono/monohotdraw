@@ -79,12 +79,14 @@ namespace MonoHotDraw.Handles {
 		}
 
 		public virtual void Draw (Context context) {
+			context.Save();
 			context.LineWidth = LineWidth;
 			context.Rectangle (GdkCairoHelper.CairoRectangle (DisplayBox));
 			context.Color = FillColor;
 			context.FillPreserve ();
 			context.Color = LineColor;
 			context.Stroke ();
+			context.Restore();
 		}
 
 		public virtual void InvokeStart (double x, double y, IDrawingView view) {

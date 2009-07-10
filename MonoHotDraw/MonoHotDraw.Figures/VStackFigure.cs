@@ -53,7 +53,7 @@ namespace MonoHotDraw.Figures {
 				return 0.0;
 			
 			return (from IFigure fig in this.Figures
-			        select fig.DisplayBox.Height).Sum() + Spacing * count-1;
+			        select fig.DisplayBox.Height).Sum() + Spacing * (count-1);
 		}
 		
 		protected override double CalculateWidth() {

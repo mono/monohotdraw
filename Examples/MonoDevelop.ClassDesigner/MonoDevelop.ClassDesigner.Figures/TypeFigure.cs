@@ -23,14 +23,81 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Collections.Generic;
 using MonoHotDraw.Figures;
+using MonoHotDraw.Handles;
+using MonoHotDraw.Util;
+using MonoHotDraw.Locators;
 
 namespace MonoDevelop.ClassDesigner.Figures {
 
-	public class TypeFigure: BaseBoxFigure {
+	public abstract class TypeFigure: VStackFigure {
 		
-		public TypeFigure(): base()
-		{
+		public TypeFigure(): base() {
+			Spacing = 10.0;
+			Header = new TypeHeaderFigure();
+			members = new VStackFigure();
+			Add(Header);
+
+			expandHandle = new ToggleButtonHandle(this, new AbsoluteLocator(20, 20));
+			expandHandle.Toggled += delegate(object sender, ToggleEventArgs e) {
+				if (e.Active) {
+					Add(members);
+				}
+				else {
+					Remove(members);
+				}
+			};
+			expandHandle.Active = false;
 		}
+		
+		public override void BasicDrawSelected (Cairo.Context context) {
+			RectangleD rect = DisplayBox;
+			rect.OffsetDot5();
+			context.LineWidth = 2.0;
+			context.Rectangle(GdkCairoHelper.CairoRectangle(rect));
+			context.Stroke();
+		}
+		
+		public override void BasicDraw (Cairo.Context context) {
+			RectangleD rect = DisplayBox;
+			rect.OffsetDot5();
+			context.LineWidth = 1.0;
+			context.Rectangle(GdkCairoHelper.CairoRectangle(rect));
+			context.Stroke();
+			
+			base.BasicDraw(context);
+		}
+		
+		public override RectangleD DisplayBox {
+			get {
+				RectangleD rect = base.DisplayBox;
+				rect.X -= 30;
+				rect.Y -= 10;
+				rect.Width += 30;
+				rect.Height += 10;
+				return rect;
+			}
+			set {
+				base.DisplayBox = value;
+			}
+		}
+
+		public override IEnumerable<IHandle> HandlesEnumerator {
+			get {
+				yield return expandHandle;
+				foreach (IHandle handle in base.HandlesEnumerator)
+					yield return handle;
+			}
+		}
+		
+		protected virtual void AddMemberGroup(TypeMemberGroupFigure group) {
+			members.Add(group);
+		}
+		
+		protected TypeHeaderFigure Header { get; set; }
+		
+		private VStackFigure members;
+		private ToggleButtonHandle expandHandle;
 	}
 }

@@ -43,6 +43,7 @@ namespace MonoDevelop.ClassDesigner.Figures {
 			_name.FontSize = 10;
 			_retvalue.Padding = 0.0;
 			_retvalue.FontSize = 10;
+			_retvalue.FontColor = new Cairo.Color(0, 0, 1.0);
 			
 			Alignment = HStackAlignment.Bottom;
 			

@@ -27,9 +27,12 @@ using System.Text;
 using Gtk;
 using MonoDevelop.Core;
 using MonoDevelop.Ide.Gui;
+using MonoDevelop.Projects;
+using MonoDevelop.Projects.Dom;
+using MonoDevelop.Projects.Dom.Parser;
+using MonoDevelop.ClassDesigner.Figures;
 using MonoHotDraw;
 using MonoHotDraw.Tools;
-using MonoDevelop.ClassDesigner.Figures;
 
 namespace MonoDevelop.ClassDesigner {
 	
@@ -61,11 +64,23 @@ namespace MonoDevelop.ClassDesigner {
 		{
 			ContentName = GettextCatalog.GetString ("Class Diagram");
 			IsViewOnly = true;
+			
 			mhdEditor = new SteticComponent();
 			mhdEditor.ShowAll();
-			TypeHeaderFigure figure = new TypeHeaderFigure();
-			mhdEditor.View.Drawing.Add(figure);
-			figure.MoveTo(10.0, 10.0);
+			
+			Project project = IdeApp.ProjectOperations.CurrentSelectedProject;
+			ProjectDom dom = ProjectDomService.GetProjectDom(project);
+			ClassFigure classfigure = null;
+			foreach (IType type in dom.Types) {
+				if (type.ClassType == ClassType.Class) {
+					classfigure = new ClassFigure(type);
+					break;
+				}
+			}
+			
+			if (classfigure != null) {
+				mhdEditor.View.Drawing.Add(classfigure);
+			}
 		}
 		
 		private SteticComponent mhdEditor;

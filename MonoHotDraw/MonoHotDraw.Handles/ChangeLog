@@ -1,3 +1,9 @@
+2009-07-10  Manuel Cerón  <ceronman@gmail.com>
+
+	* AbstractHandle.cs:
+	* ToggleButtonHandle.cs: Now the cairo context is saved and
+	restored during draw
+
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>
 
 	* ToggleButtonHandle.cs: Improved margin selection

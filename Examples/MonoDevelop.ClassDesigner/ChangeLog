@@ -1,3 +1,7 @@
+2009-07-10  Manuel Cerón  <ceronman@gmail.com>
+
+	* ClassDesignerView.cs: It creates class figures now
+
 2009-07-09  Manuel Cerón  <ceronman@gmail.com>
 
 	* MonoDevelop.ClassDesigner.csproj: Updated Project

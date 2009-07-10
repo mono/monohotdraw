@@ -60,7 +60,10 @@ namespace MonoHotDraw.Handles {
 		
 		public override void Draw (Cairo.Context context)
 		{
+			context.Save();
 			base.Draw(context);
+			
+			context.LineWidth = 1.0;
 			
 			if (Active) {
 				DrawOn(context);
@@ -68,6 +71,7 @@ namespace MonoHotDraw.Handles {
 			else {
 				DrawOff(context);
 			}
+			context.Restore();
 		}
 		
 		public bool Active {

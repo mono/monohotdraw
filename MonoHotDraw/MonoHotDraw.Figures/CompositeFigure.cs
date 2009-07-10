@@ -135,13 +135,13 @@ namespace MonoHotDraw.Figures {
 			return false;
 		}
 
-		public override void Draw (Context context)	{
+		public override void BasicDraw (Context context)	{
 			foreach (IFigure fig in FiguresEnumerator) {
 				fig.Draw (context);
 			}
 		}
 			
-		public override void DrawSelected (Context context)	{
+		public override void BasicDrawSelected (Context context)	{
 			foreach (IFigure fig in FiguresEnumerator) {
 				fig.DrawSelected (context);
 			}

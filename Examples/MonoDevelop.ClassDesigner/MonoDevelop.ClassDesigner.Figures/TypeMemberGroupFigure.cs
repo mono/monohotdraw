@@ -42,6 +42,7 @@ namespace MonoDevelop.ClassDesigner.Figures {
 			groupName = new SimpleTextFigure(name);
 			groupName.Padding = 0;
 			groupName.FontSize = 10;
+			groupName.FontColor = new Cairo.Color(0.3, 0.0, 0.0);
 			
 			Add(groupName);
 			

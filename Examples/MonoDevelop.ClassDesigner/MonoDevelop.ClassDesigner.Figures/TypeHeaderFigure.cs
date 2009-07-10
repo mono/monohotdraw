@@ -55,9 +55,35 @@ namespace MonoDevelop.ClassDesigner.Figures {
 			Add(nameFigure);
 		}
 		
+		public string Name {
+			get {
+				return nameFigure.Text;
+			}
+			set {
+				nameFigure.Text = value;
+			}
+		}
+		
+		public string Namespace {
+			get {
+				return namespaceFigure.Text;
+			}
+			set {
+				namespaceFigure.Text = value;
+			}
+		}
+		
+		public string Type {
+			get {
+				return typeFigure.Text;
+			}
+			set {
+				typeFigure.Text = value;
+			}
+		}
+		
 		private SimpleTextFigure namespaceFigure;
 		private SimpleTextFigure typeFigure;
 		private SimpleTextFigure nameFigure;
-		private ToggleButtonHandle expanderHandle;
 	}
 }
