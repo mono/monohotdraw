@@ -64,10 +64,19 @@ namespace MonoDevelop.ClassDesigner.Figures {
 			rect.OffsetDot5();
 			context.LineWidth = 1.0;
 			context.Rectangle(GdkCairoHelper.CairoRectangle(rect));
+			context.Color = new Cairo.Color(1.0, 1.0, 0.7, 0.8);
+			context.FillPreserve();
+			context.Color = new Cairo.Color(0.0, 0.0, 0.0, 1.0);
 			context.Stroke();
 			
 			base.BasicDraw(context);
 		}
+		
+		public override bool ContainsPoint (double x, double y)
+		{
+			return DisplayBox.Contains(x, y);
+		}
+
 		
 		public override RectangleD DisplayBox {
 			get {
@@ -89,6 +98,11 @@ namespace MonoDevelop.ClassDesigner.Figures {
 				foreach (IHandle handle in base.HandlesEnumerator)
 					yield return handle;
 			}
+		}
+		
+		// FIXME: Use an IType member instead
+		public string Name {
+			get { return Header.Name; }
 		}
 		
 		protected virtual void AddMemberGroup(TypeMemberGroupFigure group) {

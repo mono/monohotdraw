@@ -23,7 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System.Text;
+using System.Collections.Generic;
 using Gtk;
 using MonoDevelop.Core;
 using MonoDevelop.Ide.Gui;
@@ -59,7 +59,7 @@ namespace MonoDevelop.ClassDesigner {
 				return mhdEditor;
 			}
 		}
-
+		
 		public ClassDesignerView()
 		{
 			ContentName = GettextCatalog.GetString ("Class Diagram");
@@ -68,18 +68,29 @@ namespace MonoDevelop.ClassDesigner {
 			mhdEditor = new SteticComponent();
 			mhdEditor.ShowAll();
 			
+			// CODE DOM TEST:
+			// THIS IS TEMPORAL
+			
 			Project project = IdeApp.ProjectOperations.CurrentSelectedProject;
 			ProjectDom dom = ProjectDomService.GetProjectDom(project);
-			ClassFigure classfigure = null;
+			List<ClassFigure> figures = new List<ClassFigure>();
 			foreach (IType type in dom.Types) {
 				if (type.ClassType == ClassType.Class) {
-					classfigure = new ClassFigure(type);
-					break;
+					figures.Add(new ClassFigure(type));
 				}
 			}
 			
-			if (classfigure != null) {
-				mhdEditor.View.Drawing.Add(classfigure);
+			double x = 50.0;
+			double y = 50.0;
+			
+			foreach (ClassFigure figure in figures)  {
+				mhdEditor.View.Drawing.Add(figure);
+				figure.MoveTo(x, y);
+				x += figure.DisplayBox.Width + 50.0;
+				if (x > 1000.0) {
+					x = 50.0;
+					y += figure.DisplayBox.Height + 100.0;
+				}
 			}
 		}
 		

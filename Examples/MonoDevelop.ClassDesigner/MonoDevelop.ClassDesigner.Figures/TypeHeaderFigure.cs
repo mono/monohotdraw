@@ -46,7 +46,7 @@ namespace MonoDevelop.ClassDesigner.Figures {
 
 			nameFigure = new SimpleTextFigure("Name");
 			nameFigure.Padding = 0;
-			nameFigure.FontSize = 10;
+			nameFigure.FontSize = 12;
 			
 			Spacing = 0.0;
 			
