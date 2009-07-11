@@ -54,7 +54,7 @@ namespace MonoDevelop.ClassDesigner.Figures {
 		public override void BasicDrawSelected (Cairo.Context context) {
 			RectangleD rect = DisplayBox;
 			rect.OffsetDot5();
-			context.LineWidth = 2.0;
+			context.LineWidth = 3.0;
 			context.Rectangle(GdkCairoHelper.CairoRectangle(rect));
 			context.Stroke();
 		}

@@ -1,5 +1,12 @@
 2009-07-10  Manuel Cerón  <ceronman@gmail.com>
 
+	* StackFigure.cs: Removed unnecesary UpdatePositions
+
+	* SimpleTextFigure.cs: Hack to properly calculate size of the
+	widget
+
+2009-07-10  Manuel Cerón  <ceronman@gmail.com>
+
 	* VStackFigure.cs: Height is now properly calculated
 
 	* CompositeFigure.cs: Using BasicDraw and BasicDrawSelected

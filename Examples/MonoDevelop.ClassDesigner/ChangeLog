@@ -1,5 +1,12 @@
 2009-07-10  Manuel Cerón  <ceronman@gmail.com>
 
+	* ClassDesignerView.cs: Added creation of all classes and
+	inheritance figures
+
+	* MonoDevelop.ClassDesigner.csproj: Updated project
+
+2009-07-10  Manuel Cerón  <ceronman@gmail.com>
+
 	* ClassDesignerView.cs: Adding multiple classes
 
 2009-07-10  Manuel Cerón  <ceronman@gmail.com>

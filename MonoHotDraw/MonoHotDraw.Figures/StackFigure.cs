@@ -58,7 +58,6 @@ namespace MonoHotDraw.Figures {
 			base.Add(figure);
 			figure.FigureChanged += FigureChangedHandler;
 			CalculateDimensions();
-			UpdateFiguresPosition();
 		}
 		
 		public override void Remove (IFigure figure)

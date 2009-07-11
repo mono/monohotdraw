@@ -136,18 +136,20 @@ namespace MonoHotDraw.Figures {
 		public override RectangleD BasicDisplayBox {
 			get { return _displayBox; }
 			set {
-				if (value != _displayBox) {
-					WillChange ();
-					_displayBox = value; 
-					RecalculateDisplayBox ();
-				} else
-					_displayBox = value;
+				WillChange ();
+				_displayBox = value; 
+				RecalculateDisplayBox ();
 			}
 		}
 
 		public override void BasicDraw (Cairo.Context context) {
 			SetupLayout (context);
 			DrawText (context);
+			if (_usingDummy) {
+				RecalculateDisplayBox();
+				Changed();
+				_usingDummy = false;
+			}
 		}
 		
 		public override void BasicDrawSelected (Cairo.Context context)
@@ -249,14 +251,11 @@ namespace MonoHotDraw.Figures {
 		}
 
 		protected void RecalculateDisplayBox () {
-			Pango.Rectangle ink = new Pango.Rectangle();
-			Pango.Rectangle log = new Pango.Rectangle();
+			int w = 0;
+			int h = 0;
 			
 			if (PangoLayout != null)
-				PangoLayout.GetPixelExtents(out ink, out log);
-			
-			int w = log.Width;
-			int h = log.Height;
+				PangoLayout.GetPixelSize(out w, out h);
 			
 			RectangleD r = new RectangleD (DisplayBox.X + Padding, DisplayBox.Y + Padding, 
 									(double) w, (double) h);
@@ -270,7 +269,7 @@ namespace MonoHotDraw.Figures {
 			// a Pango.Layout before obtaining a valid Cairo Context, otherwise, we should
 			// wait until Draw method is called. The Pango.Layout is neccesary for
 			// RecalculateDisplayBox.
-			ImageSurface surface = new ImageSurface (Cairo.Format.ARGB32, 0, 0);			
+			ImageSurface surface = new ImageSurface (Cairo.Format.ARGB32, 100, 100);			
 			using (Cairo.Context dummycontext =  new Cairo.Context (surface)) {
 				SetupLayout (dummycontext);
 				RecalculateDisplayBox ();
@@ -287,6 +286,6 @@ namespace MonoHotDraw.Figures {
 		private Pango.Layout    _pangoLayout;
 		private string          _text;
 		private bool            _textEditable;
-
+		private bool            _usingDummy = true;
 	}
 }

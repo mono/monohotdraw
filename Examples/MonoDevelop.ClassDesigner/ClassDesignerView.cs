@@ -73,7 +73,7 @@ namespace MonoDevelop.ClassDesigner {
 			
 			Project project = IdeApp.ProjectOperations.CurrentSelectedProject;
 			ProjectDom dom = ProjectDomService.GetProjectDom(project);
-			List<ClassFigure> figures = new List<ClassFigure>();
+			figures = new List<ClassFigure>();
 			foreach (IType type in dom.Types) {
 				if (type.ClassType == ClassType.Class) {
 					figures.Add(new ClassFigure(type));
@@ -92,8 +92,29 @@ namespace MonoDevelop.ClassDesigner {
 					y += figure.DisplayBox.Height + 100.0;
 				}
 			}
+			
+			foreach (IType type in dom.Types) {
+				if (type.ClassType == ClassType.Class) {
+					ClassFigure subclass = GetFigure(type.Name);
+					ClassFigure superclass = GetFigure(type.BaseType.Name);
+					
+					if (subclass != null && superclass != null) {
+						InheritanceConnectionFigure connection = new InheritanceConnectionFigure(subclass, superclass);
+						mhdEditor.View.Drawing.Add(connection);
+					}
+				}
+			}
+		}
+		
+		private ClassFigure GetFigure(string name) {
+			foreach (ClassFigure figure in figures) {
+				if (figure.Name == name)
+					return figure;
+			}
+			return null;
 		}
 		
 		private SteticComponent mhdEditor;
+		private List<ClassFigure> figures;
 	}
 }
