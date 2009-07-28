@@ -39,7 +39,11 @@ public partial class MainWindow: Gtk.Window
 	}
 
 	protected virtual void OnAddLineConnectionActionActivated (object sender, System.EventArgs e) {
-		mhdcanvas.AddConnection(new LineConnection());
+		LineConnection connection = new LineConnection();
+		connection.ConnectionChanged += delegate {
+			System.Console.WriteLine("Connection Changed");
+		};
+		mhdcanvas.AddConnection(connection);
 	}
 
 	protected virtual void OnRedoActionActivated (object sender, System.EventArgs e)

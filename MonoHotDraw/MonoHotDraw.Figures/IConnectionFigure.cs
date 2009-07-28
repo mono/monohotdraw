@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Cairo;
 using MonoHotDraw.Connectors;
 using MonoHotDraw.Handles;
@@ -50,6 +51,8 @@ namespace MonoHotDraw.Figures {
 		IFigure EndFigure { get; }
 		IHandle StartHandle { get; }
 		IHandle EndHandle { get; }
+	
+		event EventHandler ConnectionChanged;
 	}
 }
 

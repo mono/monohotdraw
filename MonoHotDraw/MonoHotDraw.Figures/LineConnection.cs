@@ -48,6 +48,8 @@ namespace MonoHotDraw.Figures {
 			_endConnector = (IConnector) info.GetValue ("EndConnector", typeof (IConnector));
 			_startConnector = (IConnector) info.GetValue ("StartConnector", typeof (IConnector));
 		}
+		
+		public event EventHandler ConnectionChanged;
 
 		public LineConnection (IFigure fig1, IFigure fig2): this ()	{
 			if (fig1 != null) {
@@ -84,7 +86,8 @@ namespace MonoHotDraw.Figures {
 
 			DisconnectStart ();
 			StartConnector = start;
-			ConnectFigure (StartConnector);			
+			ConnectFigure (StartConnector);
+			OnConnectionChanged();
 		}
 
 		public virtual void ConnectEnd (IConnector end)	{
@@ -95,16 +98,25 @@ namespace MonoHotDraw.Figures {
 			DisconnectEnd ();
 			EndConnector = end;
 			ConnectFigure (EndConnector);
+			OnConnectionChanged();
 		}
 
 		public virtual void DisconnectStart () {
+			if (StartConnector == null) {
+				return;
+			}
 			DisconnectFigure (StartConnector);
 			StartConnector = null;
+			OnConnectionChanged();
 		}
 
 		public virtual void DisconnectEnd () {
+			if (EndConnector == null) {
+				return;
+			}
 			DisconnectFigure (EndConnector);
 			EndConnector = null;
+			OnConnectionChanged();
 		}
 
 		public virtual bool CanConnectEnd (IFigure figure) {
@@ -200,6 +212,12 @@ namespace MonoHotDraw.Figures {
 			info.AddValue ("StartConnector", StartConnector);
 			
 			base.GetObjectData (info, context);
+		}
+		
+		protected virtual void OnConnectionChanged() {
+			if (ConnectionChanged != null) {
+				ConnectionChanged(this, new EventArgs());
+			}
 		}
 		
 		private void ConnectFigure (IConnector connector) {
