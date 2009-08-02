@@ -1,5 +1,12 @@
 2009-08-01  Manuel Cerón  <ceronman@gmail.com>
 
+	* EnumFigure.cs:
+	* TypeFigure.cs:
+	* ClassFigure.cs: Moved functionality from ClassFigure to
+	TypeFigure
+
+2009-08-01  Manuel Cerón  <ceronman@gmail.com>
+
 	* TypeFigure.cs: AddMemberGroup uses VstackFigure
 
 	* EnumFigure.cs: Added Enum Figure

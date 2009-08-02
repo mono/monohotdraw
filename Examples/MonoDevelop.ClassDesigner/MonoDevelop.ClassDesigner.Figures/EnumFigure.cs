@@ -35,32 +35,21 @@ using MonoDevelop.Core.Gui;
 namespace MonoDevelop.ClassDesigner.Figures {
 	
 	public class EnumFigure: TypeFigure {
-		
-		public EnumFigure(): base() {
-			identifiers = new VStackFigure();
-			
-			AddMemberGroup(identifiers);
+
+		public EnumFigure(IType domtype): base(domtype) {
 		}
 		
-		public EnumFigure(IType domtype): this() {
-			if (domtype == null || domtype.ClassType != ClassType.Enum) {
-				throw new ArgumentException();
-			}
-			
-			Header.Name = domtype.Name;
-			Header.Namespace = domtype.Namespace;
-			Header.Type = domtype.ClassType.ToString();
-			
-			foreach (IField field in domtype.Fields) {
-				Pixbuf icon = Services.Resources.GetIcon(field.StockIcon, IconSize.Menu);
-				AddIdentifier(icon, field.ReturnType.Name, field.Name);
+		protected override ClassType ClassType {
+			get {
+				return ClassType.Enum;
 			}
 		}
 		
-		public void AddIdentifier(Pixbuf icon, string type, string name) {
-			identifiers.Add(new TypeMemberFigure(icon, "", name));
+		protected override void CreateGroups ()
+		{
+			fields = new TypeMemberGroupFigure(GettextCatalog.GetString("Fields"));
+			AddMemberGroup(fields);
 		}
-		
-		VStackFigure identifiers;
+
 	}
 }
