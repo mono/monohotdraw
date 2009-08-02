@@ -57,6 +57,7 @@
     <Compile Include="MonoDevelop.ClassDesigner.Figures\TypeMemberFigure.cs" />
     <Compile Include="MonoDevelop.ClassDesigner.Figures\TypeMemberGroupFigure.cs" />
     <Compile Include="MonoDevelop.ClassDesigner.Figures\InheritanceConnection.cs" />
+    <Compile Include="MonoDevelop.ClassDesigner.Figures\EnumFigure.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

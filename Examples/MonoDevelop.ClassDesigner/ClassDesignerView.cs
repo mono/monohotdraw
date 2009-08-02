@@ -73,17 +73,23 @@ namespace MonoDevelop.ClassDesigner {
 			
 			Project project = IdeApp.ProjectOperations.CurrentSelectedProject;
 			ProjectDom dom = ProjectDomService.GetProjectDom(project);
-			figures = new List<ClassFigure>();
+			figures = new List<TypeFigure>();
 			foreach (IType type in dom.Types) {
 				if (type.ClassType == ClassType.Class) {
+					System.Console.WriteLine("Adding Class");
 					figures.Add(new ClassFigure(type));
+				}
+				
+				if (type.ClassType == ClassType.Enum) {
+					System.Console.WriteLine("Adding Enum");
+					figures.Add(new EnumFigure(type));
 				}
 			}
 			
 			double x = 50.0;
 			double y = 50.0;
 			
-			foreach (ClassFigure figure in figures)  {
+			foreach (TypeFigure figure in figures)  {
 				mhdEditor.View.Drawing.Add(figure);
 				figure.MoveTo(x, y);
 				x += figure.DisplayBox.Width + 50.0;
@@ -107,14 +113,14 @@ namespace MonoDevelop.ClassDesigner {
 		}
 		
 		private ClassFigure GetFigure(string name) {
-			foreach (ClassFigure figure in figures) {
+			foreach (TypeFigure figure in figures) {
 				if (figure.Name == name)
-					return figure;
+					return figure as ClassFigure;
 			}
 			return null;
 		}
 		
 		private SteticComponent mhdEditor;
-		private List<ClassFigure> figures;
+		private List<TypeFigure> figures;
 	}
 }

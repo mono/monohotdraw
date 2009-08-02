@@ -105,7 +105,7 @@ namespace MonoDevelop.ClassDesigner.Figures {
 			get { return Header.Name; }
 		}
 		
-		protected virtual void AddMemberGroup(TypeMemberGroupFigure group) {
+		protected virtual void AddMemberGroup(VStackFigure group) {
 			members.Add(group);
 		}
 		
