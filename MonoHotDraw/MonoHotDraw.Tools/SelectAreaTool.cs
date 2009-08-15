@@ -31,9 +31,9 @@ using MonoHotDraw.Util;
 
 namespace MonoHotDraw.Tools {
 
-	public class SelectAreaTracker: AbstractTool {
+	public class SelectAreaTool: AbstractTool {
 	
-		public SelectAreaTracker (IDrawingEditor editor): base (editor) {
+		public SelectAreaTool (IDrawingEditor editor): base (editor) {
 		}
 
 		public override void MouseDown (MouseEvent ev) {
@@ -95,8 +95,8 @@ namespace MonoHotDraw.Tools {
 			PointD p = View.DrawingToView(r.X, r.Y);
 			window.DrawRectangle (gc, false, (int) p.X,
 			                       (int) p.Y,
-			                       (int) r.Width,
-			                       (int) r.Height);
+			                       (int) (r.Width * View.Scale),
+			                       (int) (r.Height * View.Scale));
 		}
 
 		private RectangleD _selectionRect;

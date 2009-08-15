@@ -130,7 +130,7 @@
     <Compile Include="MonoHotDraw.Tools\MultiLineTextTool.cs" />
     <Compile Include="MonoHotDraw.Tools\PolyLineFigureTool.cs" />
     <Compile Include="MonoHotDraw.Tools\ResizeCreationTool.cs" />
-    <Compile Include="MonoHotDraw.Tools\SelectAreaTracker.cs" />
+    <Compile Include="MonoHotDraw.Tools\SelectAreaTool.cs" />
     <Compile Include="MonoHotDraw.Tools\SelectionTool.cs" />
     <Compile Include="MonoHotDraw.Tools\SimpleTextTool.cs" />
     <Compile Include="MonoHotDraw.Tools\TextTool.cs" />

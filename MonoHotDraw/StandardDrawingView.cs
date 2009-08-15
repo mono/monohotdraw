@@ -41,9 +41,12 @@ namespace MonoHotDraw {
 
 	public class StandardDrawingView : ContainerCanvas, IDrawingView {
 		
+		public event EventHandler VisibleAreaChanged;
+		
 		public StandardDrawingView (IDrawingEditor editor): base () {
 			Drawing = new StandardDrawing ();
 			Editor = editor;
+			Scale = 1.0;
 			_selection = new FigureCollection ();
 					
 			DebugCreateTimer ();
@@ -67,9 +70,14 @@ namespace MonoHotDraw {
 			get { return  _drawing; }
 		}
 
-		public IDrawingEditor Editor {
-			set { _editor = value; }
-			get { return  _editor; }
+		public IDrawingEditor Editor { get; set; }
+		
+		public double Scale {
+			get { return _scale; }
+			set { 
+				_scale = value;
+				QueueDraw();
+			}
 		}
 
 		public IEnumerable <IFigure> SelectionEnumerator {
@@ -140,16 +148,27 @@ namespace MonoHotDraw {
 		}
 		
 		public PointD ViewToDrawing (double x, double y) {
-			return new PointD(x + VisibleArea.X, y + VisibleArea.Y);
+			return new PointD {
+				X = (x/Scale + VisibleArea.X),
+				Y = (y/Scale + VisibleArea.Y)
+			};
 		}
 		
 		public PointD DrawingToView (double x, double y) {
-			return new PointD(x - VisibleArea.X, y - VisibleArea.Y);
+			return new PointD {
+					X = (x - VisibleArea.X) * Scale,
+					Y = (y - VisibleArea.Y) * Scale
+			};
 		}
 		
 		public RectangleD VisibleArea {
 			get {
-				return new RectangleD (Hadjustment.Value, Vadjustment.Value, Allocation.Width, Allocation.Height);
+				return new RectangleD {
+					X = Hadjustment.Value,
+					Y = Vadjustment.Value,
+					Width = Allocation.Width / Scale,
+					Height = Allocation.Height / Scale
+				};
 			}
 		}
 		
@@ -237,8 +256,11 @@ namespace MonoHotDraw {
 		protected override bool OnExposeEvent (EventExpose ev) {
 			using (Cairo.Context context = CairoHelper.Create (ev.Window)) {
 				
+				context.Save();
+				
 				PointD translation = DrawingToView(0.0,  0.0);
 				context.Translate (translation.X, translation.Y);
+				context.Scale(Scale, Scale);
 				
 				foreach (IFigure figure in Drawing.FiguresEnumerator) {
 					// check region for update
@@ -251,8 +273,10 @@ namespace MonoHotDraw {
 					figure.DrawSelected (context);
 				}
 				
+				context.Restore();
+				
 				foreach (IHandle handle in SelectionHandles) {
-					handle.Draw (context);
+					handle.Draw (context, this);
 				}
 			}
 			
@@ -307,10 +331,12 @@ namespace MonoHotDraw {
 			base.OnSizeAllocated (allocation);
 			
 			UpdateAdjustments ();
+			OnVisibleAreaChaned();
 		}
 
 		protected override void OnAdjustmentValueChanged (object sender, EventArgs args) {
 			QueueDraw();
+			OnVisibleAreaChaned();
 		}
 
 		
@@ -319,12 +345,20 @@ namespace MonoHotDraw {
 			PointD p = DrawingToView(r.X, r.Y);
 			r.X = p.X;
 			r.Y = p.Y;
+			r.Width = r.Width * Scale;
+			r.Height = r.Height * Scale;
 			QueueDrawArea ((int) r.X, (int) r.Y, (int) r.Width, (int) r.Height);
 		}
 		
 		protected void OnDrawingSizeAllocated (object sender, DrawingEventArgs args) {
 			UpdateAdjustments ();
 			QueueDraw();
+		}
+		
+		protected void OnVisibleAreaChaned() {
+			if (VisibleAreaChanged != null) {
+				VisibleAreaChanged(this, new EventArgs());
+			}
 		}
 		
 		private void UpdateAdjustments () {
@@ -360,14 +394,13 @@ namespace MonoHotDraw {
 			_frameCount ++;
 		}
 		
-		
 		private bool _drag;		
 		private IDrawing _drawing;
-		private IDrawingEditor _editor;
 		private FigureCollection _selection;
 		
 		// used for debug purposes
 		private int _frameCount = 0;
+		private double _scale = 1.0;
 	}
 }
 

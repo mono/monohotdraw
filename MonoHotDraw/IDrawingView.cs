@@ -26,6 +26,7 @@
 
 using Cairo;
 using Gdk;
+using System;
 using System.Collections.Generic;
 using MonoHotDraw.Figures;
 using MonoHotDraw.Handles;
@@ -57,15 +58,14 @@ namespace MonoHotDraw {
 		IEnumerable <IFigure> SelectionEnumerator { get; }
 		int SelectionCount { get; }
 		RectangleD VisibleArea { get; }
+		double Scale { get; set; }
 		
 		void AddWidget (Gtk.Widget w, double x, double y);
 		void MoveWidget (Gtk.Widget w, double x, double y);
 		void RemoveWidget (Gtk.Widget w);
 		void ClearWidgets ();
-	
-//		bool IsFrozenView { get; } 
-//		void FreezeView ();
-//		void UnfreezeView ();
+		
+		event EventHandler VisibleAreaChanged;
 	}
 }
 

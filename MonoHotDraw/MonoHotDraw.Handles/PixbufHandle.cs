@@ -50,16 +50,8 @@ namespace MonoHotDraw.Handles {
 			}
 		}
 		
-		public override RectangleD DisplayBox {
-			get {
-				RectangleD rect = new RectangleD(Locate());
-				rect.Inflate((double)_pixbuf.Width/2, (double)_pixbuf.Height/2);
-				return rect;
-			}
-		}
-		
-		public override void Draw(Context context) {
-			RectangleD r = DisplayBox;
+		public override void Draw(Context context, IDrawingView view) {
+			RectangleD r = ViewDisplayBox(view);
 			_image.Show (context, Math.Round (r.X), Math.Round (r.Y));
 		}
 		

@@ -46,12 +46,14 @@ namespace MonoHotDraw.Handles {
 			((PolyLineFigure) Owner).SetPointAt (Index, x, y);
 		}
 
-		public override void Draw (Context context) {
-			double middle = DisplayBox.Width / 2.0;
+		public override void Draw (Context context, IDrawingView view) {
+			RectangleD rect = ViewDisplayBox(view);
+			
+			double middle = rect.Width / 2.0;
 
 			context.LineWidth = LineWidth;
 			context.Save ();
-			context.Translate (DisplayBox.X + middle, DisplayBox.Y + middle);
+			context.Translate (rect.X + middle, rect.Y + middle);
 			context.Arc (0.0, 0.0, middle, 0.0, 2.0 * Math.PI);
 			context.Restore ();
 			context.Color = new Cairo.Color (0.2, 0.2, 1.0, 0.5);

@@ -40,6 +40,18 @@ public partial class MainWindow {
     
     private MonoHotDraw.SteticComponent mhdcanvas;
     
+    private Gtk.HBox hbox1;
+    
+    private Gtk.HBox hbox2;
+    
+    private Gtk.Label label2;
+    
+    private Gtk.HScale zoomscale;
+    
+    private Gtk.Label label3;
+    
+    private Gtk.Label visiblearea;
+    
     protected virtual void Build() {
         Stetic.Gui.Initialize(this);
         // Widget MainWindow
@@ -100,6 +112,63 @@ public partial class MainWindow {
         this.vbox1.Add(this.mhdcanvas);
         Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox1[this.mhdcanvas]));
         w3.Position = 1;
+        // Container child vbox1.Gtk.Box+BoxChild
+        this.hbox1 = new Gtk.HBox();
+        this.hbox1.Name = "hbox1";
+        this.hbox1.Spacing = 6;
+        // Container child hbox1.Gtk.Box+BoxChild
+        this.hbox2 = new Gtk.HBox();
+        this.hbox2.Name = "hbox2";
+        this.hbox2.Spacing = 6;
+        // Container child hbox2.Gtk.Box+BoxChild
+        this.label2 = new Gtk.Label();
+        this.label2.Name = "label2";
+        this.label2.LabelProp = Mono.Unix.Catalog.GetString("Zoom:");
+        this.hbox2.Add(this.label2);
+        Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox2[this.label2]));
+        w4.Position = 0;
+        w4.Expand = false;
+        w4.Fill = false;
+        // Container child hbox2.Gtk.Box+BoxChild
+        this.zoomscale = new Gtk.HScale(null);
+        this.zoomscale.CanFocus = true;
+        this.zoomscale.Name = "zoomscale";
+        this.zoomscale.Adjustment.Lower = 10;
+        this.zoomscale.Adjustment.Upper = 500;
+        this.zoomscale.Adjustment.PageIncrement = 50;
+        this.zoomscale.Adjustment.StepIncrement = 1;
+        this.zoomscale.Adjustment.Value = 100;
+        this.zoomscale.DrawValue = true;
+        this.zoomscale.Digits = 0;
+        this.zoomscale.ValuePos = ((Gtk.PositionType)(3));
+        this.hbox2.Add(this.zoomscale);
+        Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.hbox2[this.zoomscale]));
+        w5.Position = 1;
+        // Container child hbox2.Gtk.Box+BoxChild
+        this.label3 = new Gtk.Label();
+        this.label3.Name = "label3";
+        this.label3.LabelProp = Mono.Unix.Catalog.GetString("Visible Area:");
+        this.hbox2.Add(this.label3);
+        Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.hbox2[this.label3]));
+        w6.Position = 2;
+        w6.Expand = false;
+        w6.Fill = false;
+        this.hbox1.Add(this.hbox2);
+        Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(this.hbox1[this.hbox2]));
+        w7.Position = 0;
+        // Container child hbox1.Gtk.Box+BoxChild
+        this.visiblearea = new Gtk.Label();
+        this.visiblearea.Name = "visiblearea";
+        this.visiblearea.LabelProp = Mono.Unix.Catalog.GetString("~");
+        this.hbox1.Add(this.visiblearea);
+        Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.hbox1[this.visiblearea]));
+        w8.Position = 1;
+        w8.Expand = false;
+        w8.Fill = false;
+        this.vbox1.Add(this.hbox1);
+        Gtk.Box.BoxChild w9 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox1]));
+        w9.Position = 2;
+        w9.Expand = false;
         this.Add(this.vbox1);
         if ((this.Child != null)) {
             this.Child.ShowAll();
@@ -116,5 +185,6 @@ public partial class MainWindow {
         this.AddLineConnectionAction.Activated += new System.EventHandler(this.OnAddLineConnectionActionActivated);
         this.UndoAction.Activated += new System.EventHandler(this.OnUndoActionActivated);
         this.RedoAction.Activated += new System.EventHandler(this.OnRedoActionActivated);
+        this.zoomscale.ValueChanged += new System.EventHandler(this.OnHscale1ValueChanged);
     }
 }

@@ -29,7 +29,7 @@ using MonoHotDraw.Figures;
 using MonoHotDraw.Commands;
 using MonoHotDraw.Util;
 
-namespace MonoHotDraw.Handles {	
+namespace MonoHotDraw.Handles {
 	
 	public class UndoableHandle: IHandle {
 		
@@ -39,6 +39,14 @@ namespace MonoHotDraw.Handles {
 		
 		public bool ContainsPoint (double x, double y) {
 			return WrappedHandle.ContainsPoint(x, y);
+		}
+		
+		public double Width {
+			get { return WrappedHandle.Width; }
+		}
+		
+		public double Height {
+			get { return WrappedHandle.Width; }
 		}
 		
 		public PointD Locate () {
@@ -64,16 +72,12 @@ namespace MonoHotDraw.Handles {
 			}
 		}
 			
-		public void Draw (Context context) {
-			WrappedHandle.Draw(context);
+		public void Draw (Context context, IDrawingView view) {
+			WrappedHandle.Draw(context, view);
 		}
 		
 		public Gdk.Cursor CreateCursor () {
 			return WrappedHandle.CreateCursor();
-		}
-		
-		public RectangleD DisplayBox {
-			get { return WrappedHandle.DisplayBox; }
 		}
 		
 		public IFigure Owner {

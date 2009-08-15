@@ -63,14 +63,16 @@ namespace MonoHotDraw.Handles {
 			Connection.UpdateConnection ();
 		}
 
-		public override void Draw (Context context) {
+		public override void Draw (Context context, IDrawingView view) {
+			RectangleD rect = ViewDisplayBox(view);
+			
 			context.LineWidth = LineWidth;
 
-			context.MoveTo (DisplayBox.Center.X, DisplayBox.Top);
-			context.LineTo (DisplayBox.Right, DisplayBox.Center.Y);
-			context.LineTo (DisplayBox.Center.X, DisplayBox.Bottom);
-			context.LineTo (DisplayBox.Left, DisplayBox.Center.Y);
-			context.LineTo (DisplayBox.Center.X, DisplayBox.Top);
+			context.MoveTo (rect.Center.X, rect.Top);
+			context.LineTo (rect.Right, rect.Center.Y);
+			context.LineTo (rect.Center.X, rect.Bottom);
+			context.LineTo (rect.Left, rect.Center.Y);
+			context.LineTo (rect.Center.X, rect.Top);
 
 			context.Color = new Cairo.Color (1.0, 0.0, 0.0, 0.8);
 			context.FillPreserve ();

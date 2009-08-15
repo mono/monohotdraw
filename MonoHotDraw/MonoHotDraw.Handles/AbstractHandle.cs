@@ -34,7 +34,7 @@ namespace MonoHotDraw.Handles {
 
 	public abstract class AbstractHandle : IHandle {
 	
-		public static readonly double Size = 4.0;
+		public static readonly double Size = 8.0;
 	
 		protected AbstractHandle (IFigure owner) {
 			Owner     = owner;
@@ -46,15 +46,15 @@ namespace MonoHotDraw.Handles {
 		public virtual Gdk.Cursor CreateCursor () {
 			return null;
 		}
-
-		public virtual RectangleD DisplayBox {
-			get {
-				PointD p = Locate ();
-				RectangleD rect = new RectangleD (p, p);
-				rect.Inflate (Size, Size);
-				rect.OffsetDot5 ();
-				return rect;
-			}
+		
+		public virtual double Width {
+			get { return Size; }
+			set {}
+		}
+		
+		public virtual double Height {
+			get { return Size; }
+			set {}
 		}
 
 		public virtual IFigure Owner { get; set; }
@@ -75,13 +75,16 @@ namespace MonoHotDraw.Handles {
 		public Color LineColor { get; set; }
 
 		public bool ContainsPoint (double x, double y) {
-			return DisplayBox.Contains (x, y);
+			RectangleD displayBox = new RectangleD(Locate());
+			displayBox.Inflate(Width/2, Height/2);
+			return displayBox.Contains(x, y);
 		}
 
-		public virtual void Draw (Context context) {
+		public virtual void Draw (Context context, IDrawingView view) {
+			RectangleD rect = ViewDisplayBox(view);
 			context.Save();
 			context.LineWidth = LineWidth;
-			context.Rectangle (GdkCairoHelper.CairoRectangle (DisplayBox));
+			context.Rectangle (GdkCairoHelper.CairoRectangle (rect));
 			context.Color = FillColor;
 			context.FillPreserve ();
 			context.Color = LineColor;
@@ -106,6 +109,19 @@ namespace MonoHotDraw.Handles {
 		}
 		
 		protected virtual void UpdateUndoActivity() {
+		}
+		
+		protected virtual RectangleD ViewDisplayBox(IDrawingView view) {
+			if (view == null)
+				throw new ArgumentNullException("view");
+			
+			PointD center = Locate();
+			center = view.DrawingToView(center.X, center.Y);
+			RectangleD displayBox = new RectangleD(center);
+			displayBox.Inflate(Width/2, Height/2);
+			displayBox.OffsetDot5();
+			
+			return displayBox;
 		}
 
 		private double  _lineWidth;

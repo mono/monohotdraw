@@ -41,11 +41,12 @@ namespace MonoHotDraw.Handles {
 		void InvokeStart (double x, double y, IDrawingView view);
 		void InvokeStep (double x, double y, IDrawingView view);
 		void InvokeEnd (double x, double y, IDrawingView view);
-		void Draw (Context context);
+		void Draw (Context context, IDrawingView view);
 		Gdk.Cursor CreateCursor ();
 		
-		RectangleD DisplayBox { get; }
 		IFigure Owner { get; }
 		IUndoActivity UndoActivity { get; set; }
+		double Width { get; }
+		double Height { get; }
 	}
 }

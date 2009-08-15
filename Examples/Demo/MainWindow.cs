@@ -11,6 +11,11 @@ public partial class MainWindow: Gtk.Window
 		mhdcanvas.UndoStackChanged += delegate {
 			UpdateUndoRedo();
 		};
+		
+		visiblearea.Text = mhdcanvas.View.VisibleArea.ToString();
+		mhdcanvas.View.VisibleAreaChanged += delegate {
+			visiblearea.Text = mhdcanvas.View.VisibleArea.ToString();
+		};
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)	{
@@ -59,5 +64,10 @@ public partial class MainWindow: Gtk.Window
 	protected void UpdateUndoRedo() {
 		UndoAction.Sensitive = mhdcanvas.UndoManager.Undoable;
 		RedoAction.Sensitive = mhdcanvas.UndoManager.Redoable;
+	}
+
+	protected virtual void OnHscale1ValueChanged (object sender, System.EventArgs e)
+	{
+		mhdcanvas.View.Scale = zoomscale.Value / 100.0;
 	}
 }
